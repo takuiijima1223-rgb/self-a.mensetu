@@ -55,7 +55,10 @@
 
         <!-- 事業所選択・ログイン画面 -->
         <div id="auth-screen" class="screen hidden flex flex-col items-center justify-center h-full p-8 text-center bg-slate-800 text-white relative overflow-hidden font-black">
-            <button onclick="window.showScreen('home-screen'); window.pendingAction=null;" class="absolute top-8 left-8 text-slate-400 hover:text-white font-bold transition-colors text-sm font-black">← 戻る</button>
+            <button onclick="window.showScreen('home-screen'); window.pendingAction=null;" class="absolute top-6 left-6 text-slate-400 hover:text-white font-bold transition-colors text-sm flex items-center gap-2 bg-slate-900/50 px-4 py-2 rounded-full font-black">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                戻る
+            </button>
             <div class="z-10 flex flex-col items-center bg-slate-900/80 p-8 rounded-3xl border border-slate-700 w-full max-w-md backdrop-blur-sm shadow-2xl animate-fade-in font-black">
                 <h2 class="text-2xl font-bold mb-6 tracking-wide text-indigo-300 font-black uppercase tracking-widest">事業所ログイン</h2>
                 <div class="w-full space-y-5 font-black">
@@ -75,11 +78,30 @@
             </div>
         </div>
 
+        <!-- 履歴認証画面 -->
+        <div id="history-auth-screen" class="screen hidden flex flex-col items-center justify-center h-full p-8 text-center bg-[#1e2338] text-white relative overflow-hidden font-black">
+            <button onclick="window.showScreen('home-screen')" class="absolute top-6 left-6 text-slate-400 hover:text-white font-bold transition-colors text-sm flex items-center gap-2 bg-slate-800/50 px-4 py-2 rounded-full font-black">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                戻る
+            </button>
+            <div class="z-10 bg-white/10 p-12 rounded-[3rem] w-full max-w-md shadow-2xl border border-white/5 backdrop-blur-md font-black">
+                <h3 class="text-2xl font-black text-white mb-4 tracking-tight font-black">🔒 セキュリティ認証</h3>
+                <p class="text-slate-400 font-bold mb-10 text-sm font-black">履歴を閲覧するには、事業所の<br>管理パスワードを入力してください。</p>
+                <input type="password" id="history-auth-password" class="w-full bg-slate-900 border-2 border-slate-700 rounded-3xl px-6 py-6 mb-4 text-3xl font-black focus:border-indigo-500 focus:outline-none shadow-inner text-center text-white tracking-[0.5em] font-black" placeholder="••••">
+                <p id="history-auth-error" class="text-red-500 font-bold text-sm mb-10 hidden font-black">パスワードが間違っています。</p>
+                <button onclick="window.authenticateHistory()" class="w-full bg-[#5a55ea] hover:bg-[#4d48d6] text-white font-black py-6 rounded-2xl shadow-xl active:scale-95 uppercase tracking-widest text-lg font-black">ロック解除</button>
+            </div>
+        </div>
+
         <!-- 履歴一覧画面 -->
         <div id="history-list-screen" class="screen hidden flex flex-col h-full bg-slate-50 font-black">
             <div class="bg-white px-6 py-4 border-b border-slate-200 flex justify-between items-center glass-panel sticky top-0 z-10 font-black">
+                <button onclick="window.showScreen('home-screen')" class="text-slate-400 hover:text-indigo-600 font-bold transition-colors text-sm flex items-center gap-1 font-black">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    ホームに戻る
+                </button>
                 <div class="flex items-center font-bold uppercase font-black"><span class="text-2xl mr-3 font-black">📂</span>履歴一覧</div>
-                <button onclick="window.showScreen('home-screen')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold px-4 py-2 rounded-lg transition-all shadow-sm font-black">ホームに戻る</button>
+                <div class="w-24"></div> <!-- スペース調整用 -->
             </div>
             <div class="flex-grow p-6 overflow-y-auto">
                 <div id="history-container" class="max-w-4xl mx-auto space-y-4"></div>
@@ -89,8 +111,12 @@
         <!-- マニュアル画面 -->
         <div id="manual-screen" class="screen hidden flex flex-col h-full bg-slate-50 overflow-y-auto font-black">
             <div class="bg-white px-6 py-4 border-b border-slate-200 flex justify-between items-center glass-panel sticky top-0 z-10 font-black">
+                <button onclick="window.showScreen('home-screen')" class="text-slate-400 hover:text-indigo-600 font-bold transition-colors text-sm flex items-center gap-1 font-black">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    戻る
+                </button>
                 <div class="flex items-center font-bold font-black"><span class="text-2xl mr-3 font-black">📖</span>運用マニュアル</div>
-                <button onclick="window.showScreen('home-screen')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold px-4 py-2 rounded-lg transition-all shadow-sm font-black">ホームに戻る</button>
+                <div class="w-16"></div>
             </div>
             <div class="p-8 max-w-4xl mx-auto space-y-8 font-black">
                 <h2 class="text-2xl font-black text-slate-800 border-b-4 border-indigo-500 pb-2 inline-block font-black">1. 面接の基本方針</h2>
@@ -302,7 +328,7 @@
                             </div>
                             <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-2 font-black">
                                 <p class="text-xs font-black"><span class="text-emerald-600 text-sm font-black">🟢 Good</span><br>切り替えてすぐに別のアクションに移れた等、前向き行動なら〇。</p>
-                                <p class="text-xs font-black pt-2 border-t border-slate-200 font-black"><span class="text-red-500 text-sm font-black">🔴 不動固 NG</span><br>「まずは基本（目視）からだと諭す」等、変化を拒絶する。</p>
+                                <p class="text-xs font-black pt-2 border-t border-slate-200 font-black"><span class="text-red-500 text-sm font-black">🔴 不動固 NG</span><br>「まずは基本からだと諭す」等、変化を拒絶する。</p>
                                 <p class="text-xs font-black pt-2 border-t border-slate-200 font-black"><span class="text-red-500 text-sm font-black">🔴 古井説子 NG</span><br>「ネットと現場は違うと教える」等、経験マウント・柔軟性欠如。</p>
                                 <p class="text-xs font-black pt-2 border-t border-slate-200 font-black"><span class="text-slate-500 text-sm font-black">⚠️ 要注意</span><br>「結構落ち込みますね」など、次に中々動けなかったで終わった場合は×。</p>
                             </div>
@@ -479,7 +505,11 @@
         <!-- 最終レポート（完成版） -->
         <div id="final-report-screen" class="screen hidden flex flex-col h-full bg-slate-800 text-white overflow-y-auto relative font-black">
             <div class="bg-slate-900/50 px-6 py-4 sticky top-0 z-10 flex justify-between items-center text-xl font-black text-indigo-300 uppercase font-black">
-                <h2 id="report-header-title" class="font-black">判定レポート</h2>
+                <button id="final-back-btn" class="hidden text-sm flex items-center gap-1 text-slate-300 hover:text-white transition-colors font-black">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    戻る
+                </button>
+                <h2 id="report-header-title" class="font-black flex-grow text-center">判定レポート</h2>
                 <button id="final-nav-btn" onclick="window.closeSession()" class="text-xs bg-slate-700 font-bold px-5 py-2.5 rounded-xl hover:bg-slate-600 uppercase font-black">終了</button>
             </div>
             <div class="p-8 md:p-12 w-full max-w-5xl mx-auto space-y-12 pb-32 font-black">
@@ -728,8 +758,12 @@
 
         window.loadHistoryDetail = function(res) {
             document.getElementById('report-header-title').innerText = "アセスメント結果詳細";
+            
+            document.getElementById('final-back-btn').classList.remove('hidden');
+            document.getElementById('final-back-btn').onclick = () => window.showHistoryScreen();
+            
             const navBtn = document.getElementById('final-nav-btn');
-            navBtn.innerText = "履歴一覧に戻る"; navBtn.onclick = () => window.showHistoryScreen();
+            navBtn.classList.add('hidden'); // 履歴から来た場合は右上の終了ボタンは隠す
             
             const feedback = window.generateDetailedFeedback(res);
             document.getElementById('final-rank').innerText = res.finalRank;
@@ -767,8 +801,12 @@
 
         window.startNewSession = function() {
             document.getElementById('report-header-title').innerText = "判定レポート";
+            
+            document.getElementById('final-back-btn').classList.add('hidden');
             const navBtn = document.getElementById('final-nav-btn');
-            navBtn.innerText = "終了"; navBtn.onclick = () => window.closeSession();
+            navBtn.classList.remove('hidden');
+            navBtn.innerText = "終了"; 
+            navBtn.onclick = () => window.closeSession();
             
             window.interviewData = { p0: 3, p1: 3, p2: 3, p3_1: 5, p3_2: 5, p3_3: 5, p3_1_skipped: false, p3_2_skipped: false, p3_3_skipped: false, calculatedP3: 15, risk_1: false, risk_2: false, risk_3: false, p4_1: 5, p4_2: 5, p4_3: 5, p4_4: 5, logic_1: false, logic_2: false, logic_3: false, logic_4: false, phil_g1: false, phil_g2: false, phil_r1: false, phil_r2: false, phil_r3: false, calculatedLogic: 7, calculatedPhil: 0 };
             window.answers = {}; window.currentQuestionIndex = 0; window.aiSkipped = false;
@@ -777,6 +815,7 @@
             document.querySelectorAll('input[type=range]').forEach(s => s.value = s.id.startsWith('slider-p3') || s.id.startsWith('slider-p4') ? 5 : 3);
             document.querySelectorAll('input[type=checkbox]').forEach(c => c.checked = false);
             
+            // マルチリスクのUIリセット
             ['q1-block', 'q2-block', 'q3-block'].forEach(id => {
                 const el = document.getElementById(id); if(el) el.classList.remove('risk-detected');
             });
