@@ -271,9 +271,9 @@
                 </div>
                 <div class="md:w-1/3 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm h-fit sticky top-6">
                     <div class="space-y-6 mb-8">
-                        <div><div class="flex justify-between text-xs font-bold mb-1">Q1</div><input type="range" min="0" max="10" value="5" oninput="window.interviewData.p3_1 = parseInt(this.value);"></div>
-                        <div><div class="flex justify-between text-xs font-bold mb-1">Q2</div><input type="range" min="0" max="10" value="5" oninput="window.interviewData.p3_2 = parseInt(this.value);"></div>
-                        <div><div class="flex justify-between text-xs font-bold mb-1">Q3</div><input type="range" min="0" max="10" value="5" oninput="window.interviewData.p3_3 = parseInt(this.value);"></div>
+                        <div><div class="flex justify-between text-xs font-bold mb-1">Q1 (10点)</div><input type="range" min="0" max="10" value="5" oninput="window.interviewData.p3_1 = parseInt(this.value);"></div>
+                        <div><div class="flex justify-between text-xs font-bold mb-1">Q2 (10点)</div><input type="range" min="0" max="10" value="5" oninput="window.interviewData.p3_2 = parseInt(this.value);"></div>
+                        <div><div class="flex justify-between text-xs font-bold mb-1">Q3 (10点)</div><input type="range" min="0" max="10" value="5" oninput="window.interviewData.p3_3 = parseInt(this.value);"></div>
                     </div>
                     <button onclick="window.showScreen('phase4-screen')" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-3.5 rounded-xl shadow-md">Phase 4 へ進む</button>
                 </div>
@@ -295,11 +295,11 @@
                     </div>
                 </div>
                 <div class="md:w-1/3 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm h-fit sticky top-6">
-                    <div class="space-y-4 mb-8">
-                        <input type="range" min="0" max="10" value="5" oninput="window.interviewData.p4_1 = parseInt(this.value);">
-                        <input type="range" min="0" max="10" value="5" oninput="window.interviewData.p4_2 = parseInt(this.value);">
-                        <input type="range" min="0" max="10" value="5" oninput="window.interviewData.p4_3 = parseInt(this.value);">
-                        <input type="range" min="0" max="10" value="5" oninput="window.interviewData.p4_4 = parseInt(this.value);">
+                    <div class="space-y-4 mb-8 text-xs font-bold">
+                        <div>1. 実作業 (10点)<input type="range" min="0" max="10" value="5" oninput="window.interviewData.p4_1 = parseInt(this.value);"></div>
+                        <div>2. 毅然さ (10点)<input type="range" min="0" max="10" value="5" oninput="window.interviewData.p4_2 = parseInt(this.value);"></div>
+                        <div>3. 自走力 (10点)<input type="range" min="0" max="10" value="5" oninput="window.interviewData.p4_3 = parseInt(this.value);"></div>
+                        <div>4. キャリア (10点)<input type="range" min="0" max="10" value="5" oninput="window.interviewData.p4_4 = parseInt(this.value);"></div>
                     </div>
                     <button onclick="window.showScreen('overall-screen')" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-3.5 rounded-xl shadow-md">全体評価へ</button>
                 </div>
@@ -313,20 +313,25 @@
             </div>
             <div class="flex-grow p-6 overflow-y-auto space-y-8 max-w-4xl mx-auto w-full">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="bg-white p-6 rounded-2xl border border-slate-200">
-                        <h3 class="font-bold mb-4">論理的対話（減点）</h3>
-                        <label class="block mb-2"><input type="checkbox" onchange="window.interviewData.logic_1 = this.checked"> 結論後回し (-2)</label>
-                        <label class="block mb-2"><input type="checkbox" onchange="window.interviewData.logic_2 = this.checked"> 事実と感情の混同 (-2)</label>
-                        <label class="block mb-2"><input type="checkbox" onchange="window.interviewData.logic_3 = this.checked"> 構造の不備 (-2)</label>
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                        <h3 class="font-bold mb-4 flex justify-between">論理的対話（減点）<span class="text-xs text-slate-400">持点 7点</span></h3>
+                        <label class="block mb-3 p-2 bg-slate-50 rounded hover:bg-slate-100 cursor-pointer"><input type="checkbox" onchange="window.interviewData.logic_1 = this.checked"> 結論後回し (-2)</label>
+                        <label class="block mb-3 p-2 bg-slate-50 rounded hover:bg-slate-100 cursor-pointer"><input type="checkbox" onchange="window.interviewData.logic_2 = this.checked"> 事実と感情の混同 (-2)</label>
+                        <label class="block mb-3 p-2 bg-slate-50 rounded hover:bg-slate-100 cursor-pointer"><input type="checkbox" onchange="window.interviewData.logic_3 = this.checked"> 構造の不備 (-2)</label>
+                        <label class="block mb-3 p-2 bg-slate-50 rounded hover:bg-slate-100 cursor-pointer"><input type="checkbox" onchange="window.interviewData.logic_4 = this.checked"> 冗長・繰り返し (-1)</label>
                     </div>
-                    <div class="bg-white p-6 rounded-2xl border border-slate-200">
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
                         <h3 class="font-bold mb-4">理念適性（加減点）</h3>
-                        <label class="block mb-2 text-emerald-600 font-bold"><input type="checkbox" onchange="window.interviewData.phil_g1 = this.checked"> 変化を面白がる (+4)</label>
-                        <label class="block mb-2 text-red-600 font-bold"><input type="checkbox" onchange="window.interviewData.phil_r1 = this.checked"> 不動 固（変化拒否） (-4)</label>
-                        <label class="block mb-2 text-red-600 font-bold"><input type="checkbox" onchange="window.interviewData.phil_r2 = this.checked"> 依存 待子（感謝依存） (-4)</label>
+                        <p class="text-[10px] text-emerald-600 font-bold mb-2 uppercase">🌱 Green</p>
+                        <label class="block mb-3 p-2 bg-emerald-50 text-emerald-700 rounded font-bold cursor-pointer"><input type="checkbox" onchange="window.interviewData.phil_g1 = this.checked"> 変化を面白がる (+4)</label>
+                        <label class="block mb-3 p-2 bg-emerald-50 text-emerald-700 rounded font-bold cursor-pointer"><input type="checkbox" onchange="window.interviewData.phil_g2 = this.checked"> 理想（Trend）への関心が高い (+4)</label>
+                        <p class="text-[10px] text-red-600 font-bold mb-2 uppercase mt-4">🚩 Red Flag</p>
+                        <label class="block mb-3 p-2 bg-red-50 text-red-700 rounded font-bold cursor-pointer"><input type="checkbox" onchange="window.interviewData.phil_r1 = this.checked"> 不動 固（変化拒否） (-4)</label>
+                        <label class="block mb-3 p-2 bg-red-50 text-red-700 rounded font-bold cursor-pointer"><input type="checkbox" onchange="window.interviewData.phil_r2 = this.checked"> 依存 待子（感謝依存） (-4)</label>
+                        <label class="block mb-3 p-2 bg-red-50 text-red-700 rounded font-bold cursor-pointer"><input type="checkbox" onchange="window.interviewData.phil_r3 = this.checked"> 古井 説子（マウント） (-4)</label>
                     </div>
                 </div>
-                <button onclick="window.generateFinalReport()" class="w-full bg-indigo-600 text-white font-bold py-5 rounded-2xl shadow-xl">総合評価レポートを生成</button>
+                <button onclick="window.generateFinalReport()" class="w-full bg-indigo-600 text-white font-bold py-5 rounded-2xl shadow-xl hover:bg-indigo-700 transition-colors">総合評価レポートを生成</button>
             </div>
         </div>
 
@@ -338,13 +343,13 @@
             </div>
             <div class="p-6 md:p-10 w-full max-w-4xl mx-auto space-y-8">
                 <div class="bg-slate-900 border border-slate-700 rounded-3xl p-8 text-center shadow-2xl relative">
-                    <p class="text-sm font-bold text-slate-400 mb-2">総合ランク</p>
+                    <p class="text-sm font-bold text-slate-400 mb-2 tracking-widest">OVERALL EVALUATION</p>
                     <span id="final-rank" class="text-7xl font-black text-yellow-400 drop-shadow-lg"></span>
                     <p class="text-3xl font-bold mt-4"><span id="final-total-score"></span><span class="text-lg text-slate-500"> /100</span></p>
-                    <p id="final-message" class="text-slate-200 mt-4 font-bold"></p>
+                    <p id="final-message" class="text-slate-200 mt-4 font-bold max-w-2xl mx-auto"></p>
                 </div>
                 <div class="mt-8 flex justify-center pb-10">
-                    <button id="save-report-btn" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 px-10 rounded-xl shadow-lg flex items-center text-lg">
+                    <button id="save-report-btn" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 px-10 rounded-xl shadow-lg flex items-center text-lg transition-all transform hover:-translate-y-1">
                         <span class="mr-2">💾</span> スプレッドシートに保存
                     </button>
                 </div>
@@ -354,11 +359,11 @@
         <!-- 事業所追加モーダル -->
         <div id="add-office-modal" class="hidden fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4 animate-fade-in">
             <div class="bg-white p-8 rounded-3xl w-full max-w-md shadow-2xl">
-                <h3 class="text-xl font-bold text-slate-800 mb-6">🏢 事業所の登録</h3>
+                <h3 class="text-xl font-bold text-slate-800 mb-6 font-bold">🏢 事業所の登録</h3>
                 <input type="text" id="new-office-name" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 mb-6" placeholder="事業所名を入力">
                 <div class="flex gap-3">
                     <button id="cancel-add-office-btn" class="w-1/3 bg-slate-100 font-bold py-3.5 rounded-xl">キャンセル</button>
-                    <button id="submit-add-office-btn" class="w-2/3 bg-indigo-600 text-white font-bold py-3.5 rounded-xl">登録する</button>
+                    <button id="submit-add-office-btn" class="w-2/3 bg-indigo-600 text-white font-bold py-3.5 rounded-xl shadow-md">登録する</button>
                 </div>
             </div>
         </div>
@@ -504,7 +509,7 @@
         window.renderQuestion = function() {
             const q = QUESTIONS[currentQuestionIndex];
             const progress = (currentQuestionIndex / QUESTIONS.length) * 100;
-            document.getElementById('question-counter').innerText = `Question ${currentQuestionIndex + 1} / ${QUESTIONS.length}`;
+            document.getElementById('question-counter').innerText = `Question ${currentQuestionIndex + 1} / 50`;
             document.getElementById('progress-text').innerText = `${Math.round(progress)}%`;
             document.getElementById('progress-bar').style.width = `${progress}%`;
             document.getElementById('question-text').innerText = q.text;
@@ -557,7 +562,7 @@
                 document.getElementById('result-question').innerText = currentAiResult.question;
 
                 const container = document.getElementById('detail-params-container');
-                container.innerHTML = `<div class='text-xs'>診断が正常に完了しました。性格タイプ：${currentAiTypeCode}</div>`;
+                container.innerHTML = `<div class='text-xs'>AI診断が正常に完了しました。</div>`;
                 
                 showScreen('result-screen');
             }, 2000);
@@ -567,27 +572,56 @@
             let baseScore = window.interviewData.p0 + window.interviewData.p1 + window.interviewData.p2 
                           + window.interviewData.p3_1 + window.interviewData.p3_2 + window.interviewData.p3_3 
                           + window.interviewData.p4_1 + window.interviewData.p4_2 + window.interviewData.p4_3 + window.interviewData.p4_4;
-            let logicScore = 7 - (window.interviewData.logic_1 ? 2 : 0) - (window.interviewData.logic_2 ? 2 : 0) - (window.interviewData.logic_3 ? 2 : 0);
-            let philScore = (window.interviewData.phil_g1 ? 4 : 0) - (window.interviewData.phil_r1 ? 4 : 0) - (window.interviewData.phil_r2 ? 4 : 0);
+            
+            // 論理的対話 (持点 7)
+            let logicScore = 7 - (window.interviewData.logic_1 ? 2 : 0) - (window.interviewData.logic_2 ? 2 : 0) - (window.interviewData.logic_3 ? 2 : 0) - (window.interviewData.logic_4 ? 1 : 0);
+            if(logicScore < 0) logicScore = 0;
+
+            // 理念適性 (Green +4, Red -4)
+            let philScore = (window.interviewData.phil_g1 ? 4 : 0) + (window.interviewData.phil_g2 ? 4 : 0) 
+                          - (window.interviewData.phil_r1 ? 4 : 0) - (window.interviewData.phil_r2 ? 4 : 0) - (window.interviewData.phil_r3 ? 4 : 0);
+            
             let total = Math.max(0, Math.min(100, baseScore + logicScore + philScore));
-            let rank = total >= 85 ? 'S' : total >= 70 ? 'A' : total >= 60 ? 'B' : 'C';
-            if(window.interviewData.phil_r1 || window.interviewData.phil_r2) rank = 'C';
+            
+            // Red Flag判定
+            let hasRedFlag = window.interviewData.phil_r1 || window.interviewData.phil_r2 || window.interviewData.phil_r3;
+            
+            let rank = 'C';
+            let message = "";
+
+            if(hasRedFlag) {
+                rank = 'C';
+                message = "【不採用推奨】Red Flagが検出されました。理念適合リスクが高いと判定されます。";
+            } else if(total >= 85) {
+                rank = 'S';
+                message = "【超優秀】即戦力のリーダー候補です。Trendを共に追える人材です。";
+            } else if(total >= 70) {
+                rank = 'A';
+                message = "【採用推奨】標準以上の思考力と覚悟があります。現場を任せられます。";
+            } else if(total >= 60) {
+                rank = 'B';
+                message = "【合格】懸念点はありますが、教育でカバー可能な範囲です。";
+            } else {
+                rank = 'C';
+                message = "【不採用推奨】スコアが基準に達していない、またはリスクの兆候があります。";
+            }
 
             document.getElementById('final-rank').innerText = rank;
             document.getElementById('final-total-score').innerText = total;
-            document.getElementById('final-message').innerText = rank === 'C' ? "理念不一致またはリスクペルソナの兆候があります。" : "基準を満たしています。";
+            document.getElementById('final-message').innerText = message;
+            
+            // スコアをinterviewDataに保持（保存用）
+            window.interviewData.calculatedLogic = logicScore;
+            window.interviewData.calculatedPhil = philScore;
+
             showScreen('final-report-screen');
         };
 
-        // 保存処理：M, N列およびG列の理由を含めた転送に修正
+        // 保存処理
         document.getElementById('save-report-btn').onclick = async () => {
             const btn = document.getElementById('save-report-btn');
             btn.disabled = true;
             btn.innerText = "転送中...";
-
-            // 送信用スコア計算
-            const logicScore = 7 - (window.interviewData.logic_1 ? 2 : 0) - (window.interviewData.logic_2 ? 2 : 0) - (window.interviewData.logic_3 ? 2 : 0);
-            const philScore = (window.interviewData.phil_g1 ? 4 : 0) - (window.interviewData.phil_r1 ? 4 : 0) - (window.interviewData.phil_r2 ? 4 : 0);
 
             try {
                 const payload = {
@@ -596,17 +630,17 @@
                     candidateName: document.getElementById('candidate-name').value || "未入力",
                     finalRank: document.getElementById('final-rank').innerText,
                     totalScore: document.getElementById('final-total-score').innerText,
-                    aiTypeCode: currentAiTypeCode,
-                    // G列：マッチランクと理由を結合
-                    aiMatch: currentAiResult ? currentAiResult.matchRank + "：" + currentAiResult.matchReason : "未実施",
+                    aiTypeCode: currentAiTypeCode || "未実施",
+                    // G列：マッチランクと理由
+                    aiMatch: currentAiResult ? currentAiResult.matchRank + " (" + currentAiResult.matchReason + ")" : "未実施",
                     p0: window.interviewData.p0, 
                     p1: window.interviewData.p1, 
                     p2: window.interviewData.p2,
                     p3: window.interviewData.p3_1 + window.interviewData.p3_2 + window.interviewData.p3_3,
                     p4: window.interviewData.p4_1 + window.interviewData.p4_2 + window.interviewData.p4_3 + window.interviewData.p4_4,
-                    // M, N列：追加項目
-                    logicScore: logicScore,
-                    philScore: philScore
+                    // M, N列：計算済み数値を直接送る
+                    logicScore: window.interviewData.calculatedLogic !== undefined ? window.interviewData.calculatedLogic : 7,
+                    philScore: window.interviewData.calculatedPhil !== undefined ? window.interviewData.calculatedPhil : 0
                 };
                 
                 await fetch(GAS_WEBHOOK_URL, { 
