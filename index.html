@@ -173,7 +173,6 @@
             </div>
         </div>
 
-        <!-- AI診断系画面はそのまま保持 (中略: ロジックは後述のJSに集約) -->
         <div id="handover-screen" class="screen hidden flex flex-col items-center justify-center h-full p-8 text-center bg-slate-800 text-white">
             <div class="text-7xl mb-8 animate-bounce">📱</div>
             <h2 class="text-2xl font-bold mb-4">候補者へ端末をお渡しください</h2>
@@ -184,7 +183,7 @@
             <div class="w-24 h-24 bg-indigo-600 rounded-full flex items-center justify-center text-white shadow-lg" id="start-icon"></div>
             <h1 class="text-2xl font-bold text-slate-800">適性ミキワメAI診断</h1>
             <p class="text-slate-500 text-sm">ありのままの自分に近いものを選んでください（全50問）</p>
-            <button id="start-btn" class="w-full max-w-sm bg-slate-800 hover:bg-slate-900 text-white font-bold py-4 rounded-2xl">診断を開始する</button>
+            <button id="start-btn" class="w-full max-sm bg-slate-800 hover:bg-slate-900 text-white font-bold py-4 rounded-2xl">診断を開始する</button>
         </div>
 
         <div id="question-screen" class="screen hidden flex flex-col h-full p-6 md:p-12 max-w-3xl mx-auto w-full">
@@ -380,7 +379,6 @@
         let currentAiTypeCode = null;
         let currentAiResult = null;
 
-        // --- 16タイプデータ (中身は以前と同じ) ---
         const QUESTIONS = [
             { id: 1, axis: "EI", direction: "E", text: "初対面の人ばかりの場でも、自分から積極的に話しかけにいくことができる。" },
             { id: 2, axis: "EI", direction: "I", text: "休日は人とワイワイ過ごすよりも、一人で静かに過ごす方が疲れが取れる。" },
@@ -447,20 +445,18 @@
             "ESFP": { name: "陽気なエンターテイナー", matchRank: "A", matchLabel: "ムードメーカー", matchReason: "明るさとコミュ力で利用者の笑顔を引き出し、現場をポジティブに保つ能力が高く評価されるためです。", strength: "抜群のコミュニケーション能力で、利用者の笑顔を引き出す天才です。", risk: "ネガティブな感情を伴う対応から目を背けがちな面があります。", question: "「雰囲気が悪くなることを承知で、チームの課題を指摘できますか？」" },
             "ENFP": { name: "情熱の広報運動家", matchRank: "B", matchLabel: "モチベーター", matchReason: "強みを見つける能力は高いですが、計画の実行力や細かい実務でのミスが懸念され、サポートが必要な水準です。", strength: "利用者の「できること」を見つけ、エンパワメントする能力が高いです。", risk: "最後までやり遂げるのが苦手で、風呂敷を広げすぎる傾向があります。", question: "「新しいアイデアを最後まで形にして実行し続けた経験を教えてください。」" },
             "ENTP": { name: "革新的な討論者", matchRank: "D", matchLabel: "要フォロー", matchReason: "論理的ですが、議論を好む傾向が現場の和を乱すリスクとなり、感情的配慮に欠ける恐れがあるためです。", strength: "古い慣習に縛られず、事業所の課題に革新的な解決策を提示します。", risk: "保守的なスタッフと衝突し、和を乱すリスクがあります。", question: "「自分の意見が正しいのに感情的反発に遭った時、どう対処しますか？」" },
-            "ESTJ": { name: "徹底した幹部", matchRank: "B", matchLabel: "管理者候補", matchReason: "強い責任感で組織運営に貢献しますが、他者への要求が高く利用者のペースを無視するリスクがあるためです。", strength: "非常に強い責任感とリーダーシップを持ちます。事業運営の安定に寄与します。", risk: "他者にも自分と同じ水準を求め、圧が強くなることがあります。", question: "「何度指導してもミスを繰り返す人に対し、どのようなマインドで接しますか？」" },
+            "ESTJ": { name: "徹底した幹部", matchRank: "B", matchLabel: "管理者候補", matchReason: "強い責任感で組織運営に貢献しますが、他者への要求が高く利用者のペースを無視するリスクがあるためです。", strength: "非常に強い責任感とリーダーシップを持ちます。", risk: "他者にも自分と同じ水準を求め、圧が強くなることがあります。", question: "「何度指導してもミスを繰り返す人に対し、どのようなマインドで接しますか？」" },
             "ESFJ": { name: "世話焼きな領事官", matchRank: "S", matchLabel: "福祉の最適性", matchReason: "チームワークを重視し、利用者に対しても丁寧な支援を提供できる、最も安定した適性を持つためです。", strength: "チーム間の潤滑油になります。手厚い支援を提供する優等生タイプです。", risk: "対立を恐れるあまり、利用者に過保護になりすぎることがあります。", question: "「利用者の自立のために、あえて失敗させる支援をすることに抵抗は？」" },
             "ENFJ": { name: "導きの主人公", matchRank: "S", matchLabel: "次世代リーダー", matchReason: "利用者の成長を強く信じる情熱を備えており、現場の士気と支援の質を同時に高める中核人材となるためです。", strength: "スタッフを巻き込むリーダーシップを兼ね備えています。", risk: "理想に燃えるあまり、現実的な体力や時間を無視して全員に無理を強いるリスクがあります。", question: "「他のスタッフとの温度感が低い時、どうやってチームをまとめますか？」" },
             "ENTJ": { name: "野心的な指揮官", matchRank: "C", matchLabel: "経営・施設長候補", matchReason: "高い推進力を持ちますが、効率優先で福祉に重要な『寄り添いのプロセス』を切り捨てるリスクが高いためです。", strength: "決断力と推進力が圧倒的です。困難なミッションを完遂します。", risk: "独裁的になりやすく、感情的フォローを軽視する面があります。", question: "「スタッフから『効率より利用者のペースを優先して』と反発されたら？」" }
         };
 
-        // --- 画面遷移ロジック ---
         window.showScreen = function(id) {
             document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
             document.getElementById(id).classList.remove('hidden');
             document.getElementById(id).scrollTop = 0;
         };
 
-        // --- 初期化 ---
         function initApp() {
             renderOfficeSelect();
             showScreen('auth-screen');
@@ -477,7 +473,6 @@
             });
         }
 
-        // 事業所登録
         document.getElementById('show-add-office-btn').onclick = () => document.getElementById('add-office-modal').classList.remove('hidden');
         document.getElementById('cancel-add-office-btn').onclick = () => document.getElementById('add-office-modal').classList.add('hidden');
         document.getElementById('submit-add-office-btn').onclick = () => {
@@ -490,7 +485,6 @@
             document.getElementById('add-office-modal').classList.add('hidden');
         };
 
-        // ログイン
         document.getElementById('login-btn').onclick = () => {
             const idx = document.getElementById('office-select').value;
             if(idx === "") return;
@@ -507,11 +501,10 @@
             showScreen('phase0-screen');
         };
 
-        // --- 診断ロジック (コア部分は保持) ---
         window.renderQuestion = function() {
             const q = QUESTIONS[currentQuestionIndex];
             const progress = (currentQuestionIndex / QUESTIONS.length) * 100;
-            document.getElementById('question-counter').innerText = `Question ${currentQuestionIndex + 1} / 50`;
+            document.getElementById('question-counter').innerText = `Question ${currentQuestionIndex + 1} / ${QUESTIONS.length}`;
             document.getElementById('progress-text').innerText = `${Math.round(progress)}%`;
             document.getElementById('progress-bar').style.width = `${progress}%`;
             document.getElementById('question-text').innerText = q.text;
@@ -563,9 +556,8 @@
                 document.getElementById('match-label').innerText = currentAiResult.matchLabel;
                 document.getElementById('result-question').innerText = currentAiResult.question;
 
-                // パラメーター表示 (簡易版)
                 const container = document.getElementById('detail-params-container');
-                container.innerHTML = `<div class='text-xs'>診断が正常に完了しました。</div>`;
+                container.innerHTML = `<div class='text-xs'>診断が正常に完了しました。性格タイプ：${currentAiTypeCode}</div>`;
                 
                 showScreen('result-screen');
             }, 2000);
@@ -587,11 +579,16 @@
             showScreen('final-report-screen');
         };
 
-        // 保存処理
+        // 保存処理：M, N列およびG列の理由を含めた転送に修正
         document.getElementById('save-report-btn').onclick = async () => {
             const btn = document.getElementById('save-report-btn');
             btn.disabled = true;
             btn.innerText = "転送中...";
+
+            // 送信用スコア計算
+            const logicScore = 7 - (window.interviewData.logic_1 ? 2 : 0) - (window.interviewData.logic_2 ? 2 : 0) - (window.interviewData.logic_3 ? 2 : 0);
+            const philScore = (window.interviewData.phil_g1 ? 4 : 0) - (window.interviewData.phil_r1 ? 4 : 0) - (window.interviewData.phil_r2 ? 4 : 0);
+
             try {
                 const payload = {
                     date: new Date().toISOString(),
@@ -600,15 +597,28 @@
                     finalRank: document.getElementById('final-rank').innerText,
                     totalScore: document.getElementById('final-total-score').innerText,
                     aiTypeCode: currentAiTypeCode,
-                    aiMatch: currentAiResult.matchRank + " (" + currentAiResult.matchReason + ")",
-                    p0: window.interviewData.p0, p1: window.interviewData.p1, p2: window.interviewData.p2,
+                    // G列：マッチランクと理由を結合
+                    aiMatch: currentAiResult ? currentAiResult.matchRank + "：" + currentAiResult.matchReason : "未実施",
+                    p0: window.interviewData.p0, 
+                    p1: window.interviewData.p1, 
+                    p2: window.interviewData.p2,
                     p3: window.interviewData.p3_1 + window.interviewData.p3_2 + window.interviewData.p3_3,
-                    p4: window.interviewData.p4_1 + window.interviewData.p4_2 + window.interviewData.p4_3 + window.interviewData.p4_4
+                    p4: window.interviewData.p4_1 + window.interviewData.p4_2 + window.interviewData.p4_3 + window.interviewData.p4_4,
+                    // M, N列：追加項目
+                    logicScore: logicScore,
+                    philScore: philScore
                 };
-                await fetch(GAS_WEBHOOK_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
+                
+                await fetch(GAS_WEBHOOK_URL, { 
+                    method: 'POST', 
+                    mode: 'no-cors', 
+                    body: JSON.stringify(payload) 
+                });
                 btn.innerText = "✅ 保存完了";
             } catch(e) {
+                console.error(e);
                 btn.innerText = "❌ 送信エラー";
+                btn.disabled = false;
             }
         };
 
