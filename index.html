@@ -9,19 +9,13 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
         .progress-transition { transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        
-        /* AIローディングアニメーション用 */
         .ai-pulse { animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
         @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .5; transform: scale(1.05); } }
-        
         .glass-panel { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
-        
-        /* カスタムスクロールバー */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-
         input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; }
         input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 24px; width: 24px; border-radius: 50%; background: #4f46e5; cursor: pointer; margin-top: -8px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
         input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 8px; cursor: pointer; background: #e2e8f0; border-radius: 4px; }
@@ -32,338 +26,234 @@
     <div id="app" class="bg-white w-full max-w-5xl h-screen md:h-[900px] md:rounded-3xl shadow-2xl overflow-hidden relative border border-slate-200 flex flex-col">
         
         <!-- ==========================================
-             事業所選択画面（localStorage管理）
+             事業所選択画面
         ========================================== -->
         <div id="auth-screen" class="screen flex flex-col items-center justify-center h-full p-8 text-center bg-slate-800 text-white relative overflow-hidden">
             <div class="absolute -right-20 -top-20 opacity-10" id="bg-icon-auth"></div>
-            <div class="z-10 flex flex-col items-center bg-slate-900/80 p-8 rounded-3xl border border-slate-700 w-full max-w-md backdrop-blur-sm shadow-2xl">
-                <h2 class="text-2xl font-bold mb-6 tracking-wide">事業所選択</h2>
-                
-                <div id="auth-form" class="w-full space-y-5 animate-fade-in">
+            <div class="z-10 flex flex-col items-center bg-slate-900/80 p-8 rounded-3xl border border-slate-700 w-full max-w-md backdrop-blur-sm shadow-2xl animate-fade-in">
+                <h2 class="text-2xl font-bold mb-6 tracking-wide text-indigo-300 font-black uppercase">Office Selection</h2>
+                <div class="w-full space-y-5">
                     <div class="text-left">
-                        <label class="block text-xs text-indigo-300 font-bold mb-1 ml-1">事業所を選択</label>
-                        <select id="office-select" class="w-full bg-slate-800 border border-slate-600 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 shadow-inner">
+                        <label class="block text-xs text-indigo-400 font-bold mb-1 ml-1 uppercase">Select Office</label>
+                        <select id="office-select" class="w-full bg-slate-800 border border-slate-600 rounded-xl px-4 py-3 text-white focus:outline-none shadow-inner cursor-pointer">
                             <option value="">事業所を選択してください</option>
                         </select>
                     </div>
-                    <button id="login-btn" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3.5 rounded-xl transition-all shadow-[0_0_15px_rgba(79,70,229,0.4)] mt-2">ログイン</button>
-                    
+                    <button id="login-btn" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3.5 rounded-xl transition-all shadow-lg active:scale-95">ログイン</button>
                     <div class="pt-6 border-t border-slate-700 mt-6">
-                        <button id="show-add-office-btn" class="text-sm text-indigo-400 hover:text-indigo-300 transition-colors">＋ 新しい事業所を登録する</button>
+                        <button id="show-add-office-btn" class="text-sm text-indigo-400 hover:text-indigo-300 transition-colors font-bold">＋ 新しい事業所を登録する</button>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- ==========================================
-             メイン：ダッシュボード画面
+             ダッシュボード
         ========================================== -->
         <div id="app-init-screen" class="screen hidden flex flex-col items-center justify-center h-full space-y-8 p-8 text-center animate-fade-in bg-slate-800 text-white relative overflow-hidden">
-            <div class="absolute -right-20 -top-20 opacity-10" id="bg-icon-large"></div>
             <div class="z-10 flex flex-col items-center w-full">
                 <span id="dashboard-office-name" class="px-5 py-2 bg-indigo-500/30 text-indigo-200 font-bold rounded-full text-sm tracking-widest mb-6 border border-indigo-400/30 shadow-sm"></span>
-                <h1 class="text-3xl md:text-5xl font-black mb-4 leading-tight">
-                    採用面接 運用・評価<br>コンプリートマニュアル
-                </h1>
-                <p class="text-slate-300 text-sm md:text-lg mb-10 max-w-2xl leading-relaxed">
-                    〜Trend（理想）を共に追い、自走できる「プロフェッショナル人材」の獲得〜
-                </p>
-
-                <div class="flex flex-col sm:flex-row gap-4 w-full max-w-sm">
-                    <button onclick="window.startNewSession()" class="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-5 rounded-2xl shadow-[0_0_20px_rgba(79,70,229,0.5)] transition-all transform hover:-translate-y-1 text-xl flex items-center justify-center">
-                        <span class="mr-2">🚀</span> 面接を開始
-                    </button>
+                <h1 class="text-3xl md:text-5xl font-black mb-4 leading-tight text-white uppercase tracking-tighter">Interview Support PRO</h1>
+                <p class="text-slate-300 text-sm md:text-lg mb-10 max-w-2xl leading-relaxed font-medium">理想を共に追い、自走できるプロフェッショナル人材の獲得</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-xl">
+                    <button onclick="window.startNewSession()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-black py-8 rounded-3xl shadow-2xl transition-all text-2xl flex flex-col items-center justify-center gap-2"><span class="text-3xl">🚀</span><span>面接を開始</span></button>
+                    <button onclick="window.showHistoryAuthModal()" class="bg-slate-700 hover:bg-slate-600 text-white font-black py-8 rounded-3xl shadow-2xl transition-all text-2xl flex flex-col items-center justify-center border border-slate-600 gap-2"><span class="text-3xl">📂</span><span>履歴を確認</span></button>
                 </div>
-                <button onclick="location.reload()" class="mt-8 text-xs text-slate-500 hover:text-slate-400 underline">事業所選択に戻る</button>
+                <button onclick="location.reload()" class="mt-12 text-xs text-slate-500 hover:text-slate-400 underline uppercase font-black tracking-widest">Logout</button>
             </div>
         </div>
 
         <!-- ==========================================
-             Phase 0: 候補者名入力・お出迎え
+             履歴一覧画面
         ========================================== -->
+        <div id="history-list-screen" class="screen hidden flex flex-col h-full bg-slate-50">
+            <div class="bg-white px-6 py-4 border-b border-slate-200 flex justify-between items-center glass-panel sticky top-0 z-10">
+                <div class="flex items-center"><span class="text-2xl mr-3">📂</span><h2 class="text-lg font-bold text-slate-800 font-black">面接・診断履歴</h2></div>
+                <button onclick="window.showScreen('app-init-screen')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold px-4 py-2 rounded-lg transition-all">ダッシュボードに戻る</button>
+            </div>
+            <div class="flex-grow p-6 overflow-y-auto">
+                <div id="history-container" class="max-w-4xl mx-auto space-y-4 font-bold"></div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             面接フロー各画面
+        ========================================== -->
+        <!-- Phase 0 -->
         <div id="phase0-screen" class="screen hidden flex flex-col h-full bg-slate-50">
             <div class="bg-white px-6 py-4 border-b border-slate-200 flex justify-between items-center glass-panel sticky top-0 z-10">
-                <div class="flex items-center"><span class="text-2xl mr-3">🤝</span><h2 class="text-lg font-bold text-slate-800">Phase 0: お出迎え・着席</h2></div>
-                <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1.5 rounded-full">配点: 5点</span>
+                <div class="flex items-center"><span class="text-2xl mr-3">🤝</span><h2 class="text-lg font-bold text-slate-800">Phase 0: お出迎え</h2></div>
+                <button onclick="window.confirmToHome()" class="p-2 text-slate-400 hover:text-red-500 transition-colors bg-slate-50 rounded-full shadow-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-6 h-6"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></button>
             </div>
             <div class="flex-grow p-6 overflow-y-auto flex flex-col md:flex-row gap-6">
-                <div class="md:w-2/3 space-y-4">
-                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-                        <h3 class="font-bold text-indigo-700 mb-3 flex items-center">評価の視点：社会人基礎・ホスピタリティ</h3>
-                        <p class="text-slate-600 text-sm mb-4">挨拶のトーン、目線、態度の余裕を観察してください。</p>
-                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                            <p class="font-bold text-sm text-slate-700 mb-1">【手順】</p>
-                            <p class="text-sm text-slate-600">笑顔で迎え入れ、面接室へ案内。案内中の振る舞いを観察。</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="md:w-1/3 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm h-fit sticky top-6">
-                    <div class="mb-6 border-b border-slate-100 pb-5">
-                        <label class="block text-sm font-bold text-slate-800 mb-2">👤 候補者氏名（必須）</label>
-                        <input type="text" id="candidate-name" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-800 focus:outline-none focus:border-indigo-500 font-medium" placeholder="例：山田 太郎">
-                    </div>
-                    <h3 class="font-bold text-slate-800 mb-4 border-b pb-2">評価入力</h3>
-                    <div class="mb-8">
-                        <div class="flex justify-between text-sm mb-3 font-bold text-slate-600">
-                            <span>スコア</span>
-                            <span id="score-val-p0" class="text-indigo-600 text-lg">3点</span>
-                        </div>
-                        <input type="range" min="1" max="5" value="3" oninput="document.getElementById('score-val-p0').innerText = this.value + '点'; window.interviewData.p0 = parseInt(this.value);">
-                    </div>
-                    <button onclick="window.showScreen('phase1-screen')" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-3.5 rounded-xl transition-all shadow-md">Phase 1 へ進む</button>
+                <div class="md:w-2/3"><div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 space-y-4 font-medium text-slate-600"><h3 class="font-black text-indigo-700 text-lg uppercase tracking-widest">Hospitality Check</h3><p>挨拶、目線、待機中の余裕を観察してください。5点（最高）〜1点（最低）で評価します。</p></div></div>
+                <div class="md:w-1/3 bg-white p-8 rounded-3xl shadow-sm border border-slate-200 h-fit space-y-8">
+                    <div><label class="block text-sm font-black mb-3 text-slate-800 uppercase tracking-tighter">Candidate Name</label><input type="text" id="candidate-name" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 focus:border-indigo-500 focus:outline-none shadow-inner font-bold text-lg" placeholder="候補者名"></div>
+                    <div><div class="flex justify-between text-sm font-bold mb-3 text-slate-600"><span>社会人基礎評価</span><span id="score-val-p0" class="text-indigo-600 font-black text-xl">3点</span></div><input type="range" min="1" max="5" value="3" oninput="document.getElementById('score-val-p0').innerText = this.value + '点'; window.interviewData.p0 = parseInt(this.value);"></div>
+                    <button onclick="window.showScreen('phase1-screen')" class="w-full bg-slate-800 text-white font-black py-4 rounded-2xl shadow-xl active:scale-95 transition-all uppercase tracking-widest">Next Phase →</button>
                 </div>
             </div>
         </div>
 
-        <!-- ==========================================
-             Phase 1: アイスブレイク
-        ========================================== -->
+        <!-- Phase 1 -->
         <div id="phase1-screen" class="screen hidden flex flex-col h-full bg-slate-50">
-            <div class="bg-white px-6 py-4 border-b border-slate-200 flex justify-between items-center glass-panel sticky top-0 z-10">
-                <div class="flex items-center"><span class="text-2xl mr-3">☕</span><h2 class="text-lg font-bold text-slate-800">Phase 1: アイスブレイク・基本確認</h2></div>
-                <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1.5 rounded-full">配点: 5点</span>
-            </div>
+            <div class="bg-white px-6 py-4 border-b border-slate-200 flex justify-between items-center glass-panel sticky top-0 z-10"><div class="flex items-center"><span class="text-2xl mr-3">☕</span><h2 class="text-lg font-bold text-slate-800 font-black">Phase 1: アイスブレイク</h2></div><button onclick="window.confirmToHome()" class="p-2 text-slate-400 hover:text-red-500 transition-colors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-6 h-6"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></button></div>
             <div class="flex-grow p-6 overflow-y-auto flex flex-col md:flex-row gap-6">
-                <div class="md:w-2/3 space-y-4">
-                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-                        <h3 class="font-bold text-indigo-700 mb-3 text-sm">評価：表情・対話の基礎・ニーズ把握</h3>
-                        <p class="text-slate-700 font-bold mb-1">Q.「障害福祉サービスというものをご存知ですか？」</p>
-                        <p class="text-xs text-slate-500 mb-4">知っている場合：「なぜご存知ですか？」と深掘り。</p>
-                        <p class="text-slate-700 font-bold mb-1">Q.「今日、一番気になっていることは何ですか？」</p>
-                    </div>
-                </div>
-                <div class="md:w-1/3 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm h-fit sticky top-6">
-                    <div class="mb-8">
-                        <div class="flex justify-between text-sm mb-3 font-bold text-slate-600">
-                            <span>スコア</span>
-                            <span id="score-val-p1" class="text-indigo-600 text-lg">3点</span>
-                        </div>
-                        <input type="range" min="1" max="5" value="3" oninput="document.getElementById('score-val-p1').innerText = this.value + '点'; window.interviewData.p1 = parseInt(this.value);">
-                    </div>
-                    <button onclick="window.showScreen('phase2-screen')" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-3.5 rounded-xl transition-all shadow-md">Phase 2 へ進む</button>
+                <div class="md:w-2/3"><div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200"><h3 class="font-black text-indigo-700 mb-2 uppercase text-xs">Assessment</h3><p class="text-sm text-slate-600 font-bold leading-relaxed">表情が豊かか、会話のラリーがスムーズか。ニーズを把握できているかを確認。</p></div></div>
+                <div class="md:w-1/3 bg-white p-8 rounded-3xl shadow-sm border border-slate-200 h-fit space-y-8">
+                    <div class="flex justify-between text-sm font-bold text-slate-600"><span>対話基礎評価</span><span id="score-val-p1" class="text-indigo-600 font-black text-xl">3点</span></div>
+                    <input type="range" min="1" max="5" value="3" oninput="document.getElementById('score-val-p1').innerText = this.value + '点'; window.interviewData.p1 = parseInt(this.value);">
+                    <div class="flex gap-2 pt-4"><button onclick="window.showScreen('phase0-screen')" class="w-1/3 bg-slate-100 font-bold py-4 rounded-2xl text-slate-400 font-bold">戻る</button><button onclick="window.showScreen('phase2-screen')" class="w-2/3 bg-slate-800 text-white font-bold py-4 rounded-2xl shadow-md uppercase tracking-widest">Next →</button></div>
                 </div>
             </div>
         </div>
 
-        <!-- ==========================================
-             Phase 2: 経歴・条件
-        ========================================== -->
+        <!-- Phase 2 -->
         <div id="phase2-screen" class="screen hidden flex flex-col h-full bg-slate-50">
-            <div class="bg-white px-6 py-4 border-b border-slate-200 flex justify-between items-center glass-panel sticky top-0 z-10">
-                <div class="flex items-center"><span class="text-2xl mr-3">💼</span><h2 class="text-lg font-bold text-slate-800">Phase 2: 経歴・条件・スタンス</h2></div>
-                <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1.5 rounded-full">配点: 5点</span>
-            </div>
+            <div class="bg-white px-6 py-4 border-b border-slate-200 flex justify-between items-center glass-panel sticky top-0 z-10"><div class="flex items-center"><span class="text-2xl mr-3">💼</span><h2 class="text-lg font-bold text-slate-800 font-black uppercase">Phase 2: Career & Stance</h2></div><button onclick="window.confirmToHome()" class="p-2 text-slate-400 hover:text-red-500 transition-colors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-6 h-6"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></button></div>
             <div class="flex-grow p-6 overflow-y-auto flex flex-col md:flex-row gap-6">
-                <div class="md:w-2/3 space-y-4">
-                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-                        <p class="text-slate-700 font-bold mb-2">Q.「お仕事をする中で大事にしていたポイントは何ですか？」</p>
-                        <p class="text-sm text-slate-600">条件（シフト・給与等）に100%前向きな合意があるかも確認。</p>
-                    </div>
-                </div>
-                <div class="md:w-1/3 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm h-fit sticky top-6">
-                    <div class="mb-8">
-                        <div class="flex justify-between text-sm mb-3 font-bold text-slate-600">
-                            <span>スコア</span>
-                            <span id="score-val-p2" class="text-indigo-600 text-lg">3点</span>
-                        </div>
-                        <input type="range" min="1" max="5" value="3" oninput="document.getElementById('score-val-p2').innerText = this.value + '点'; window.interviewData.p2 = parseInt(this.value);">
-                    </div>
-                    <button onclick="window.showScreen('handover-screen')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3.5 rounded-xl shadow-md">AI診断へ移行</button>
+                <div class="md:w-2/3"><div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 space-y-4"><p class="text-sm text-slate-600 leading-relaxed font-bold">経歴の論理性と仕事へのこだわり。条件（給与・シフト）への前向きな合意を評価。</p></div></div>
+                <div class="md:w-1/3 bg-white p-8 rounded-3xl shadow-sm border border-slate-200 h-fit space-y-8">
+                    <div class="flex justify-between text-sm font-bold text-slate-600"><span>経歴スタンス評価</span><span id="score-val-p2" class="text-indigo-600 font-black text-xl">3点</span></div>
+                    <input type="range" min="1" max="5" value="3" oninput="document.getElementById('score-val-p2').innerText = this.value + '点'; window.interviewData.p2 = parseInt(this.value);">
+                    <div class="flex gap-2 pt-4"><button onclick="window.showScreen('phase1-screen')" class="w-1/3 bg-slate-100 font-bold py-4 rounded-2xl text-slate-400 font-bold">戻る</button><button onclick="window.showScreen('handover-screen')" class="w-2/3 bg-indigo-600 text-white font-black py-4 rounded-2xl shadow-md uppercase tracking-tighter">AI診断移行</button></div>
                 </div>
             </div>
         </div>
 
-        <div id="handover-screen" class="screen hidden flex flex-col items-center justify-center h-full p-8 text-center bg-slate-800 text-white">
-            <div class="text-7xl mb-8 animate-bounce">📱</div>
-            <h2 class="text-2xl font-bold mb-4">候補者へ端末をお渡しください</h2>
-            <button onclick="window.showScreen('start-screen')" class="bg-indigo-500 hover:bg-indigo-400 text-white font-bold py-4 px-10 rounded-2xl shadow-xl">診断スタート画面へ</button>
+        <!-- AI診断遷移 -->
+        <div id="handover-screen" class="screen hidden flex flex-col items-center justify-center h-full p-8 text-center bg-slate-800 text-white animate-fade-in">
+            <div class="text-7xl mb-8 animate-bounce text-indigo-400">📱</div><h2 class="text-3xl font-black mb-10 text-indigo-100 uppercase tracking-widest leading-relaxed">Device Handover</h2>
+            <div class="flex gap-4"><button onclick="window.showScreen('phase2-screen')" class="bg-slate-700 font-bold py-4 px-10 rounded-2xl border border-slate-600 transition-all hover:bg-slate-600">戻る</button><button onclick="window.showScreen('start-screen')" class="bg-indigo-500 hover:bg-indigo-400 text-white font-black py-4 px-12 rounded-2xl shadow-2xl transition-all">診断を開始する</button></div>
         </div>
 
-        <div id="start-screen" class="screen hidden flex flex-col items-center justify-center h-full space-y-8 p-8 text-center bg-white">
-            <div class="w-24 h-24 bg-indigo-600 rounded-full flex items-center justify-center text-white shadow-lg" id="start-icon"></div>
-            <h1 class="text-2xl font-bold text-slate-800">適性ミキワメAI診断</h1>
-            <p class="text-slate-500 text-sm">ありのままの自分に近いものを選んでください（全50問）</p>
-            <button id="start-btn" class="w-full max-sm bg-slate-800 hover:bg-slate-900 text-white font-bold py-4 rounded-2xl">診断を開始する</button>
+        <!-- AI診断エンジン -->
+        <div id="start-screen" class="screen hidden flex flex-col items-center justify-center h-full space-y-10 p-10 text-center bg-white">
+            <div class="text-8xl">🧠</div><h1 class="text-4xl font-black text-slate-800 tracking-tighter uppercase">Diagnostic</h1><p class="text-slate-500 font-medium text-lg">直感で選んでください（全50問）</p>
+            <button id="start-btn" class="w-full max-w-sm bg-slate-800 hover:bg-slate-900 text-white font-black py-6 rounded-3xl text-xl shadow-xl transition-all active:scale-95 tracking-widest">START</button>
         </div>
 
-        <div id="question-screen" class="screen hidden flex flex-col h-full p-6 md:p-12 max-w-3xl mx-auto w-full">
-            <div class="mb-12 mt-8">
-                <div class="flex justify-between text-xs font-bold text-indigo-500 mb-3 tracking-widest">
-                    <span id="question-counter">Question 1 / 50</span>
-                    <span id="progress-text">0%</span>
-                </div>
-                <div class="w-full bg-slate-100 rounded-full h-2">
-                    <div id="progress-bar" class="bg-indigo-500 h-2 rounded-full progress-transition" style="width: 0%"></div>
-                </div>
-            </div>
-            <div class="flex-grow flex flex-col justify-center mb-12 relative px-4">
-                <h2 id="question-text" class="text-xl md:text-3xl font-bold text-slate-800 leading-relaxed text-center"></h2>
-            </div>
-            <div id="options-container" class="grid grid-cols-1 gap-3 mt-auto mb-8"></div>
+        <div id="question-screen" class="screen hidden flex flex-col h-full p-6 md:p-12 max-w-3xl mx-auto w-full bg-white">
+            <div class="mb-12 mt-8"><div class="flex justify-between text-[10px] font-black text-indigo-500 mb-3 uppercase tracking-widest font-black"><span id="question-counter"></span><span id="progress-text"></span></div><div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden shadow-inner"><div id="progress-bar" class="bg-indigo-500 h-2 rounded-full progress-transition"></div></div></div>
+            <div class="flex-grow flex flex-col justify-center mb-16"><h2 id="question-text" class="text-2xl md:text-4xl font-black text-slate-800 text-center leading-[1.6] px-4"></h2></div>
+            <div id="options-container" class="grid grid-cols-1 gap-4 mt-auto mb-10"></div>
         </div>
 
-        <div id="loading-screen" class="screen hidden flex flex-col items-center justify-center h-full space-y-6 p-8 text-center bg-slate-50">
-            <div class="relative w-32 h-32 flex items-center justify-center">
-                <div class="absolute inset-0 border-4 border-indigo-600 rounded-full border-t-transparent animate-spin"></div>
-                <div id="brain-icon" class="text-indigo-600 ai-pulse text-4xl">🧠</div>
-            </div>
-            <h2 class="text-xl font-bold text-slate-800">AI解析中...</h2>
-            <p class="text-sm text-slate-500" id="loading-status-text">一貫性フィルターを実行しています</p>
+        <div id="loading-screen" class="screen hidden flex flex-col items-center justify-center h-full space-y-8 text-center bg-slate-50">
+            <div class="relative w-32 h-32 flex items-center justify-center"><div class="absolute inset-0 border-4 border-indigo-600 rounded-full border-t-transparent animate-spin"></div><div class="text-indigo-600 ai-pulse text-5xl font-black">🧠</div></div>
+            <h2 class="text-2xl font-black text-slate-800 tracking-tighter uppercase font-black">Analyzing...</h2><p class="text-xs text-slate-400 font-black uppercase tracking-widest" id="loading-status-text"></p>
         </div>
 
-        <div id="completed-screen" class="screen hidden flex flex-col items-center justify-center h-full space-y-8 p-8 text-center">
-            <div class="w-24 h-24 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 mb-2 text-4xl">✅</div>
-            <h2 class="text-3xl font-bold text-slate-800">テスト完了</h2>
-            <p class="text-lg text-slate-600">担当者に端末をお返しください。</p>
-            <button id="show-result-btn" class="bg-slate-800 hover:bg-slate-900 text-white font-bold py-4 px-6 rounded-2xl shadow-md">レポートを表示する</button>
+        <div id="completed-screen" class="screen hidden flex flex-col items-center justify-center h-full p-8 text-center bg-white animate-fade-in">
+            <div class="text-8xl mb-8">✅</div><h2 class="text-4xl font-black text-slate-800 mb-4 tracking-tighter uppercase">Step Completed</h2><p class="text-xl text-slate-500 mb-12 font-bold leading-relaxed font-black">診断が完了しました。<br><span class="text-indigo-600">担当者に端末をお返しください。</span></p>
+            <button id="show-result-btn" class="bg-slate-800 hover:bg-slate-900 text-white font-black py-5 px-16 rounded-3xl text-xl shadow-xl transition-all">レポートを確認</button>
         </div>
 
-        <!-- AI診断結果（面接官用） -->
+        <!-- 診断レポート -->
         <div id="result-screen" class="screen hidden flex flex-col h-full bg-slate-50 overflow-y-auto">
-            <div class="bg-indigo-900 px-6 py-4 sticky top-0 z-50 flex justify-between items-center text-white">
-                <h2 class="text-lg font-bold">MIKIWAME AI 候補者分析</h2>
-                <div class="text-xs font-bold bg-indigo-800 px-3 py-1 rounded">面接官専用</div>
-            </div>
-            <div class="p-6 space-y-6 max-w-4xl mx-auto w-full">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="md:col-span-2 bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
-                        <p class="text-xs font-bold text-indigo-500 mb-2 uppercase">Personality Type</p>
-                        <div class="flex items-end gap-4 mb-3">
-                            <h3 id="result-type-code" class="text-5xl font-black text-slate-800"></h3>
-                            <p id="result-type-name" class="text-xl font-bold text-slate-500 mb-1"></p>
-                        </div>
-                        <p id="result-description" class="text-sm text-slate-600 leading-relaxed"></p>
+            <div class="bg-indigo-900 px-6 py-4 sticky top-0 z-50 flex justify-between items-center text-white text-lg font-black tracking-widest uppercase"><h2>AI Insights</h2><button onclick="window.confirmToHome()" class="p-2 bg-indigo-800 rounded-full hover:bg-red-500 transition-colors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-6 h-6"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></button></div>
+            <div class="p-8 space-y-8 max-w-5xl mx-auto w-full flex-grow">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 font-bold">
+                    <div class="md:col-span-2 bg-white rounded-[2rem] p-10 shadow-sm border border-slate-200">
+                        <div class="flex items-end gap-6 mb-6 font-black"><h3 id="result-type-code" class="text-7xl text-slate-800 tracking-tighter"></h3><p id="result-type-name" class="text-2xl text-indigo-500 mb-2"></p></div>
+                        <p id="result-description" class="text-base text-slate-600 leading-relaxed"></p>
                     </div>
-                    <div class="bg-slate-800 text-white rounded-3xl p-6 shadow-sm flex flex-col items-center justify-center text-center">
-                        <p class="text-xs font-bold text-slate-400 mb-2">福祉現場 総合マッチ度</p>
-                        <div id="match-rank" class="text-6xl font-black mb-1"></div>
-                        <p id="match-label" class="text-xs font-bold px-4 py-1 rounded-full bg-white/20 mb-3"></p>
+                    <div class="bg-slate-800 text-white rounded-[2rem] p-8 shadow-2xl flex flex-col items-center justify-center text-center font-black">
+                        <p class="text-xs text-slate-400 mb-2 uppercase tracking-widest">Match Index</p><div id="match-rank" class="text-8xl mb-1 text-yellow-400"></div><p id="match-label" class="text-[10px] px-4 py-2 rounded-full bg-white/10 uppercase tracking-widest"></p>
                     </div>
                 </div>
-                <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
-                    <h4 class="font-bold text-slate-800 mb-6">福祉職能 詳細パラメーター分析</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6" id="detail-params-container"></div>
-                </div>
-                <div class="bg-indigo-50 p-5 rounded-2xl border border-indigo-100">
-                    <p class="text-xs text-indigo-600 font-bold mb-4">AI個別推奨質問（次のPhase3で使用）</p>
-                    <p id="result-question" class="text-base font-bold text-indigo-950 leading-relaxed"></p>
-                </div>
+                <div class="bg-indigo-50 p-8 rounded-3xl border border-indigo-100 shadow-inner font-bold"><p class="text-[10px] text-indigo-400 font-black mb-2 uppercase tracking-widest">Recommended Question</p><p id="result-question" class="text-xl text-indigo-950 leading-relaxed"></p></div>
             </div>
-            <div class="p-6 bg-white border-t border-slate-200 sticky bottom-0 flex justify-end">
-                <button onclick="window.showScreen('phase3-screen')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-10 rounded-xl shadow-lg">Phase 3 (深掘り) へ進む →</button>
-            </div>
+            <div class="p-6 bg-white border-t border-slate-200 sticky bottom-0 flex justify-end gap-4"><button onclick="window.showScreen('phase2-screen')" class="bg-slate-100 font-bold py-5 px-12 rounded-2xl text-slate-500 font-bold">戻る</button><button onclick="window.showScreen('phase3-screen')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-black py-5 px-12 rounded-2xl shadow-xl transition-all">Phase 3 へ →</button></div>
         </div>
 
-        <!-- Phase 3: 深掘り -->
-        <div id="phase3-screen" class="screen hidden flex flex-col h-full bg-slate-50">
-            <div class="bg-white px-6 py-4 border-b border-slate-200 flex justify-between items-center glass-panel sticky top-0 z-10">
-                <div class="flex items-center"><span class="text-2xl mr-3">🔍</span><h2 class="text-lg font-bold text-slate-800">Phase 3: 面接質問・深掘り</h2></div>
-                <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1.5 rounded-full">30点満点</span>
-            </div>
-            <div class="flex-grow p-6 overflow-y-auto flex flex-col md:flex-row gap-6">
-                <div class="md:w-2/3 space-y-4">
-                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm text-sm">
-                        <p class="font-bold text-indigo-600 mb-1">Q1：提案経験</p>
-                        <p class="mb-4">「もし若手から『自動化しましょう』と反対意見が出たら？」</p>
-                        <p class="font-bold text-indigo-600 mb-1">Q2：達成感と失敗</p>
-                        <p class="mb-4">「支援した方が再発して戻ってきたら、自分をどう評価する？」</p>
-                    </div>
-                </div>
-                <div class="md:w-1/3 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm h-fit sticky top-6">
-                    <div class="space-y-6 mb-8">
-                        <div><div class="flex justify-between text-xs font-bold mb-1">Q1 (10点)</div><input type="range" min="0" max="10" value="5" oninput="window.interviewData.p3_1 = parseInt(this.value);"></div>
-                        <div><div class="flex justify-between text-xs font-bold mb-1">Q2 (10点)</div><input type="range" min="0" max="10" value="5" oninput="window.interviewData.p3_2 = parseInt(this.value);"></div>
-                        <div><div class="flex justify-between text-xs font-bold mb-1">Q3 (10点)</div><input type="range" min="0" max="10" value="5" oninput="window.interviewData.p3_3 = parseInt(this.value);"></div>
-                    </div>
-                    <button onclick="window.showScreen('phase4-screen')" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-3.5 rounded-xl shadow-md">Phase 4 へ進む</button>
+        <!-- Phase 3, 4, Overall -->
+        <div id="phase3-screen" class="screen hidden flex flex-col h-full bg-slate-50 overflow-y-auto">
+            <div class="bg-white px-6 py-4 border-b border-slate-200 flex justify-between items-center glass-panel sticky top-0 z-10"><div class="flex items-center"><span class="text-2xl mr-3">🔍</span><h2 class="text-lg font-bold text-slate-800 font-black uppercase tracking-tighter">Phase 3: Deep Dive</h2></div><button onclick="window.confirmToHome()" class="p-2 text-slate-400 hover:text-red-500 transition-colors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-6 h-6"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></button></div>
+            <div class="p-8 flex flex-col md:flex-row gap-8 max-w-5xl mx-auto w-full">
+                <div class="md:w-2/3 bg-white p-8 rounded-3xl border border-slate-200 space-y-8 text-sm font-bold text-slate-600"><p>Q1：提案経験・柔軟性 (10点)</p><p>Q2：達成感と失敗分析 (10点)</p><p>Q3：自己客観視・感情制御 (10点)</p></div>
+                <div class="md:w-1/3 bg-white p-8 rounded-3xl border border-slate-200 h-fit space-y-8 font-bold">
+                    <input type="range" min="0" max="10" value="5" oninput="window.interviewData.p3_1 = parseInt(this.value);"><input type="range" min="0" max="10" value="5" oninput="window.interviewData.p3_2 = parseInt(this.value);"><input type="range" min="0" max="10" value="5" oninput="window.interviewData.p3_3 = parseInt(this.value);">
+                    <div class="flex gap-2 pt-6"><button onclick="window.showScreen('result-screen')" class="w-1/3 bg-slate-100 font-bold py-4 rounded-2xl text-slate-400 font-bold">戻る</button><button onclick="window.showScreen('phase4-screen')" class="w-2/3 bg-slate-800 text-white font-bold py-4 rounded-2xl shadow-lg uppercase">Next →</button></div>
                 </div>
             </div>
         </div>
 
-        <!-- Phase 4: RJP -->
-        <div id="phase4-screen" class="screen hidden flex flex-col h-full bg-slate-50">
-            <div class="bg-white px-6 py-4 border-b border-slate-200 flex justify-between items-center glass-panel sticky top-0 z-10">
-                <div class="flex items-center"><span class="text-2xl mr-3">🔥</span><h2 class="text-lg font-bold text-slate-800">Phase 4: 覚悟の確認 (RJP)</h2></div>
-                <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1.5 rounded-full">40点満点</span>
-            </div>
-            <div class="flex-grow p-6 overflow-y-auto flex flex-col md:flex-row gap-6">
-                <div class="md:w-2/3 space-y-4">
-                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm text-sm">
-                        <p class="mb-2">1. 実作業：「背中を見せる期間があるが大丈夫か？」</p>
-                        <p class="mb-2">2. 毅然さ：「大声や暴れる方にも適切な指導ができるか？」</p>
-                        <p class="mb-2">3. 自走力：「自ら聞き、提案するスタンスを取れるか？」</p>
-                    </div>
-                </div>
-                <div class="md:w-1/3 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm h-fit sticky top-6">
-                    <div class="space-y-4 mb-8 text-xs font-bold">
-                        <div>1. 実作業 (10点)<input type="range" min="0" max="10" value="5" oninput="window.interviewData.p4_1 = parseInt(this.value);"></div>
-                        <div>2. 毅然さ (10点)<input type="range" min="0" max="10" value="5" oninput="window.interviewData.p4_2 = parseInt(this.value);"></div>
-                        <div>3. 自走力 (10点)<input type="range" min="0" max="10" value="5" oninput="window.interviewData.p4_3 = parseInt(this.value);"></div>
-                        <div>4. キャリア (10点)<input type="range" min="0" max="10" value="5" oninput="window.interviewData.p4_4 = parseInt(this.value);"></div>
-                    </div>
-                    <button onclick="window.showScreen('overall-screen')" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-3.5 rounded-xl shadow-md">全体評価へ</button>
+        <div id="phase4-screen" class="screen hidden flex flex-col h-full bg-slate-50 overflow-y-auto font-bold">
+            <div class="bg-white px-6 py-4 border-b border-slate-200 flex justify-between items-center sticky top-0 z-10"><div class="flex items-center"><span class="text-2xl mr-3">🔥</span><h2 class="text-lg font-bold text-slate-800 font-black uppercase tracking-tighter">Phase 4: RJP</h2></div><button onclick="window.confirmToHome()" class="p-2 text-slate-400 hover:text-red-500 transition-colors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-6 h-6"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></button></div>
+            <div class="p-8 flex flex-col md:flex-row gap-8 max-w-5xl mx-auto w-full">
+                <div class="md:w-2/3 bg-white p-8 rounded-3xl shadow-sm text-sm space-y-4">覚悟の確認 4項目（各10点）</div>
+                <div class="md:w-1/3 bg-white p-8 rounded-3xl border border-slate-200 h-fit space-y-6">
+                    <input type="range" min="0" max="10" value="5" oninput="window.interviewData.p4_1 = parseInt(this.value);"><input type="range" min="0" max="10" value="5" oninput="window.interviewData.p4_2 = parseInt(this.value);"><input type="range" min="0" max="10" value="5" oninput="window.interviewData.p4_3 = parseInt(this.value);"><input type="range" min="0" max="10" value="5" oninput="window.interviewData.p4_4 = parseInt(this.value);">
+                    <div class="flex gap-2 pt-6"><button onclick="window.showScreen('phase3-screen')" class="w-1/3 bg-slate-100 font-bold py-4 rounded-2xl text-slate-400">戻る</button><button onclick="window.showScreen('overall-screen')" class="w-2/3 bg-slate-800 text-white font-bold py-4 rounded-2xl shadow-lg uppercase">Overall →</button></div>
                 </div>
             </div>
         </div>
 
-        <!-- 全体評価 -->
-        <div id="overall-screen" class="screen hidden flex flex-col h-full bg-slate-50">
-            <div class="bg-white px-6 py-4 border-b border-slate-200 flex justify-between items-center glass-panel sticky top-0 z-10">
-                <div class="flex items-center"><span class="text-2xl mr-3">⚖️</span><h2 class="text-lg font-bold text-slate-800">全体評価: 理念・対話スキル</h2></div>
-            </div>
-            <div class="flex-grow p-6 overflow-y-auto space-y-8 max-w-4xl mx-auto w-full">
+        <div id="overall-screen" class="screen hidden flex flex-col h-full bg-slate-50 overflow-y-auto">
+            <div class="bg-white px-6 py-4 border-b border-slate-200 flex justify-between items-center glass-panel sticky top-0 z-10 font-black"><div class="flex items-center"><span class="text-2xl mr-3">⚖️</span><h2 class="text-lg font-bold text-slate-800 uppercase tracking-tighter">Final Evaluation</h2></div><button onclick="window.confirmToHome()" class="p-2 text-slate-400 hover:text-red-500 transition-colors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-6 h-6"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></button></div>
+            <div class="p-8 space-y-8 max-w-5xl mx-auto w-full flex-grow pb-24 font-bold">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                        <h3 class="font-bold mb-4 flex justify-between">論理的対話（減点）<span class="text-xs text-slate-400">持点 7点</span></h3>
-                        <label class="block mb-3 p-2 bg-slate-50 rounded hover:bg-slate-100 cursor-pointer"><input type="checkbox" onchange="window.interviewData.logic_1 = this.checked"> 結論後回し (-2)</label>
-                        <label class="block mb-3 p-2 bg-slate-50 rounded hover:bg-slate-100 cursor-pointer"><input type="checkbox" onchange="window.interviewData.logic_2 = this.checked"> 事実と感情の混同 (-2)</label>
-                        <label class="block mb-3 p-2 bg-slate-50 rounded hover:bg-slate-100 cursor-pointer"><input type="checkbox" onchange="window.interviewData.logic_3 = this.checked"> 構造の不備 (-2)</label>
-                        <label class="block mb-3 p-2 bg-slate-50 rounded hover:bg-slate-100 cursor-pointer"><input type="checkbox" onchange="window.interviewData.logic_4 = this.checked"> 冗長・繰り返し (-1)</label>
-                    </div>
-                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                        <h3 class="font-bold mb-4">理念適性（加減点）</h3>
-                        <p class="text-[10px] text-emerald-600 font-bold mb-2 uppercase">🌱 Green</p>
-                        <label class="block mb-3 p-2 bg-emerald-50 text-emerald-700 rounded font-bold cursor-pointer"><input type="checkbox" onchange="window.interviewData.phil_g1 = this.checked"> 変化を面白がる (+4)</label>
-                        <label class="block mb-3 p-2 bg-emerald-50 text-emerald-700 rounded font-bold cursor-pointer"><input type="checkbox" onchange="window.interviewData.phil_g2 = this.checked"> 理想（Trend）への関心が高い (+4)</label>
-                        <p class="text-[10px] text-red-600 font-bold mb-2 uppercase mt-4">🚩 Red Flag</p>
-                        <label class="block mb-3 p-2 bg-red-50 text-red-700 rounded font-bold cursor-pointer"><input type="checkbox" onchange="window.interviewData.phil_r1 = this.checked"> 不動 固（変化拒否） (-4)</label>
-                        <label class="block mb-3 p-2 bg-red-50 text-red-700 rounded font-bold cursor-pointer"><input type="checkbox" onchange="window.interviewData.phil_r2 = this.checked"> 依存 待子（感謝依存） (-4)</label>
-                        <label class="block mb-3 p-2 bg-red-50 text-red-700 rounded font-bold cursor-pointer"><input type="checkbox" onchange="window.interviewData.phil_r3 = this.checked"> 古井 説子（マウント） (-4)</label>
-                    </div>
+                    <div class="bg-white p-8 rounded-[2rem] border border-slate-200 shadow-sm"><h3 class="font-black mb-6 text-slate-800 text-lg uppercase tracking-widest">Logic (7)</h3><label class="block mb-4 p-4 bg-slate-50 rounded-2xl cursor-pointer text-slate-600"><input type="checkbox" onchange="window.interviewData.logic_1 = this.checked" class="mr-3 w-5 h-5"> 結論後回し</label><label class="block mb-4 p-4 bg-slate-50 rounded-2xl cursor-pointer text-slate-600"><input type="checkbox" onchange="window.interviewData.logic_2 = this.checked" class="mr-3 w-5 h-5"> 事実感情混同</label><label class="block mb-4 p-4 bg-slate-50 rounded-2xl cursor-pointer text-slate-600"><input type="checkbox" onchange="window.interviewData.logic_3 = this.checked" class="mr-3 w-5 h-5"> 構造不備</label></div>
+                    <div class="bg-white p-8 rounded-[2rem] border border-slate-200 shadow-sm font-black"><h3 class="font-black mb-6 text-slate-800 text-lg uppercase tracking-widest">Phil (8)</h3><label class="block mb-4 p-4 bg-emerald-50 text-emerald-800 rounded-2xl cursor-pointer"><input type="checkbox" onchange="window.interviewData.phil_g1 = this.checked" class="mr-3 w-5 h-5"> 変化を面白がる</label><label class="block mb-4 p-4 bg-red-50 text-red-800 rounded-2xl cursor-pointer"><input type="checkbox" onchange="window.interviewData.phil_r1 = this.checked" class="mr-3 w-5 h-5"> 不動 固</label><label class="block p-4 bg-red-50 text-red-800 rounded-2xl cursor-pointer"><input type="checkbox" onchange="window.interviewData.phil_r2 = this.checked" class="mr-3 w-5 h-5"> 依存 待子</label></div>
                 </div>
-                <button onclick="window.generateFinalReport()" class="w-full bg-indigo-600 text-white font-bold py-5 rounded-2xl shadow-xl hover:bg-indigo-700 transition-colors">総合評価レポートを生成</button>
+                <div class="flex gap-4 pt-6"><button onclick="window.showScreen('phase4-screen')" class="w-1/3 bg-slate-100 font-bold py-6 rounded-3xl text-slate-400 tracking-widest uppercase">Back</button><button onclick="window.generateFinalReport()" class="w-2/3 bg-indigo-600 text-white font-black py-6 rounded-3xl shadow-xl text-xl tracking-widest uppercase font-black">Generate Report</button></div>
             </div>
         </div>
 
-        <!-- 最終レポート -->
+        <!-- 最終レポート（履歴詳細も兼用） -->
         <div id="final-report-screen" class="screen hidden flex flex-col h-full bg-slate-800 text-white overflow-y-auto relative">
-            <div class="bg-slate-900/50 px-6 py-4 sticky top-0 z-10 flex justify-between items-center backdrop-blur-md">
-                <h2 class="text-xl font-bold tracking-widest text-indigo-300 uppercase">Final Report</h2>
-                <button onclick="location.reload()" class="text-xs bg-slate-700 font-bold px-4 py-2 rounded-lg">終了</button>
+            <div class="bg-slate-900/50 px-6 py-4 sticky top-0 z-10 flex justify-between items-center text-xl font-black tracking-[0.2em] text-indigo-300 uppercase">
+                <h2 id="report-header-title">Report</h2>
+                <button id="final-nav-btn" onclick="window.closeSession()" class="text-xs bg-slate-700 font-bold px-5 py-2.5 rounded-xl hover:bg-slate-600 transition-colors uppercase">Finish</button>
             </div>
-            <div class="p-6 md:p-10 w-full max-w-4xl mx-auto space-y-8">
-                <div class="bg-slate-900 border border-slate-700 rounded-3xl p-8 text-center shadow-2xl relative">
-                    <p class="text-sm font-bold text-slate-400 mb-2 tracking-widest">OVERALL EVALUATION</p>
-                    <span id="final-rank" class="text-7xl font-black text-yellow-400 drop-shadow-lg"></span>
-                    <p class="text-3xl font-bold mt-4"><span id="final-total-score"></span><span class="text-lg text-slate-500"> /100</span></p>
-                    <p id="final-message" class="text-slate-200 mt-4 font-bold max-w-2xl mx-auto"></p>
+            <div class="p-8 md:p-12 w-full max-w-5xl mx-auto space-y-12">
+                <div class="bg-slate-900 border border-slate-700 rounded-[3rem] p-12 text-center shadow-2xl relative overflow-hidden font-black">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-emerald-500"></div>
+                    <p class="text-[10px] font-black text-slate-500 mb-4 uppercase tracking-[0.4em]">Assessment Result</p>
+                    <span id="final-rank" class="text-[10rem] font-black text-yellow-400 drop-shadow-2xl"></span>
+                    <p class="text-5xl font-black mt-8 text-white"><span id="final-total-score"></span><span class="text-xl text-slate-600 font-medium"> / 100</span></p>
+                    <p id="final-message" class="text-slate-200 mt-10 font-bold text-xl max-w-2xl mx-auto leading-relaxed font-bold"></p>
                 </div>
-                <div class="mt-8 flex justify-center pb-10">
-                    <button id="save-report-btn" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 px-10 rounded-xl shadow-lg flex items-center text-lg transition-all transform hover:-translate-y-1">
-                        <span class="mr-2">💾</span> スプレッドシートに保存
-                    </button>
+                <div id="final-detail-section" class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm font-bold"></div>
+                <div id="save-area" class="mt-8 flex justify-center pb-24 gap-6">
+                    <button onclick="window.showScreen('overall-screen')" class="bg-slate-700 text-white font-bold py-6 px-12 rounded-[2rem] border border-slate-600 transition-all hover:bg-slate-600 uppercase tracking-widest">Edit</button>
+                    <button id="save-report-btn" class="bg-emerald-600 hover:bg-emerald-500 text-white font-black py-6 px-20 rounded-[2rem] shadow-xl text-2xl tracking-widest uppercase font-black">💾 SAVE & SYNC</button>
                 </div>
             </div>
         </div>
 
-        <!-- 事業所追加モーダル -->
-        <div id="add-office-modal" class="hidden fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4 animate-fade-in">
-            <div class="bg-white p-8 rounded-3xl w-full max-w-md shadow-2xl">
-                <h3 class="text-xl font-bold text-slate-800 mb-6 font-bold">🏢 事業所の登録</h3>
-                <input type="text" id="new-office-name" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 mb-6" placeholder="事業所名を入力">
-                <div class="flex gap-3">
-                    <button id="cancel-add-office-btn" class="w-1/3 bg-slate-100 font-bold py-3.5 rounded-xl">キャンセル</button>
-                    <button id="submit-add-office-btn" class="w-2/3 bg-indigo-600 text-white font-bold py-3.5 rounded-xl shadow-md">登録する</button>
+        <!-- 各種確認モーダル -->
+        <div id="confirm-home-modal" class="hidden fixed inset-0 bg-black/90 z-[100] flex items-center justify-center p-4 backdrop-blur-sm font-black text-center">
+            <div class="bg-white p-12 rounded-[3rem] w-full max-w-sm shadow-2xl border border-slate-200">
+                <div class="text-amber-500 mb-8 text-7xl">⚠️</div>
+                <h3 class="text-3xl font-black text-slate-800 mb-6">中断しますか？</h3>
+                <div class="flex gap-4"><button onclick="document.getElementById('confirm-home-modal').classList.add('hidden')" class="w-1/2 bg-slate-100 py-5 rounded-2xl text-slate-500 uppercase tracking-widest font-black">戻る</button><button onclick="location.reload()" class="w-1/2 bg-red-600 text-white py-5 rounded-2xl shadow-lg uppercase tracking-widest font-black">終了</button></div>
+            </div>
+        </div>
+        <div id="add-office-modal" class="hidden fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+            <div class="bg-white p-12 rounded-[3rem] w-full max-w-md shadow-2xl border-t-[12px] border-indigo-600">
+                <h3 class="text-2xl font-black text-slate-800 mb-8 uppercase tracking-widest">Office Registration</h3>
+                <input type="text" id="new-office-name" class="w-full bg-slate-50 border-2 border-slate-200 rounded-3xl px-6 py-6 mb-4 text-2xl font-black focus:border-indigo-500 focus:outline-none shadow-inner" placeholder="事業所名を入力">
+                <input type="password" id="new-office-password" class="w-full bg-slate-50 border-2 border-slate-200 rounded-3xl px-6 py-6 mb-6 text-xl font-black focus:border-indigo-500 focus:outline-none shadow-inner" placeholder="管理パスワードを設定">
+                <p id="add-office-error" class="text-red-500 font-bold text-sm mb-6 hidden">事業所名とパスワードの両方を入力してください。</p>
+                <div class="flex gap-4 font-black">
+                    <button id="cancel-add-office-btn" class="w-1/3 bg-slate-100 py-5 rounded-2xl text-slate-400 uppercase">Cancel</button>
+                    <button id="submit-add-office-btn" class="w-2/3 bg-indigo-600 text-white py-5 rounded-2xl shadow-xl active:scale-95 transition-all uppercase tracking-widest">Register</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 履歴閲覧用 認証モーダル -->
+        <div id="history-auth-modal" class="hidden fixed inset-0 bg-black/90 z-[100] flex items-center justify-center p-4 backdrop-blur-sm">
+            <div class="bg-white p-12 rounded-[3rem] w-full max-w-md shadow-2xl border-t-[12px] border-indigo-600 text-center">
+                <h3 class="text-2xl font-black text-slate-800 mb-4 tracking-tight">🔒 認証</h3>
+                <p class="text-slate-500 font-bold mb-8 text-sm">履歴を閲覧するには管理パスワードを入力してください。</p>
+                <input type="password" id="history-auth-password" class="w-full bg-slate-50 border-2 border-slate-200 rounded-3xl px-6 py-5 mb-4 text-xl font-black focus:border-indigo-500 focus:outline-none shadow-inner text-center" placeholder="パスワード">
+                <p id="history-auth-error" class="text-red-500 font-bold text-sm mb-8 hidden">パスワードが間違っています。</p>
+                <div class="flex gap-4 font-black">
+                    <button onclick="document.getElementById('history-auth-modal').classList.add('hidden')" class="w-1/3 bg-slate-100 py-5 rounded-2xl text-slate-400 uppercase">Cancel</button>
+                    <button onclick="window.authenticateHistory()" class="w-2/3 bg-indigo-600 text-white py-5 rounded-2xl shadow-xl active:scale-95 transition-all uppercase tracking-widest">Unlock</button>
                 </div>
             </div>
         </div>
@@ -371,89 +261,87 @@
     </div>
 
     <script type="module">
-        // --- 設定 ---
         const GAS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbxluPMyik3TIqcsSZP1kEKIy0tG6tz1h2nVdx2Zm8uMxW0FcW8KWb7R2CmCXkRafdV_/exec";
 
-        // --- 状態管理 (localStorage) ---
-        let offices = JSON.parse(localStorage.getItem('mikiwame_offices') || '[]');
-        let currentOffice = null;
+        window.currentQuestionIndex = 0;
+        window.currentAiTypeCode = null;
+        window.currentAiResult = null;
+        window.currentOfficeIdx = null;
+        window.offices = JSON.parse(localStorage.getItem('mikiwame_offices') || '[]');
 
-        window.interviewData = { p0: 3, p1: 3, p2: 3, p3_1: 5, p3_2: 5, p3_3: 5, p4_1: 5, p4_2: 5, p4_3: 5, p4_4: 5, logic_1: false, logic_2: false, logic_3: false, logic_4: false, phil_g1: false, phil_g2: false, phil_r1: false, phil_r2: false, phil_r3: false };
+        window.interviewData = { p0: 3, p1: 3, p2: 3, p3_1: 5, p3_2: 5, p3_3: 5, p4_1: 5, p4_2: 5, p4_3: 5, p4_4: 5, logic_1: false, logic_2: false, logic_3: false, logic_4: false, phil_g1: false, phil_g2: false, phil_r1: false, phil_r2: false, phil_r3: false, calculatedLogic: 7, calculatedPhil: 0 };
         window.answers = {};
-        let currentQuestionIndex = 0;
-        let currentAiTypeCode = null;
-        let currentAiResult = null;
 
-        const QUESTIONS = [
-            { id: 1, axis: "EI", direction: "E", text: "初対面の人ばかりの場でも、自分から積極的に話しかけにいくことができる。" },
-            { id: 2, axis: "EI", direction: "I", text: "休日は人とワイワイ過ごすよりも、一人で静かに過ごす方が疲れが取れる。" },
-            { id: 3, axis: "EI", direction: "E", text: "考えをまとめる時は、一人で黙考するより誰かに話しながら整理する方が得意だ。" },
-            { id: 4, axis: "EI", direction: "I", text: "複数人での会議よりも、テキストやメールでのやり取りの方が気を遣わずに済む。" },
+        const QUESTIONS_PRO = [
+            { id: 1, axis: "EI", direction: "E", text: "初対面の人ばかりの場でも、積極的に話しかけにいくことができる。" },
+            { id: 2, axis: "EI", direction: "I", text: "休日は人と過ごすよりも、一人で静かに過ごす方が疲れが取れる。" },
+            { id: 3, axis: "EI", direction: "E", text: "考えをまとめる時は、黙考するより誰かに話しながら整理する方が得意だ。" },
+            { id: 4, axis: "EI", direction: "I", text: "複数人での対面会議よりも、メール等の非対面やり取りの方が気を遣わずに済む。" },
             { id: 5, axis: "EI", direction: "E", text: "沈黙が続くと気まずくなり、自分から話題を振って場を盛り上げようとする。" },
             { id: 6, axis: "EI", direction: "I", text: "大勢の前に立って注目を浴びたり、リーダーシップを取ったりするのは苦手だ。" },
-            { id: 7, axis: "EI", direction: "E", text: "新しい環境やコミュニティに飛び込んでいくことに、ワクワクする。" },
-            { id: 8, axis: "EI", direction: "I", text: "友人は「広く浅く」よりも「狭く深く」付き合うタイプだ。" },
-            { id: 9, axis: "EI", direction: "E", text: "自分の感情や考えていることは、比較的すぐに顔や言葉に出る方だ。" },
+            { id: 7, axis: "EI", direction: "E", text: "新しい環境やコミュニティに飛び込んでいくことにワクワクする。" },
+            { id: 8, axis: "EI", direction: "I", text: "友人は広く浅くよりも、狭く深く付き合うタイプだ。" },
+            { id: 9, axis: "EI", direction: "E", text: "自分の感情や考えていることは、すぐに顔や言葉に出る方だ。" },
             { id: 10, axis: "EI", direction: "I", text: "話す前に頭の中でじっくり考えを組み立ててから発言したい。" },
-            { id: 11, axis: "SN", direction: "S", text: "抽象的なビジョンや理念よりも、具体的な事実やデータ、実績を信用する。" },
-            { id: 12, axis: "SN", direction: "N", text: "過去のやり方を踏襲するより、全く新しいアイデアや可能性を考えるのが好きだ。" },
-            { id: 13, axis: "SN", direction: "S", text: "マニュアルや手順書がある作業は、その通りに正確に進めることが得意だ。" },
-            { id: 14, axis: "SN", direction: "N", text: "細かい部分（木）にとらわれず、全体のつながりや意味（森）を捉えるのが得意だ。" },
-            { id: 15, axis: "SN", direction: "S", text: "物事を説明する時は、例え話よりも「5W1H」を用いて具体的に話す。" },
-            { id: 16, axis: "SN", direction: "N", text: "「現実的にどうか」よりも「将来どうなるか」という未来の話をするのが好きだ。" },
-            { id: 17, axis: "SN", direction: "S", text: "アイディアマンというよりは、地に足のついた現実主義者だと言われる。" },
-            { id: 18, axis: "SN", direction: "N", text: "ふとした瞬間に、直感的なひらめきやインスピレーションを得ることが多い。" },
-            { id: 19, axis: "SN", direction: "S", text: "五感（見る、聞く、触るなど）で直接確かめられることしか信じない傾向がある。" },
-            { id: 20, axis: "SN", direction: "N", text: "「なぜそうなるのか？」という事象の裏にある意味や法則性を探求したくなる。" },
-            { id: 21, axis: "TF", direction: "T", text: "決断を下す時は、人の感情よりも「論理的な正しさ」や「効率」を優先する。" },
+            { id: 11, axis: "SN", direction: "S", text: "抽象的な理念よりも、具体的な事実や実績データを信用する。" },
+            { id: 12, axis: "SN", direction: "N", text: "過去のやり方を踏襲するより、新しいアイデアや可能性を考えるのが好きだ。" },
+            { id: 13, axis: "SN", direction: "S", text: "マニュアルがある作業は、その通りに正確に進めることが得意だ。" },
+            { id: 14, axis: "SN", direction: "N", text: "細かい部分（木）にとらわれず、全体のつながり（森）を捉えるのが得意だ。" },
+            { id: 15, axis: "SN", direction: "S", text: "物事を説明する時は、例え話よりも具体的な数値や事実を用いて話す。" },
+            { id: 16, axis: "SN", direction: "N", text: "「将来どうなるか」という未来の話をするのが好きだ。" },
+            { id: 17, axis: "SN", direction: "S", text: "地に足のついた現実主義者だと言われることが多い。" },
+            { id: 18, axis: "SN", direction: "N", text: "直感的なひらめきやインスピレーションを得ることが多い。" },
+            { id: 19, axis: "SN", direction: "S", text: "五感で確かめられる実体験に基づいたことしか信じない傾向がある。" },
+            { id: 20, axis: "SN", direction: "N", text: "事象の裏にある意味や法則性を探求したくなる。" },
+            { id: 21, axis: "TF", direction: "T", text: "決断を下す時は、人の感情よりも「論理的正しさ」を優先する。" },
             { id: 22, axis: "TF", direction: "F", text: "チーム内の調和や、他人がどう感じているかを常に気にかけてしまう。" },
-            { id: 23, axis: "TF", direction: "T", text: "議論になった際、相手に共感するより、まずは事実関係や原因を分析しようとする。" },
+            { id: 23, axis: "TF", direction: "T", text: "議論になった際、共感より先に原因や事実関係を分析しようとする。" },
             { id: 24, axis: "TF", direction: "F", text: "困っている人を見ると、理屈抜きに「助けたい」という感情が先に立つ。" },
-            { id: 25, axis: "TF", direction: "T", text: "仕事の評価は、プロセス（がんばり）よりも結果や数字で客観的に判断すべきだ。" },
-            { id: 26, axis: "TF", direction: "F", text: "正しい批判であっても、言い方が冷たいと素直に受け入れられないことがある。" },
+            { id: 25, axis: "TF", direction: "T", text: "評価はプロセスより、結果や数字で客観的に判断すべきだ。" },
+            { id: 26, axis: "TF", direction: "F", text: "正しい批判であっても、言い方が冷たいと受け入れられないことがある。" },
             { id: 27, axis: "TF", direction: "T", text: "感情的な慰めよりも、具体的な解決策を提示される方が嬉しい。" },
-            { id: 28, axis: "TF", direction: "F", text: "映画やドラマを見ると、登場人物に深く感情移入して涙もろくなる。" },
-            { id: 29, axis: "TF", direction: "T", text: "仕事において「優しい人」と言われるより「有能な人」と言われたい。" },
-            { id: 30, axis: "TF", direction: "F", text: "自分の決定が誰かを傷つけるかもしれないと思うと、決断を躊躇してしまう。" },
-            { id: 31, axis: "JP", direction: "J", text: "仕事や旅行は、事前にしっかり計画やスケジュールを立ててから実行したい。" },
-            { id: 32, axis: "JP", direction: "P", text: "状況の変化に合わせて、臨機応変に計画を変更したり対応するのが得意だ。" },
-            { id: 33, axis: "JP", direction: "J", text: "デスク周りやPCのフォルダは、常に整理整頓されていないと落ち着かない。" },
-            { id: 34, axis: "JP", direction: "P", text: "締め切りギリギリにならないと、本当のエンジンがかからないことが多い。" },
-            { id: 35, axis: "JP", direction: "J", text: "決まったルーティンやルールを守り続けることに、あまり苦痛を感じない。" },
-            { id: 36, axis: "JP", direction: "P", text: "休日は予定を詰め込まず、その日の気分で行動を決めるのが好きだ。" },
-            { id: 37, axis: "JP", direction: "J", text: "タスクは先延ばしにせず、早め早めに終わらせて安心したいタイプだ。" },
-            { id: 38, axis: "JP", direction: "P", text: "マニュアル通りにやるよりも、自分なりに工夫しながら進める方が楽しい。" },
-            { id: 39, axis: "JP", direction: "J", text: "曖昧な状態で放置されるのが嫌いで、早く白黒はっきり決着をつけたい。" },
-            { id: 40, axis: "JP", direction: "P", text: "複数の選択肢を残したまま、ギリギリまで結論を保留にすることが多い。" },
+            { id: 28, axis: "TF", direction: "F", text: "映画やドラマを見ると、登場人物に感情移入して涙もろくなる。" },
+            { id: 29, axis: "TF", direction: "T", text: "仕事において「優しい人」より「有能な人」と言われたい。" },
+            { id: 30, axis: "TF", direction: "F", text: "自分の決定が誰かを傷つけるかもと思うと、決断を躊躇してしまう。" },
+            { id: 31, axis: "JP", direction: "J", text: "仕事や旅行は、事前にしっかり計画を立ててから実行したい。" },
+            { id: 32, axis: "JP", direction: "P", text: "状況の変化に合わせて、臨機応変に対応するのが得意だ。" },
+            { id: 33, axis: "JP", direction: "J", text: "デスク周りやフォルダは、常に整理整頓されていないと落ち着かない。" },
+            { id: 34, axis: "JP", direction: "P", text: "締め切りギリギリにならないと、本当のエンジンがかからない。" },
+            { id: 35, axis: "JP", direction: "J", text: "ルーティンやルールを守り続けることに、あまり苦痛を感じない。" },
+            { id: 36, axis: "JP", direction: "P", text: "予定を詰め込まず、その日の気分で行動を決めるのが好きだ。" },
+            { id: 37, axis: "JP", direction: "J", text: "タスクは先延ばしにせず、早め早めに終わらせるタイプだ。" },
+            { id: 38, axis: "JP", direction: "P", text: "マニュアル通りより、自分なりに工夫しながら進める方が楽しい。" },
+            { id: 39, axis: "JP", direction: "J", text: "曖昧な状態で放置されるのが嫌いで、早く決着をつけたい。" },
+            { id: 40, axis: "JP", direction: "P", text: "ギリギリまで結論を保留にすることが多い。" },
             { id: 41, axis: "STRESS", direction: "HIGH", text: "予期せぬトラブルが起きても、あまりパニックにならず冷静に対処できる。" },
             { id: 42, axis: "STRESS", direction: "LOW", text: "他人から強い言葉で批判されると、数日間引きずってしまうことがある。" }, 
-            { id: 43, axis: "STRESS", direction: "HIGH", text: "仕事で嫌なことがあっても、一晩寝ればスッキリ忘れることができる。" },
+            { id: 43, axis: "STRESS", direction: "HIGH", text: "嫌なことがあっても、一晩寝ればスッキリ忘れることができる。" },
             { id: 44, axis: "STRESS", direction: "LOW", text: "複数の仕事を同時に頼まれると、キャパオーバーになり思考停止しやすい。" },
-            { id: 45, axis: "STRESS", direction: "HIGH", text: "自分とは全く合わない価値観の人とでも、ビジネスと割り切ってうまく付き合える。" },
+            { id: 45, axis: "STRESS", direction: "HIGH", text: "合わない価値観の人とでも、ビジネスと割り切ってうまく付き合える。" },
             { id: 46, axis: "LIE", direction: "TRAP", text: "私は今まで生きてきて、一度も嘘をついたりごまかしたりした事がない。" },
-            { id: 47, axis: "LIE", direction: "TRAP", text: "どんなに自分が疲れていて余裕がない時でも、必ず他人に100%優しくできる。" },
-            { id: 48, axis: "LIE", direction: "TRAP", text: "今まで出会った人の中で、嫌いだと感じたり苦手だと思った人は一人もいない。" },
-            { id: 49, axis: "LIE", direction: "NORMAL", text: "時には自分の間違いや非を認めるのが恥ずかしい、嫌だと感じることがある。" },
-            { id: 50, axis: "LIE", direction: "TRAP", text: "私は誰に対しても、どんな時でも、微塵の偏見も持たずに平等に接している。" }
+            { id: 47, axis: "LIE", direction: "TRAP", text: "どんなに疲れていても、必ず他人に100%優しくできる。" },
+            { id: 48, axis: "LIE", direction: "TRAP", text: "今まで出会った人の中で、嫌いだと感じた人は一人もいない。" },
+            { id: 49, axis: "LIE", direction: "NORMAL", text: "時には自分の間違いや非を認めるのが恥ずかしいと感じることがある。" },
+            { id: 50, axis: "LIE", direction: "TRAP", text: "私は誰に対しても、偏見を持たずに平等に接している。" }
         ];
 
         const TYPE_DATA = {
-            "ISTJ": { name: "誠実な管理者", matchRank: "A", matchLabel: "優秀な実務層", matchReason: "規律やルールを重んじ、正確な記録や安定した支援を提供できるため、現場の基盤を支える人材として高く評価されます。", strength: "コンプライアンス遵守や正確な記録作成において右に出る者はいません。", risk: "マニュアルにない突発的なトラブルにストレスを感じやすいです。", question: "「ルール通りに進まない時、どのように気持ちを切り替えましたか？」" },
-            "ISFJ": { name: "心優しき擁護者", matchRank: "S", matchLabel: "福祉の最適性", matchReason: "圧倒的なホスピタリティと他者への配慮があり、利用者の微細な変化に気づくケア能力が完全に合致するためです。", strength: "安心感を与えるケアができる、現場の要となる存在です。", risk: "NOと言えず業務を抱え込み、バーンアウトする危険性があります。", question: "「仕事を引き受けすぎて辛くなった時、誰かにSOSを出せましたか？」" },
-            "INFJ": { name: "洞察の提唱者", matchRank: "B", matchLabel: "個別支援のプロ", matchReason: "高い洞察力で質の高い支援が期待できる一方、理想と現実のギャップに悩みやすく、チーム内で孤立する懸念があるためです。", strength: "利用者の本当の苦しみやニーズを読み取る力に長けています。", risk: "人員不足などの妥協案に対して強い不満を抱きやすいです。", question: "「自分の理想と現場のルールがぶつかった場合、どう折り合いをつけますか？」" },
-            "INTJ": { name: "戦略的建築家", matchRank: "C", matchLabel: "マネジメント向き", matchReason: "仕組み化には優れますが、現場で求められる感情的共感や柔軟な寄り添いが不足しがちで、アプローチに課題が残るためです。", strength: "事業所全体の仕組み化や効率化を推進する力があります。", risk: "感情的なスタッフから「冷たい」と誤解される恐れがあります。", question: "「非効率であっても相手に寄り添うことが必要な場面で、どう振る舞いますか？」" },
-            "ISTP": { name: "冷静な巨匠", matchRank: "B", matchLabel: "トラブルシューター", matchReason: "冷静で実践的なスキル習得が早い反面、ルーチンワークにおいてモチベーションを維持しにくい傾向があるためです。", strength: "不測の事態でも感情に流されず、最も合理的な対処ができます。", risk: "長々とした会議や単調な業務を嫌う傾向があります。", question: "「変化の少ないルーチン業務に対し、どうモチベーションを維持しますか？」" },
-            "ISFP": { name: "柔軟な冒険家", matchRank: "A", matchLabel: "寄り添い力高", matchReason: "利用者のペースに合わせる柔軟性と受容力が高く、現場に安心感をもたらす支援者として適性が高いためです。", strength: "利用者のペースに合わせるのが非常に上手く、威圧感を与えません。", risk: "他者に厳しい指導や注意を行うことが苦手な面があります。", question: "「後輩に対し、耳の痛い注意をしなければならない時、どう伝えますか？」" },
-            "INFP": { name: "共感の仲介者", matchRank: "A", matchLabel: "心理的サポート", matchReason: "マイノリティへの深い共感力を持ち、利用者の心に寄り添う支援が期待できるため、高い適性と評価されます。", strength: "受容的で温かい傾聴スキルは福祉現場で大きな武器になります。", risk: "ネガティブな感情に同調しすぎ、精神的に疲労しやすいです。", question: "「利用者の重い悩みを聞いて落ち込んだ経験はありますか？その際のケアは？」" },
-            "INTP": { name: "論理的探求者", matchRank: "C", matchLabel: "専門職・分析特化", matchReason: "分析には優れますが、泥臭い対人コミュニケーションや感情面でのサポートを軽視しがちなためです。", strength: "障害特性などの専門知識を深く探求し、枠組み作りに貢献できます。", risk: "分析に満足し、利用者との「雑談などの交流」を軽視しがちです。", question: "「理屈で解決できない理不尽な感情的トラブルに、どう対応しますか？」" },
-            "ESTP": { name: "エネルギッシュな起業家", matchRank: "C", matchLabel: "立ち上げ・開拓", matchReason: "行動力はありますが、細かな記録業務を苦手とし、スローペースな利用者への忍耐力に懸念があるためです。", strength: "レクリエーションの企画や、地域のネットワーキングで活躍します。", risk: "計画性に欠け、利用者のスローペースにイライラする恐れがあります。", question: "「詳細な記録業務を正確に続けるために、どう工夫しますか？」" },
-            "ESFP": { name: "陽気なエンターテイナー", matchRank: "A", matchLabel: "ムードメーカー", matchReason: "明るさとコミュ力で利用者の笑顔を引き出し、現場をポジティブに保つ能力が高く評価されるためです。", strength: "抜群のコミュニケーション能力で、利用者の笑顔を引き出す天才です。", risk: "ネガティブな感情を伴う対応から目を背けがちな面があります。", question: "「雰囲気が悪くなることを承知で、チームの課題を指摘できますか？」" },
-            "ENFP": { name: "情熱の広報運動家", matchRank: "B", matchLabel: "モチベーター", matchReason: "強みを見つける能力は高いですが、計画の実行力や細かい実務でのミスが懸念され、サポートが必要な水準です。", strength: "利用者の「できること」を見つけ、エンパワメントする能力が高いです。", risk: "最後までやり遂げるのが苦手で、風呂敷を広げすぎる傾向があります。", question: "「新しいアイデアを最後まで形にして実行し続けた経験を教えてください。」" },
-            "ENTP": { name: "革新的な討論者", matchRank: "D", matchLabel: "要フォロー", matchReason: "論理的ですが、議論を好む傾向が現場の和を乱すリスクとなり、感情的配慮に欠ける恐れがあるためです。", strength: "古い慣習に縛られず、事業所の課題に革新的な解決策を提示します。", risk: "保守的なスタッフと衝突し、和を乱すリスクがあります。", question: "「自分の意見が正しいのに感情的反発に遭った時、どう対処しますか？」" },
-            "ESTJ": { name: "徹底した幹部", matchRank: "B", matchLabel: "管理者候補", matchReason: "強い責任感で組織運営に貢献しますが、他者への要求が高く利用者のペースを無視するリスクがあるためです。", strength: "非常に強い責任感とリーダーシップを持ちます。", risk: "他者にも自分と同じ水準を求め、圧が強くなることがあります。", question: "「何度指導してもミスを繰り返す人に対し、どのようなマインドで接しますか？」" },
-            "ESFJ": { name: "世話焼きな領事官", matchRank: "S", matchLabel: "福祉の最適性", matchReason: "チームワークを重視し、利用者に対しても丁寧な支援を提供できる、最も安定した適性を持つためです。", strength: "チーム間の潤滑油になります。手厚い支援を提供する優等生タイプです。", risk: "対立を恐れるあまり、利用者に過保護になりすぎることがあります。", question: "「利用者の自立のために、あえて失敗させる支援をすることに抵抗は？」" },
-            "ENFJ": { name: "導きの主人公", matchRank: "S", matchLabel: "次世代リーダー", matchReason: "利用者の成長を強く信じる情熱を備えており、現場の士気と支援の質を同時に高める中核人材となるためです。", strength: "スタッフを巻き込むリーダーシップを兼ね備えています。", risk: "理想に燃えるあまり、現実的な体力や時間を無視して全員に無理を強いるリスクがあります。", question: "「他のスタッフとの温度感が低い時、どうやってチームをまとめますか？」" },
-            "ENTJ": { name: "野心的な指揮官", matchRank: "C", matchLabel: "経営・施設長候補", matchReason: "高い推進力を持ちますが、効率優先で福祉に重要な『寄り添いのプロセス』を切り捨てるリスクが高いためです。", strength: "決断力と推進力が圧倒的です。困難なミッションを完遂します。", risk: "独裁的になりやすく、感情的フォローを軽視する面があります。", question: "「スタッフから『効率より利用者のペースを優先して』と反発されたら？」" }
+            "ISTJ": { name: "誠実な管理者", matchRank: "A", matchReason: "規律を重んじ、正確な記録を提供できる安定感が評価されます。", question: "「ルール通りに進まない時、どう切り替えましたか？」" },
+            "ISFJ": { name: "心優しき擁護者", matchRank: "S", matchReason: "圧倒的なホスピタリティと微細な変化に気づくケア能力が完全に合致するためです。", question: "「仕事を引き受けすぎて辛くなった時、誰かにSOSを出せましたか？」" },
+            "INFJ": { name: "洞察の提唱者", matchRank: "B", matchReason: "高い洞察力で質の高い支援が期待できる一方、理想と現実のギャップに悩みやすい懸念があります。", question: "「自分の理想と現場のルールがぶつかったらどうしますか？」" },
+            "INTJ": { name: "戦略的建築家", matchRank: "C", matchReason: "仕組み化には優れますが、感情的寄り添いが不足しがちな課題があります。", question: "「非効率であっても寄り添いが必要な時、どう振る舞いますか？」" },
+            "ISTP": { name: "冷静な巨匠", matchRank: "B", matchReason: "冷静でスキル習得が早い反面、単調なルーチンに飽きやすい傾向があります。", question: "「変化の少ないルーチンに対し、どうモチベーションを維持しますか？」" },
+            "ISFP": { name: "柔軟な冒険家", matchRank: "A", matchLabel: "寄り添い力高", matchReason: "利用者のペースに合わせる受容力が高く、穏やかな現場環境を作れるためです。", question: "「後輩に耳の痛い注意をしなければならない時、どう伝えますか？」" },
+            "INFP": { name: "共感の仲介者", matchRank: "A", matchLabel: "心理的サポート", matchReason: "マイノリティへの深い共感力を持ち、心のケアにおいて高い適性があります。", question: "「重い悩みを聞いて落ち込んだ際、どうセルフケアをしますか？」" },
+            "INTP": { name: "論理的探求者", matchRank: "C", matchReason: "分析力には優れますが、感情面での泥臭いサポートを軽視しがちな点があります。", question: "「理屈で解決できない感情的なトラブルに、論理以外でどう対応しますか？」" },
+            "ESTP": { name: "エネルギッシュな起業家", matchRank: "C", matchReason: "行動力は抜群ですが、細かな記録業務やスローペースな人への忍耐に課題があります。", question: "「地道な記録業務を正確に続けるための工夫は？」" },
+            "ESFP": { name: "陽気なエンターテイナー", matchRank: "A", matchReason: "明るさで利用者の笑顔を引き出し、現場をポジティブに保つ能力が高いためです。", question: "「雰囲気が悪くなるのを承知で、必要な指摘ができますか？」" },
+            "ENFP": { name: "情熱の広報運動家", matchRank: "B", matchReason: "エンパワメント力は高いですが、計画のツメの甘さや実務ミスにサポートが必要です。", question: "「新しいアイデアを最後まで形にして実行し続けた経験を教えてください。」" },
+            "ENTP": { name: "革新的な討論者", matchRank: "D", matchReason: "論理的ですが、議論を好む傾向が現場の和を乱すリスクが高いと判断されます。", question: "「自分の正論が感情的反発に遭った時、どう対処しますか？」" },
+            "ESTJ": { name: "徹底した幹部", matchRank: "B", matchReason: "強い責任感がありますが、利用者への要求が高くなりすぎるリスクがあります。", question: "「ミスを繰り返すスタッフに対し、どのようなマインドで接しますか？」" },
+            "ESFJ": { name: "世話焼きな領事官", matchRank: "S", matchReason: "チームワークを重視し、手厚い支援を安定して提供できる模範的な適性です。", question: "「自立のために、あえて失敗させる支援に抵抗はありますか？」" },
+            "ENFJ": { name: "導きの主人公", matchRank: "S", matchReason: "利用者の成長を強く信じる情熱を備えており、現場の士気と支援の質を同時に高める中核人材となるためです。", question: "「周りの温度感が低い時、どうチームをまとめますか？」" },
+            "ENTJ": { name: "野心的な指揮官", matchRank: "C", matchReason: "推進力は凄まじいですが、効率優先で福祉のプロセスを切り捨てるリスクがあります。", question: "「効率よりペースを優先してほしいと反発されたら？」" }
         };
 
         window.showScreen = function(id) {
@@ -462,201 +350,247 @@
             document.getElementById(id).scrollTop = 0;
         };
 
-        function initApp() {
-            renderOfficeSelect();
-            showScreen('auth-screen');
-        }
+        window.confirmToHome = function() {
+            document.getElementById('confirm-home-modal').classList.remove('hidden');
+        };
+
+        window.closeSession = function() {
+            window.showScreen('app-init-screen');
+        };
 
         function renderOfficeSelect() {
             const select = document.getElementById('office-select');
             select.innerHTML = '<option value="">事業所を選択してください</option>';
-            offices.forEach((office, index) => {
+            window.offices = JSON.parse(localStorage.getItem('mikiwame_offices') || '[]');
+            window.offices.forEach((off, i) => { 
                 const opt = document.createElement('option');
-                opt.value = index;
-                opt.textContent = office.name;
+                opt.value = i;
+                opt.textContent = off.name;
                 select.appendChild(opt);
             });
         }
 
-        document.getElementById('show-add-office-btn').onclick = () => document.getElementById('add-office-modal').classList.remove('hidden');
-        document.getElementById('cancel-add-office-btn').onclick = () => document.getElementById('add-office-modal').classList.add('hidden');
-        document.getElementById('submit-add-office-btn').onclick = () => {
-            const name = document.getElementById('new-office-name').value.trim();
-            if(!name) return;
-            offices.push({ name: name });
-            localStorage.setItem('mikiwame_offices', JSON.stringify(offices));
-            renderOfficeSelect();
-            document.getElementById('new-office-name').value = '';
-            document.getElementById('add-office-modal').classList.add('hidden');
+        document.getElementById('login-btn').onclick = () => {
+            const val = document.getElementById('office-select').value;
+            if(val === "") return;
+            window.currentOfficeIdx = parseInt(val);
+            document.getElementById('dashboard-office-name').textContent = "🏢 " + window.offices[window.currentOfficeIdx].name;
+            window.showScreen('app-init-screen');
         };
 
-        document.getElementById('login-btn').onclick = () => {
-            const idx = document.getElementById('office-select').value;
-            if(idx === "") return;
-            currentOffice = offices[idx];
-            document.getElementById('dashboard-office-name').textContent = "🏢 " + currentOffice.name;
-            showScreen('app-init-screen');
+        document.getElementById('show-add-office-btn').onclick = () => {
+            document.getElementById('add-office-error').classList.add('hidden');
+            document.getElementById('add-office-modal').classList.remove('hidden');
+        };
+
+        document.getElementById('cancel-add-office-btn').onclick = () => document.getElementById('add-office-modal').classList.add('hidden');
+
+        document.getElementById('submit-add-office-btn').onclick = () => {
+            const name = document.getElementById('new-office-name').value.trim();
+            const password = document.getElementById('new-office-password').value.trim();
+            const errorEl = document.getElementById('add-office-error');
+
+            if(!name || !password) {
+                errorEl.classList.remove('hidden');
+                return;
+            }
+            errorEl.classList.add('hidden');
+
+            const currentOffices = JSON.parse(localStorage.getItem('mikiwame_offices') || '[]');
+            currentOffices.push({ name: name, password: password });
+            localStorage.setItem('mikiwame_offices', JSON.stringify(currentOffices));
+            
+            renderOfficeSelect();
+            
+            // 登録した事業所を自動で選択状態にする
+            document.getElementById('office-select').value = currentOffices.length - 1;
+
+            document.getElementById('add-office-modal').classList.add('hidden');
+            document.getElementById('new-office-name').value = "";
+            document.getElementById('new-office-password').value = "";
+        };
+
+        window.showHistoryAuthModal = function() {
+            document.getElementById('history-auth-password').value = "";
+            document.getElementById('history-auth-error').classList.add('hidden');
+            document.getElementById('history-auth-modal').classList.remove('hidden');
+        };
+
+        window.authenticateHistory = function() {
+            const inputPw = document.getElementById('history-auth-password').value;
+            const correctPw = window.offices[window.currentOfficeIdx].password || "";
+            
+            if (inputPw === correctPw || correctPw === "") {
+                document.getElementById('history-auth-modal').classList.add('hidden');
+                window.showHistoryScreen();
+            } else {
+                document.getElementById('history-auth-error').classList.remove('hidden');
+            }
+        };
+
+        window.showHistoryScreen = function() {
+            const container = document.getElementById('history-container');
+            container.innerHTML = "";
+            const history = JSON.parse(localStorage.getItem('mikiwame_history') || '[]');
+            const currentOfficeName = window.offices[window.currentOfficeIdx].name;
+            const officeResults = history.filter(h => h.officeName === currentOfficeName);
+            
+            if(officeResults.length === 0) {
+                container.innerHTML = "<p class='text-center py-20 text-slate-400 font-bold'>履歴データは見つかりませんでした。</p>";
+            } else {
+                officeResults.reverse().forEach(res => {
+                    const div = document.createElement('div');
+                    div.className = "bg-white p-8 rounded-[2.5rem] border border-slate-200 shadow-sm flex justify-between items-center hover:border-indigo-400 cursor-pointer transition-all hover:-translate-y-1 font-black";
+                    div.innerHTML = `<div class="flex-1"><span class="text-[10px] font-black bg-indigo-50 text-indigo-500 px-3 py-1 rounded-full uppercase mr-2 tracking-tighter">${res.aiTypeCode}</span><span class="text-xs font-bold text-slate-400 font-mono">${res.date.split('T')[0]}</span><h4 class="text-2xl font-black text-slate-800 mt-2">${res.candidateName}</h4></div><div class="text-right"><p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Rank</p><span class="text-4xl font-black text-indigo-600">${res.finalRank}</span></div>`;
+                    div.onclick = () => window.loadHistoryDetail(res);
+                    container.appendChild(div);
+                });
+            }
+            window.showScreen('history-list-screen');
+        };
+
+        window.loadHistoryDetail = function(res) {
+            document.getElementById('report-header-title').innerText = "History Detail";
+            const navBtn = document.getElementById('final-nav-btn');
+            navBtn.innerText = "一覧に戻る";
+            navBtn.onclick = () => window.showHistoryScreen();
+
+            document.getElementById('final-rank').innerText = res.finalRank;
+            document.getElementById('final-total-score').innerText = res.totalScore;
+            document.getElementById('final-message').innerText = "【履歴閲覧モード】";
+            document.getElementById('save-area').classList.add('hidden');
+            
+            const detail = document.getElementById('final-detail-section');
+            detail.innerHTML = `
+                <div class="bg-white/5 border border-white/10 p-10 rounded-[3rem] space-y-6">
+                    <p class="text-indigo-400 font-black uppercase tracking-widest text-[10px]">Breakdown</p>
+                    <div class="space-y-4 text-sm font-bold text-slate-300">
+                        <div class="flex justify-between"><span>Phase 0: お出迎え</span><span class="text-white">${res.p0} / 5</span></div>
+                        <div class="flex justify-between"><span>Phase 1: アイスブレイク</span><span class="text-white">${res.p1} / 5</span></div>
+                        <div class="flex justify-between"><span>Phase 2: 経歴・条件</span><span class="text-white">${res.p2} / 5</span></div>
+                        <div class="flex justify-between border-t border-white/10 pt-4"><span>Phase 3: 深掘り質問</span><span class="text-white">${res.p3} / 30</span></div>
+                        <div class="flex justify-between"><span>Phase 4: 覚悟 (RJP)</span><span class="text-white">${res.p4} / 40</span></div>
+                        <div class="flex justify-between border-t border-white/10 pt-4 text-indigo-300"><span>論理的対話スコア</span><span>${res.logicScore} / 7</span></div>
+                        <div class="flex justify-between text-indigo-300"><span>理念加減点</span><span>${res.philScore > 0 ? '+' : ''}${res.philScore}</span></div>
+                    </div>
+                </div>
+                <div class="bg-white/5 border border-white/10 p-10 rounded-[3rem] space-y-6">
+                    <p class="text-indigo-400 font-black uppercase tracking-widest text-[10px]">AI Insight</p>
+                    <div class="text-base leading-relaxed">
+                        <p class="text-2xl font-black text-white mb-2">${res.aiTypeCode}</p>
+                        <p class="text-slate-400 text-sm font-medium leading-relaxed bg-black/20 p-4 rounded-2xl border border-white/5">${res.aiMatch}</p>
+                    </div>
+                </div>
+            `;
+            window.showScreen('final-report-screen');
         };
 
         window.startNewSession = function() {
-            window.interviewData = { p0: 3, p1: 3, p2: 3, p3_1: 5, p3_2: 5, p3_3: 5, p4_1: 5, p4_2: 5, p4_3: 5, p4_4: 5, logic_1: false, logic_2: false, logic_3: false, logic_4: false, phil_g1: false, phil_g2: false, phil_r1: false, phil_r2: false, phil_r3: false };
+            document.getElementById('report-header-title').innerText = "Report";
+            const navBtn = document.getElementById('final-nav-btn');
+            navBtn.innerText = "Finish";
+            navBtn.onclick = () => window.closeSession();
+
+            window.interviewData = { p0: 3, p1: 3, p2: 3, p3_1: 5, p3_2: 5, p3_3: 5, p4_1: 5, p4_2: 5, p4_3: 5, p4_4: 5, logic_1: false, logic_2: false, logic_3: false, logic_4: false, phil_g1: false, phil_g2: false, phil_r1: false, phil_r2: false, phil_r3: false, calculatedLogic: 7, calculatedPhil: 0 };
             window.answers = {};
-            currentQuestionIndex = 0;
+            window.currentQuestionIndex = 0;
             document.getElementById('candidate-name').value = "";
-            showScreen('phase0-screen');
+            window.showScreen('phase0-screen');
         };
 
         window.renderQuestion = function() {
-            const q = QUESTIONS[currentQuestionIndex];
-            const progress = (currentQuestionIndex / QUESTIONS.length) * 100;
-            document.getElementById('question-counter').innerText = `Question ${currentQuestionIndex + 1} / 50`;
+            const q = QUESTIONS_PRO[window.currentQuestionIndex];
+            const progress = (window.currentQuestionIndex / QUESTIONS_PRO.length) * 100;
+            document.getElementById('question-counter').innerText = `Step ${window.currentQuestionIndex + 1} / 50`;
             document.getElementById('progress-text').innerText = `${Math.round(progress)}%`;
             document.getElementById('progress-bar').style.width = `${progress}%`;
             document.getElementById('question-text').innerText = q.text;
             const container = document.getElementById('options-container');
             container.innerHTML = '';
-            [
-                { label: "全くあてはまらない", score: 1 },
-                { label: "あまりあてはまらない", score: 2 },
-                { label: "どちらとも言えない", score: 3 },
-                { label: "少しあてはまる", score: 4 },
-                { label: "とてもあてはまる", score: 5 }
-            ].forEach(opt => {
+            [1, 2, 3, 4, 5].forEach(score => {
+                const labels = ["全くない", "あまりない", "どちらとも", "少しある", "かなりある"];
                 const btn = document.createElement('button');
-                btn.className = "w-full bg-white border-2 border-slate-100 hover:border-indigo-500 font-bold py-4 px-6 rounded-2xl transition-all text-left text-sm shadow-sm";
-                btn.innerText = opt.label;
+                btn.className = "w-full bg-white border-2 border-slate-100 font-bold py-5 px-8 rounded-3xl transition-all text-left text-sm hover:border-indigo-500 active:scale-[0.98]";
+                btn.innerText = labels[score-1];
                 btn.onclick = () => {
-                    window.answers[q.id] = { axis: q.axis, direction: q.direction, score: opt.score };
-                    if (currentQuestionIndex < QUESTIONS.length - 1) {
-                        currentQuestionIndex++;
-                        window.renderQuestion();
-                    } else {
-                        showScreen('completed-screen');
-                    }
+                    window.answers[q.id] = { axis: q.axis, direction: q.direction, score };
+                    if (window.currentQuestionIndex < QUESTIONS_PRO.length - 1) { window.currentQuestionIndex++; window.renderQuestion(); } else { window.showScreen('completed-screen'); }
                 };
                 container.appendChild(btn);
             });
         };
 
-        document.getElementById('start-btn').onclick = () => { window.renderQuestion(); showScreen('question-screen'); };
-        document.getElementById('show-result-btn').onclick = calculateResult;
-
-        function calculateResult() {
-            showScreen('loading-screen');
+        document.getElementById('start-btn').onclick = () => { window.renderQuestion(); window.showScreen('question-screen'); };
+        
+        document.getElementById('show-result-btn').onclick = function() {
+            window.showScreen('loading-screen');
             setTimeout(() => {
-                const scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
-                Object.values(window.answers).forEach(ans => {
-                    if(ans.axis === "EI") { if(ans.direction === "E") { scores.E += ans.score; scores.I += (6-ans.score); } else { scores.I += ans.score; scores.E += (6-ans.score); } }
-                    if(ans.axis === "SN") { if(ans.direction === "S") { scores.S += ans.score; scores.N += (6-ans.score); } else { scores.N += ans.score; scores.S += (6-ans.score); } }
-                    if(ans.axis === "TF") { if(ans.direction === "T") { scores.T += ans.score; scores.F += (6-ans.score); } else { scores.F += ans.score; scores.T += (6-ans.score); } }
-                    if(ans.axis === "JP") { if(ans.direction === "J") { scores.J += ans.score; scores.P += (6-ans.score); } else { scores.P += ans.score; scores.J += (6-ans.score); } }
+                const sc = { E:0,I:0,S:0,N:0,T:0,F:0,J:0,P:0 };
+                Object.values(window.answers).forEach(a => {
+                    if(a.axis === "EI"){ if(a.direction === "E"){sc.E+=a.score;sc.I+=(6-a.score);}else{sc.I+=a.score;sc.E+=(6-a.score);} }
+                    if(a.axis === "SN"){ if(a.direction === "S"){sc.S+=a.score;sc.N+=(6-a.score);}else{sc.N+=a.score;sc.S+=(6-a.score);} }
+                    if(a.axis === "TF"){ if(a.direction === "T"){sc.T+=a.score;sc.F+=(6-a.score);}else{sc.F+=a.score;sc.T+=(6-a.score);} }
+                    if(a.axis === "JP"){ if(a.direction === "J"){sc.J+=a.score;sc.P+=(6-a.score);}else{sc.P+=a.score;sc.J+=(6-a.score);} }
                 });
-                currentAiTypeCode = (scores.E > scores.I ? "E" : "I") + (scores.N > scores.S ? "N" : "S") + (scores.T > scores.F ? "T" : "F") + (scores.P > scores.J ? "P" : "J");
-                currentAiResult = TYPE_DATA[currentAiTypeCode];
-
-                document.getElementById('result-type-code').innerText = currentAiTypeCode;
-                document.getElementById('result-type-name').innerText = currentAiResult.name;
-                document.getElementById('result-description').innerText = currentAiResult.matchReason;
-                document.getElementById('match-rank').innerText = currentAiResult.matchRank;
-                document.getElementById('match-label').innerText = currentAiResult.matchLabel;
-                document.getElementById('result-question').innerText = currentAiResult.question;
-
-                const container = document.getElementById('detail-params-container');
-                container.innerHTML = `<div class='text-xs'>AI診断が正常に完了しました。</div>`;
-                
-                showScreen('result-screen');
-            }, 2000);
-        }
+                window.currentAiTypeCode = (sc.E > sc.I ? "E" : "I") + (sc.N > sc.S ? "N" : "S") + (sc.T > sc.F ? "T" : "F") + (sc.P > sc.J ? "P" : "J");
+                window.currentAiResult = TYPE_DATA[window.currentAiTypeCode] || TYPE_DATA["ISFJ"];
+                document.getElementById('result-type-code').innerText = window.currentAiTypeCode;
+                document.getElementById('result-type-name').innerText = window.currentAiResult.name;
+                document.getElementById('result-description').innerText = window.currentAiResult.matchReason;
+                document.getElementById('match-rank').innerText = window.currentAiResult.matchRank;
+                document.getElementById('match-label').innerText = "Job Fit Index";
+                document.getElementById('result-question').innerText = window.currentAiResult.question;
+                window.showScreen('result-screen');
+            }, 1500);
+        };
 
         window.generateFinalReport = function() {
-            let baseScore = window.interviewData.p0 + window.interviewData.p1 + window.interviewData.p2 
-                          + window.interviewData.p3_1 + window.interviewData.p3_2 + window.interviewData.p3_3 
-                          + window.interviewData.p4_1 + window.interviewData.p4_2 + window.interviewData.p4_3 + window.interviewData.p4_4;
-            
-            // 論理的対話 (持点 7)
-            let logicScore = 7 - (window.interviewData.logic_1 ? 2 : 0) - (window.interviewData.logic_2 ? 2 : 0) - (window.interviewData.logic_3 ? 2 : 0) - (window.interviewData.logic_4 ? 1 : 0);
-            if(logicScore < 0) logicScore = 0;
-
-            // 理念適性 (Green +4, Red -4)
-            let philScore = (window.interviewData.phil_g1 ? 4 : 0) + (window.interviewData.phil_g2 ? 4 : 0) 
-                          - (window.interviewData.phil_r1 ? 4 : 0) - (window.interviewData.phil_r2 ? 4 : 0) - (window.interviewData.phil_r3 ? 4 : 0);
-            
-            let total = Math.max(0, Math.min(100, baseScore + logicScore + philScore));
-            
-            // Red Flag判定
-            let hasRedFlag = window.interviewData.phil_r1 || window.interviewData.phil_r2 || window.interviewData.phil_r3;
-            
-            let rank = 'C';
-            let message = "";
-
-            if(hasRedFlag) {
-                rank = 'C';
-                message = "【不採用推奨】Red Flagが検出されました。理念適合リスクが高いと判定されます。";
-            } else if(total >= 85) {
-                rank = 'S';
-                message = "【超優秀】即戦力のリーダー候補です。Trendを共に追える人材です。";
-            } else if(total >= 70) {
-                rank = 'A';
-                message = "【採用推奨】標準以上の思考力と覚悟があります。現場を任せられます。";
-            } else if(total >= 60) {
-                rank = 'B';
-                message = "【合格】懸念点はありますが、教育でカバー可能な範囲です。";
-            } else {
-                rank = 'C';
-                message = "【不採用推奨】スコアが基準に達していない、またはリスクの兆候があります。";
-            }
+            let base = window.interviewData.p0 + window.interviewData.p1 + window.interviewData.p2 
+                     + window.interviewData.p3_1 + window.interviewData.p3_2 + window.interviewData.p3_3 
+                     + window.interviewData.p4_1 + window.interviewData.p4_2 + window.interviewData.p4_3 + window.interviewData.p4_4;
+            let logic = 7 - (window.interviewData.logic_1?2:0) - (window.interviewData.logic_2?2:0) - (window.interviewData.logic_3?2:0) - (window.interviewData.logic_4?1:0);
+            let phil = (window.interviewData.phil_g1?4:0) + (window.interviewData.phil_g2?4:0) - (window.interviewData.phil_r1?4:0) - (window.interviewData.phil_r2?4:0) - (window.interviewData.phil_r3?4:0);
+            let total = Math.max(0, Math.min(100, base + logic + phil));
+            let hasRed = window.interviewData.phil_r1 || window.interviewData.phil_r2 || window.interviewData.phil_r3;
+            let rank = (hasRed || total < 50) ? 'C' : total >= 85 ? 'S' : total >= 70 ? 'A' : total >= 60 ? 'B' : 'C';
 
             document.getElementById('final-rank').innerText = rank;
             document.getElementById('final-total-score').innerText = total;
-            document.getElementById('final-message').innerText = message;
+            document.getElementById('final-message').innerText = hasRed ? "⚠️ Red Flag検出。理念不適合のリスクがあります。" : "基準に基づく総合評価結果です。";
             
-            // スコアをinterviewDataに保持（保存用）
-            window.interviewData.calculatedLogic = logicScore;
-            window.interviewData.calculatedPhil = philScore;
+            window.interviewData.calculatedLogic = Math.max(0, logic);
+            window.interviewData.calculatedPhil = phil;
 
-            showScreen('final-report-screen');
+            document.getElementById('final-detail-section').innerHTML = `
+                <div class="bg-white/5 border border-white/10 p-10 rounded-[3rem] space-y-6">
+                    <p class="text-indigo-400 font-black uppercase tracking-widest text-[10px]">Score Breakdown</p>
+                    <div class="space-y-3 text-sm font-bold">
+                        <div class="flex justify-between text-slate-300"><span>Phase 0-4 基本点</span><span class="text-white">${base} / 85</span></div>
+                        <div class="flex justify-between text-indigo-300"><span>追加評価項目 (Logic/Phil)</span><span class="text-white">${window.interviewData.calculatedLogic + phil}</span></div>
+                    </div>
+                </div>
+                <div class="bg-white/5 border border-white/10 p-10 rounded-[3rem] space-y-6">
+                    <p class="text-indigo-400 font-black uppercase tracking-widest text-[10px]">Diagnostic Summary</p>
+                    <div class="text-sm font-bold text-white"><p class="text-2xl font-black mb-1">${window.currentAiTypeCode || '未実施'}</p><p class="text-slate-400 text-xs mt-2 font-medium leading-relaxed">${window.currentAiResult ? window.currentAiResult.matchReason : '-'}</p></div>
+                </div>
+            `;
+            document.getElementById('save-area').classList.remove('hidden');
+            window.showScreen('final-report-screen');
         };
 
-        // 保存処理
         document.getElementById('save-report-btn').onclick = async () => {
-            const btn = document.getElementById('save-report-btn');
-            btn.disabled = true;
-            btn.innerText = "転送中...";
-
-            try {
-                const payload = {
-                    date: new Date().toISOString(),
-                    officeName: currentOffice.name,
-                    candidateName: document.getElementById('candidate-name').value || "未入力",
-                    finalRank: document.getElementById('final-rank').innerText,
-                    totalScore: document.getElementById('final-total-score').innerText,
-                    aiTypeCode: currentAiTypeCode || "未実施",
-                    // G列：マッチランクと理由
-                    aiMatch: currentAiResult ? currentAiResult.matchRank + " (" + currentAiResult.matchReason + ")" : "未実施",
-                    p0: window.interviewData.p0, 
-                    p1: window.interviewData.p1, 
-                    p2: window.interviewData.p2,
-                    p3: window.interviewData.p3_1 + window.interviewData.p3_2 + window.interviewData.p3_3,
-                    p4: window.interviewData.p4_1 + window.interviewData.p4_2 + window.interviewData.p4_3 + window.interviewData.p4_4,
-                    // M, N列：計算済み数値を直接送る
-                    logicScore: window.interviewData.calculatedLogic !== undefined ? window.interviewData.calculatedLogic : 7,
-                    philScore: window.interviewData.calculatedPhil !== undefined ? window.interviewData.calculatedPhil : 0
-                };
-                
-                await fetch(GAS_WEBHOOK_URL, { 
-                    method: 'POST', 
-                    mode: 'no-cors', 
-                    body: JSON.stringify(payload) 
-                });
-                btn.innerText = "✅ 保存完了";
-            } catch(e) {
-                console.error(e);
-                btn.innerText = "❌ 送信エラー";
-                btn.disabled = false;
-            }
+            const btn = document.getElementById('save-report-btn'); btn.disabled = true; btn.innerText = "Syncing...";
+            const payload = {
+                date: new Date().toISOString(), officeName: window.offices[window.currentOfficeIdx].name, candidateName: document.getElementById('candidate-name').value || "未入力", finalRank: document.getElementById('final-rank').innerText, totalScore: parseInt(document.getElementById('final-total-score').innerText), aiTypeCode: window.currentAiTypeCode || "未実施", aiMatch: window.currentAiResult ? window.currentAiResult.matchRank + " (" + window.currentAiResult.matchReason + ")" : "未実施", p0: window.interviewData.p0, p1: window.interviewData.p1, p2: window.interviewData.p2, p3: window.interviewData.p3_1+window.interviewData.p3_2+window.interviewData.p3_3, p4: window.interviewData.p4_1+window.interviewData.p4_2+window.interviewData.p4_3+window.interviewData.p4_4, logicScore: window.interviewData.calculatedLogic, philScore: window.interviewData.calculatedPhil
+            };
+            const history = JSON.parse(localStorage.getItem('mikiwame_history') || '[]');
+            history.push(payload); localStorage.setItem('mikiwame_history', JSON.stringify(history));
+            try { await fetch(GAS_WEBHOOK_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) }); btn.innerHTML = "✅ SAVED"; setTimeout(() => { window.showScreen('app-init-screen'); }, 1200); } catch(e) { btn.innerHTML = "⚠️ SYNC ERROR"; setTimeout(() => { window.showScreen('app-init-screen'); }, 2000); }
         };
 
-        initApp();
+        renderOfficeSelect();
+        window.showScreen('auth-screen');
+
     </script>
 </body>
 </html>
