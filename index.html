@@ -24,29 +24,29 @@
         .risk-detected { border-color: #ef4444 !important; background-color: #fef2f2 !important; box-shadow: 0 0 10px rgba(239, 68, 68, 0.2); }
     </style>
 </head>
-<body class="bg-slate-100 font-sans min-h-screen flex items-center justify-center bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] py-4 font-black">
+<body class="bg-slate-100 font-sans h-[100dvh] flex items-center justify-center bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] p-0 md:p-4 lg:p-6 font-black overflow-hidden">
 
-    <div id="app" class="bg-white w-full max-w-5xl h-screen md:h-[900px] md:rounded-3xl shadow-2xl overflow-hidden relative border border-slate-200 flex flex-col font-black">
+    <div id="app" class="bg-white w-full max-w-5xl h-full md:max-h-[95vh] lg:max-h-[900px] shadow-2xl overflow-hidden relative border border-slate-200 flex flex-col font-black md:rounded-[2rem]">
         
         <!-- ホーム画面 -->
-        <div id="home-screen" class="screen flex flex-col items-center justify-center h-full p-8 text-center animate-fade-in bg-[#1e2338] text-white relative overflow-hidden font-black">
-            <div class="z-10 flex flex-col items-center w-full max-w-2xl mx-auto">
-                <button id="home-office-badge" onclick="window.showAuthModal()" class="px-6 py-2.5 bg-slate-800/80 text-slate-400 font-bold rounded-full text-xs md:text-sm tracking-widest mb-10 border border-slate-700 shadow-sm hover:bg-slate-700 transition-all flex items-center justify-center gap-2 font-black">
+        <div id="home-screen" class="screen flex flex-col items-center justify-center h-full p-4 md:p-8 text-center animate-fade-in bg-[#1e2338] text-white relative overflow-hidden font-black">
+            <div class="z-10 flex flex-col items-center w-full max-w-2xl mx-auto my-auto py-2">
+                <button id="home-office-badge" onclick="window.showAuthModal()" class="px-4 py-2 md:px-6 md:py-2 bg-slate-800/80 text-slate-400 font-bold rounded-full text-xs md:text-sm tracking-widest mb-4 md:mb-6 border border-slate-700 shadow-sm hover:bg-slate-700 transition-all flex items-center justify-center gap-2 font-black">
                     🏢 事業所を選択・登録してログイン
                 </button>
-                <h2 class="text-lg md:text-xl font-bold mb-3 text-indigo-300 tracking-[0.1em] font-black">採用面接 運用・評価コンプリートアプリ</h2>
-                <h1 class="text-6xl md:text-8xl font-black mb-8 leading-none text-white tracking-tighter drop-shadow-lg uppercase font-black">ミサダメAI</h1>
-                <p class="text-slate-300 text-sm md:text-base mb-12 max-w-2xl leading-relaxed font-medium tracking-wide font-black">理想を共に追い、自走できるプロフェッショナル人材の獲得</p>
-                <div class="flex flex-col w-full gap-4 font-black">
-                    <button onclick="window.handleStartClick()" class="bg-[#5a55ea] hover:bg-[#4d48d6] text-white font-black py-8 rounded-[2rem] shadow-2xl transition-all active:scale-95 flex flex-col items-center justify-center gap-3 border border-[#6b67f1] font-black">
-                        <span class="text-4xl font-black">🚀</span><span class="text-2xl tracking-widest uppercase font-black">面接を開始</span>
+                <h2 class="text-xs md:text-sm lg:text-base font-bold mb-1 md:mb-2 text-indigo-300 tracking-[0.1em] font-black">採用面接 運用・評価コンプリートアプリ</h2>
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-black mb-3 md:mb-4 leading-none text-white tracking-tighter drop-shadow-lg uppercase font-black">ミサダメAI</h1>
+                <p class="text-slate-300 text-xs md:text-sm mb-6 md:mb-8 max-w-2xl leading-relaxed font-medium tracking-wide font-black">理想を共に追い、自走できるプロフェッショナル人材の獲得</p>
+                <div class="flex flex-col w-full gap-3 font-black">
+                    <button onclick="window.handleStartClick()" class="bg-[#5a55ea] hover:bg-[#4d48d6] text-white font-black py-4 md:py-6 rounded-[2rem] shadow-2xl transition-all active:scale-95 flex flex-col items-center justify-center gap-2 border border-[#6b67f1] font-black">
+                        <span class="text-3xl md:text-4xl font-black">🚀</span><span class="text-lg md:text-xl tracking-widest uppercase font-black">面接を開始</span>
                     </button>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <button onclick="window.showScreen('manual-screen')" class="bg-white hover:bg-slate-50 text-[#5a55ea] font-black py-6 rounded-2xl shadow-xl transition-all text-lg flex items-center justify-center gap-2 active:scale-95 font-black">
-                            <span class="text-2xl font-black">📖</span><span>マニュアルを読む</span>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <button onclick="window.showScreen('manual-screen')" class="bg-white hover:bg-slate-50 text-[#5a55ea] font-black py-3 md:py-4 rounded-2xl shadow-xl transition-all text-sm md:text-base flex items-center justify-center gap-2 active:scale-95 font-black">
+                            <span class="text-lg md:text-xl font-black">📖</span><span>マニュアルを読む</span>
                         </button>
-                        <button onclick="window.handleHistoryClick()" class="bg-slate-700 hover:bg-slate-600 text-white font-black py-6 rounded-2xl shadow-xl transition-all text-lg flex items-center justify-center border border-slate-600 gap-2 active:scale-95 font-black">
-                            <span class="text-2xl font-black">📂</span><span>履歴を確認</span>
+                        <button onclick="window.handleHistoryClick()" class="bg-slate-700 hover:bg-slate-600 text-white font-black py-3 md:py-4 rounded-2xl shadow-xl transition-all text-sm md:text-base flex items-center justify-center border border-slate-600 gap-2 active:scale-95 font-black">
+                            <span class="text-lg md:text-xl font-black">📂</span><span>履歴を確認</span>
                         </button>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                         <input type="password" id="login-password" class="w-full bg-slate-800 border border-slate-600 rounded-xl px-4 py-3 text-white focus:outline-none shadow-inner text-center font-bold tracking-[0.5em] font-black" placeholder="••••">
                         <p id="login-error" class="text-red-500 font-bold text-xs mt-2 hidden font-black">パスワードが間違っています。</p>
                     </div>
-                    <button id="login-btn" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3.5 rounded-xl transition-all shadow-lg active:scale-95 uppercase font-black tracking-widest">認証して進む</button>
+                    <button id="login-btn" class="w-full bg-indigo-600 hover:bg-indigo-50 text-white font-bold py-3.5 rounded-xl transition-all shadow-lg active:scale-95 uppercase font-black tracking-widest">認証して進む</button>
                     <div class="pt-6 border-t border-slate-700 mt-6 text-center font-black">
                         <button onclick="window.showAddOfficeModal()" class="text-sm text-indigo-400 hover:text-indigo-300 transition-colors font-bold font-black">＋ 新しい事業所を登録する</button>
                     </div>
@@ -116,28 +116,178 @@
                     戻る
                 </button>
                 <div class="flex items-center font-bold font-black"><span class="text-2xl mr-3 font-black">📖</span>運用マニュアル</div>
-                <div class="w-16"></div>
+                <div class="w-24"></div> <!-- スペース調整用 -->
             </div>
-            <div class="p-8 max-w-4xl mx-auto space-y-8 font-black">
-                <h2 class="text-2xl font-black text-slate-800 border-b-4 border-indigo-500 pb-2 inline-block font-black">1. 面接の基本方針</h2>
-                <p class="text-slate-700 font-bold leading-relaxed bg-indigo-50 p-5 rounded-2xl border border-indigo-100 shadow-sm font-black">
-                    本面接は「欠員補充」ではなく、「自己実現をみんなのものに」のために自らを変容させ、自走できるか」を判定するものです。
-                </p>
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden text-sm font-black">
-                    <table class="w-full text-left font-bold font-black">
-                        <thead class="bg-slate-50 text-slate-500 uppercase font-black">
-                            <tr><th class="p-4 border-b font-black">Phase</th><th class="p-4 border-b font-black">内容</th><th class="p-4 border-b font-black">配点</th><th class="p-4 border-b font-black">評価の視点</th></tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-100 text-slate-700 font-black">
-                            <tr><td class="p-4 font-black">Phase 0</td><td class="p-4 font-black">お出迎え</td><td class="p-4 font-black">5</td><td class="p-4 font-black">社会人基礎・ホスピタリティ</td></tr>
-                            <tr><td class="p-4 font-black">Phase 1</td><td class="p-4 font-black">アイスブレイク</td><td class="p-4 font-black">5</td><td class="p-4 font-black">対話の基礎・ニーズ把握</td></tr>
-                            <tr><td class="p-4 font-black">Phase 2</td><td class="p-4 font-black">経歴・条件</td><td class="p-4 font-black">5</td><td class="p-4 font-black">論理性・こだわり・条件合致</td></tr>
-                            <tr class="bg-indigo-50 text-indigo-700 font-black"><td class="p-4 font-black" colspan="4">📱 適正ミサダメAI診断 実施（スキップ可）</td></tr>
-                            <tr><td class="p-4 font-black">Phase 3</td><td class="p-4 font-black">面接深掘り</td><td class="p-4 font-black">30</td><td class="p-4 font-black">リスク検知（各10点）</td></tr>
-                            <tr><td class="p-4 font-black">Phase 4</td><td class="p-4 font-black">覚悟(RJP)</td><td class="p-4 font-black">40</td><td class="p-4 font-black">適応力・自走の覚悟（各10点）</td></tr>
-                            <tr><td class="p-4 font-black">全体評価</td><td class="p-4 font-black">理念・スキル</td><td class="p-4 font-black">15</td><td class="p-4 font-black">論理性・self・A適性</td></tr>
-                        </tbody>
-                    </table>
+            
+            <div class="p-4 md:p-8 max-w-4xl mx-auto space-y-10 font-black pb-32">
+                <!-- タイトル -->
+                <div class="text-center space-y-2 md:space-y-4">
+                    <h2 class="text-2xl md:text-3xl font-black text-indigo-900 tracking-tight">採用面接 運用・評価コンプリートマニュアル</h2>
+                    <p class="text-xs md:text-sm text-indigo-600 font-black tracking-widest">〜Trend（理想）を共に追い、自走できる「プロフェッショナル人材」の獲得〜</p>
+                </div>
+
+                <!-- 1. 基本方針 -->
+                <div class="space-y-6">
+                    <h3 class="text-xl md:text-2xl font-black text-slate-800 border-b-4 border-indigo-500 pb-2 inline-block">1. 面接の基本方針と評価配分（100点満点）</h3>
+                    <p class="text-sm md:text-base text-slate-700 font-bold leading-relaxed bg-indigo-50 p-4 md:p-5 rounded-2xl border border-indigo-100 shadow-sm">
+                        本面接は「欠員補充」ではなく、「自己実現をみんなのものに」のために自らを変容させ、自走できるか」を判定するものです。
+                    </p>
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-x-auto text-xs md:text-sm">
+                        <table class="w-full text-left font-bold min-w-[600px]">
+                            <thead class="bg-slate-50 text-slate-500 uppercase">
+                                <tr><th class="p-3 md:p-4 border-b">フェーズ</th><th class="p-3 md:p-4 border-b">項目</th><th class="p-3 md:p-4 border-b">配点</th><th class="p-3 md:p-4 border-b">評価の視点</th></tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 text-slate-700">
+                                <tr><td class="p-3 md:p-4 font-black">Phase 0</td><td class="p-3 md:p-4">お出迎え・着席</td><td class="p-3 md:p-4 font-black text-indigo-600">5点</td><td class="p-3 md:p-4">社会人基礎・ホスピタリティ</td></tr>
+                                <tr><td class="p-3 md:p-4 font-black">Phase 1</td><td class="p-3 md:p-4">アイスブレイク・基本確認</td><td class="p-3 md:p-4 font-black text-indigo-600">5点</td><td class="p-3 md:p-4">表情・対話の基礎・ニーズ把握</td></tr>
+                                <tr><td class="p-3 md:p-4 font-black">Phase 2</td><td class="p-3 md:p-4">経歴・条件・スタンス</td><td class="p-3 md:p-4 font-black text-indigo-600">5点</td><td class="p-3 md:p-4">経歴の論理性・仕事への価値観</td></tr>
+                                <tr class="bg-indigo-50 text-indigo-700 font-black"><td class="p-3 md:p-4" colspan="4">📱 適正ミサダメAI診断 実施（スキップ可）</td></tr>
+                                <tr><td class="p-3 md:p-4 font-black">Phase 3</td><td class="p-3 md:p-4">面接質問・深掘り</td><td class="p-3 md:p-4 font-black text-indigo-600">30点</td><td class="p-3 md:p-4">IQ/EQ/自責/ペルソナ検問（10点×3）</td></tr>
+                                <tr><td class="p-3 md:p-4 font-black">Phase 4</td><td class="p-3 md:p-4">覚悟の確認（RJP）</td><td class="p-3 md:p-4 font-black text-indigo-600">40点</td><td class="p-3 md:p-4">現場適応力・自走の覚悟（10点×4）</td></tr>
+                                <tr class="bg-slate-50"><td class="p-3 md:p-4 font-black text-slate-800">全体評価</td><td class="p-3 md:p-4">理念・対話スキル</td><td class="p-3 md:p-4 font-black text-indigo-600">15点</td><td class="p-3 md:p-4">論理的対話・self・Aへの適性</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bg-yellow-50 p-4 rounded-xl border border-yellow-200 mt-4">
+                        <p class="text-sm text-yellow-800 font-bold flex items-center gap-2">
+                            <span class="text-xl">🏢</span>
+                            <span class="font-black tracking-widest">事業所内見学について：</span>
+                            Phase1〜4の間で、自由に組み込んで実施してください。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 2. フェーズ別 -->
+                <div class="space-y-6">
+                    <h3 class="text-xl md:text-2xl font-black text-slate-800 border-b-4 border-indigo-500 pb-2 inline-block">2. フェーズ別：運用手順と詳細基準</h3>
+                    
+                    <div class="bg-white p-5 md:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+                        <h4 class="text-lg font-black text-indigo-700">【Phase 0】お出迎え・着席（5点）</h4>
+                        <p class="text-sm text-slate-600 font-bold">面接は顔を合わせた瞬間から始まっています。</p>
+                        <ul class="text-sm text-slate-700 space-y-1 list-disc list-inside">
+                            <li><span class="text-indigo-600 font-black">手順：</span> 笑顔で迎え入れ、面接室へ案内。案内中の振る舞いを観察。</li>
+                            <li><span class="text-indigo-600 font-black">評価基準：</span> 挨拶のトーン、目線、待たされた際の態度の余裕。</li>
+                            <li><span class="text-indigo-600 font-black">採点：</span> 5点（非常に丁寧）〜1点（無愛想、目が合わない）。</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-5 md:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+                        <h4 class="text-lg font-black text-indigo-700">【Phase 1】アイスブレイク・基本確認（5点）</h4>
+                        <p class="text-sm text-slate-600 font-bold">本音を引き出すための「心理的安全性の構築」と「対話力の確認」を行います。</p>
+                        <div class="space-y-2 text-sm text-slate-700">
+                            <p><span class="text-indigo-600 font-black">自己開示（面接官から）：</span><br>「〇〇（事業所名）でチーフをやっている〇〇です。前職は〇〇で、〇年前に未経験から転職してきました」<br><span class="text-xs text-slate-500">狙い： 未経験からの活躍を伝え、安心感と入社意欲を高める。</span></p>
+                            <p><span class="text-indigo-600 font-black">スタンス提示：</span><br>「今日はざっくばらんにいきましょう。気になることはいつでも聞いてください。双方向でお話しできればと思います」</p>
+                            <p><span class="text-indigo-600 font-black">基本確認：</span><br>「障害福祉サービスというものをご存知ですか？」<br><span class="text-xs text-slate-500">知らない場合： 「自分も知らないところからでした」と共感。<br>知っている場合： 「なぜご存知ですか？」と深掘りし、関心の温度感を測る。</span></p>
+                            <p><span class="text-indigo-600 font-black">ニーズ把握（ワンポイント）：</span><br>「今日、一番気になっていること（給与、内容、社風など）は何ですか？」と聞き、相手の目的に沿って説明を設計する。</p>
+                            <p class="pt-2 border-t font-black"><span class="text-indigo-600">評価基準：</span> 表情が豊かで、会話のラリー（キャッチボール）がスムーズか。</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 md:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+                        <h4 class="text-lg font-black text-indigo-700">【Phase 2】経歴・条件確認・スタンス（5点）</h4>
+                        <p class="text-sm text-slate-600 font-bold">職歴を通じて「仕事への向き合い方」を確認します。</p>
+                        <div class="space-y-2 text-sm text-slate-700">
+                            <p><span class="text-indigo-600 font-black">経歴確認（履歴書の有無に合わせる）：</span><br>「直近どんな仕事を？」「一番長い経験は？具体的にどんな役割でしたか？」</p>
+                            <p><span class="text-indigo-600 font-black">スタンス確認：</span><br>「そのお仕事をする中で、大事にしていたポイント（こだわり）は何ですか？」<br><span class="text-xs text-slate-500">視点： ホスピタリティ重視か、現実主義（効率）か、上昇志向かを確認。</span></p>
+                            <p><span class="text-indigo-600 font-black">条件合致：</span> 募集要項（シフト・給与等）に相違がないか。</p>
+                            <p class="pt-2 border-t font-black"><span class="text-indigo-600">評価基準：</span> 経歴説明が論理的か。条件面に100%前向きな合意があるか。</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-indigo-600 text-white p-4 rounded-xl text-center shadow-md animate-pulse">
+                        <p class="font-black text-lg tracking-widest">📱 適正ミサダメAI診断 実施（スキップ可）</p>
+                    </div>
+
+                    <div class="bg-white p-5 md:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                        <h4 class="text-lg font-black text-indigo-700">【Phase 3】面接質問・深掘り（30点：各10点）</h4>
+                        <div class="space-y-1.5">
+                            <p class="text-sm text-slate-600 font-bold">具体的なリスクペルソナ（不動 固・依存 待子・古井 説子）を炙り出します。</p>
+                            <p class="text-sm text-red-600 font-black">「依存待子」「古井説子」「不動固」に近しい回答や兆候を感じたらスキル（点数）が高くても、ランクC以下となります。</p>
+                        </div>
+                        
+                        <div class="bg-slate-50 p-4 rounded-xl space-y-2">
+                            <p class="font-black text-indigo-600">Q1：提案経験（IQ/EQ）</p>
+                            <p class="text-sm">質問： 「提案経験は？ もし若手から『自動化しましょう』と反対意見が出たらどう対話しますか？」</p>
+                            <ul class="text-xs space-y-1">
+                                <li><span class="text-emerald-600 font-black">Good：</span> 目的（Trend）を優先し、論理的に比較検討できる。</li>
+                                <li><span class="text-red-500 font-black">不動固NG：</span> 「まずは基本（目視）からだと諭す」→ 変化拒絶。</li>
+                                <li><span class="text-red-500 font-black">古井説子NG：</span> 「ネットと現場は違うと教える」→ 経験マウント・柔軟性欠如。</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-slate-50 p-4 rounded-xl space-y-2">
+                            <p class="font-black text-indigo-600">Q2：達成感と失敗（IQ/自責思考）</p>
+                            <p class="text-sm">質問： 「最も失敗したことは？ 支援した方が再発して戻ってきたら、自分をどう評価しますか？」</p>
+                            <ul class="text-xs space-y-1">
+                                <li><span class="text-emerald-600 font-black">Good：</span> 仕組みの不備を分析し、プロとしての境界線を保ちつつ次を練る。</li>
+                                <li><span class="text-red-500 font-black">依存待子NG：</span> 「私の支援が足りなかった」と落ち込む、または「私がいなきゃ」と喜ぶ → 共依存・燃え尽きリスク。</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-slate-50 p-4 rounded-xl space-y-2">
+                            <p class="font-black text-indigo-600">Q3：喜怒哀楽の割合（自己客観視）</p>
+                            <p class="text-sm">質問： 「喜怒哀楽は何割ですか？ 負の感情をどう解消しますか？」</p>
+                            <ul class="text-xs space-y-1">
+                                <li><span class="text-emerald-600 font-black">Good：</span> 感情を客観視し、笑い話や学びに変換できる。</li>
+                                <li><span class="text-red-500 font-black">古井説子NG：</span> 「筋の通らないことに腹が立つ（正義感）」→ 価値観の押し付け。</li>
+                                <li><span class="text-red-500 font-black">依存待子NG：</span> 「哀」が極端に高い → 境界線が曖昧。</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 md:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+                        <h4 class="text-lg font-black text-indigo-700">【Phase 4】覚悟の確認：RJP（40点：各10点）</h4>
+                        <p class="text-sm text-slate-600 font-bold">現場の「厳しさ」を伝え、覚悟（合意）を確認します。</p>
+                        <ul class="text-sm text-slate-700 space-y-2 list-disc list-inside">
+                            <li><span class="text-indigo-600 font-black">実作業：</span> 「まず自分が作業を完遂し、背中を見せる期間があるが大丈夫か？」</li>
+                            <li><span class="text-indigo-600 font-black">毅然とした支援：</span> 「大声や暴れる方にも、優しさだけでなく適切な指導ができるか？」</li>
+                            <li><span class="text-indigo-600 font-black">自走・発信：</span> 「指示を待つのではなく、自ら聞き、提案するスタンスを取れるか？」</li>
+                            <li><span class="text-indigo-600 font-black">キャリア：</span> 「1年後のリーダー業務（OJT構築等）を自分事として捉えられるか？」</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-5 md:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                        <h4 class="text-lg font-black text-indigo-700">【全体評価】理念・対話スキル（15点）</h4>
+                        <div class="space-y-3 text-sm text-slate-700">
+                            <p class="font-black text-indigo-600">① 論理的対話（7点満点 / 減点方式）</p>
+                            <p class="text-xs">持ち点7点から、現場報告のリスク（マイナス行動）を引きます。</p>
+                            <ul class="text-xs space-y-1 ml-4 list-disc">
+                                <li><span class="font-black">結論後回し（-2）：</span> 経緯や言い訳から話し始めた。</li>
+                                <li><span class="font-black">事実と感情の混同（-2）：</span> 「大変だった」等の感情論が中心で、何が起きたか不明。</li>
+                                <li><span class="font-black">構造の不備（-2）：</span> 時系列がバラバラで、聞き手の整理が必要。</li>
+                                <li><span class="font-black">冗長・繰り返し（-1）：</span> 同じ話を何度もする。</li>
+                            </ul>
+                            <p class="font-black text-indigo-600 pt-2 border-t">② 理念・適性（8点満点 / 加点・減点方式）</p>
+                            <p class="text-xs"><span class="text-emerald-600 font-black">Green（各+4点）：</span> 「変化を面白がる」「理想（Trend）への関心が高い」。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. 総合ランク -->
+                <div class="space-y-6">
+                    <h3 class="text-xl md:text-2xl font-black text-slate-800 border-b-4 border-indigo-500 pb-2 inline-block">3. 総合ランク判定と運用ルール</h3>
+                    
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-x-auto text-xs md:text-sm">
+                        <table class="w-full text-left font-bold min-w-[600px]">
+                            <thead class="bg-slate-50 text-slate-500 uppercase">
+                                <tr><th class="p-3 md:p-4 border-b">ランク</th><th class="p-3 md:p-4 border-b">点数</th><th class="p-3 md:p-4 border-b">判定詳細</th></tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 text-slate-700">
+                                <tr><td class="p-3 md:p-4 font-black text-yellow-500 text-lg">S</td><td class="p-3 md:p-4 font-black">85点〜</td><td class="p-3 md:p-4"><span class="text-indigo-600 font-black">超優秀。</span> 即戦力のリーダー候補。Trendを共に追える。</td></tr>
+                                <tr><td class="p-3 md:p-4 font-black text-blue-500 text-lg">A</td><td class="p-3 md:p-4 font-black">70点〜</td><td class="p-3 md:p-4"><span class="text-indigo-600 font-black">採用推奨。</span> 標準以上の思考力と覚悟。現場を任せられる。</td></tr>
+                                <tr><td class="p-3 md:p-4 font-black text-emerald-500 text-lg">B</td><td class="p-3 md:p-4 font-black">60点〜</td><td class="p-3 md:p-4"><span class="text-indigo-600 font-black">合格。</span> 懸念はあるが、特定の配置や教育でカバー可能。</td></tr>
+                                <tr><td class="p-3 md:p-4 font-black text-orange-500 text-lg">C</td><td class="p-3 md:p-4 font-black">50点〜</td><td class="p-3 md:p-4"><span class="text-red-500 font-black">不採用推奨。</span> リスクペルソナの兆候あり。</td></tr>
+                                <tr><td class="p-3 md:p-4 font-black text-red-500 text-lg">D</td><td class="p-3 md:p-4 font-black">〜49点</td><td class="p-3 md:p-4"><span class="text-red-600 font-black">不採用。</span> 価値観の不一致、著しい他責傾向。</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="bg-red-50 p-5 md:p-6 rounded-2xl border border-red-100 space-y-3">
+                        <h4 class="text-lg font-black text-red-600 flex items-center gap-2">⚠️ 【面接官の鉄則】</h4>
+                        <ul class="text-sm text-slate-700 space-y-2 list-disc list-inside font-bold">
+                            <li><span class="text-red-600 font-black">「マイルドなNG」に敏感になる：</span> 丁寧な言葉でも、内容が「基本を大事に（＝変化拒絶）」であればそれは不動固のリスクです。</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -200,27 +350,14 @@
             </div>
             <div class="flex-grow p-6 overflow-y-auto flex flex-col md:flex-row gap-6 font-black">
                 <div class="md:w-2/3 bg-white p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6 font-black">
-                    <h3 class="font-black text-indigo-700 uppercase text-sm border-b pb-2 tracking-widest font-black">仕事への向き合い方を確認</h3>
-                    
-                    <div class="space-y-4 text-sm font-bold text-slate-600 font-black">
-                        <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-100 font-black">
-                            <p class="text-indigo-800 mb-1 font-black">【経歴確認】</p>
-                            <p class="text-xs text-indigo-700 font-black">「直近どんな仕事を？」「一番長い経験は？具体的にどんな役割でしたか？」</p>
-                        </div>
-                        
-                        <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-100 font-black">
-                            <p class="text-indigo-800 mb-1 font-black">【スタンス確認】</p>
-                            <p class="text-xs text-indigo-700 font-black">「そのお仕事をする中で、大事にしていたポイント（こだわり）は何ですか？」</p>
-                        </div>
-
-                        <ul class="list-disc list-inside space-y-2 ml-2 font-black">
-                            <li class="font-black"><span class="text-indigo-600 font-black">視点：</span> ホスピタリティ重視か、現実主義（効率）か、上昇志向かを確認。</li>
-                            <li class="font-black"><span class="text-indigo-600 font-black">条件合致：</span> 募集要項（シフト・給与等）に相違がないか。</li>
-                        </ul>
-                        
-                        <p class="pt-4 border-t border-slate-100 text-indigo-600 font-black">
-                            評価基準： 経歴説明が論理的か。条件面に100%前向きな合意があるか。
-                        </p>
+                    <div class="font-black">
+                        <h4 class="text-indigo-700 font-black uppercase mb-2 font-black">経歴の論理性とこだわり</h4>
+                        <p class="text-sm font-bold text-slate-600 leading-relaxed font-black">直近の仕事での具体的な役割と、大切にしていた「ポイント」を確認。<br>
+                        <span class="text-xs text-slate-400 italic font-black">ホスピタリティ重視か、現実主義（効率）か、上昇志向か。</span></p>
+                    </div>
+                    <div class="pt-4 border-t font-black">
+                        <h4 class="text-indigo-700 font-black uppercase mb-2 tracking-widest font-black">募集条件への合意</h4>
+                        <p class="text-sm font-bold text-slate-600 font-black">シフト・給与などの募集要項に100%前向きな合意があるか確認。</p>
                     </div>
                 </div>
                 <div class="md:w-1/3 bg-white p-8 rounded-3xl border border-slate-200 h-fit space-y-8 shadow-sm font-black">
@@ -250,10 +387,10 @@
         </div>
 
         <!-- AI質問画面 -->
-        <div id="question-screen" class="screen hidden flex flex-col h-full p-6 md:p-12 max-w-3xl mx-auto w-full bg-white font-black">
-            <div class="mb-12 mt-8 font-black"><div class="flex justify-between text-[10px] font-black text-indigo-500 mb-3 uppercase tracking-widest font-black"><span id="question-counter" class="font-black"></span><span id="progress-text" class="font-black"></span></div><div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden shadow-inner font-black"><div id="progress-bar" class="bg-indigo-500 h-2 rounded-full progress-transition font-black"></div></div></div>
-            <div class="flex-grow flex flex-col justify-center mb-16 font-black"><h2 id="question-text" class="text-2xl md:text-4xl font-black text-slate-800 text-center leading-[1.6] px-4 font-black"></h2></div>
-            <div id="options-container" class="grid grid-cols-1 gap-4 mt-auto mb-10 font-black"></div>
+        <div id="question-screen" class="screen hidden flex flex-col h-full p-4 md:p-8 max-w-3xl mx-auto w-full bg-white font-black overflow-hidden">
+            <div class="mb-4 mt-2 md:mb-6 md:mt-4 font-black shrink-0"><div class="flex justify-between text-[10px] font-black text-indigo-500 mb-2 uppercase tracking-widest font-black"><span id="question-counter" class="font-black"></span><span id="progress-text" class="font-black"></span></div><div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden shadow-inner font-black"><div id="progress-bar" class="bg-indigo-500 h-full rounded-full progress-transition font-black"></div></div></div>
+            <div class="flex-grow flex flex-col justify-center min-h-0 mb-4 md:mb-6 font-black overflow-y-auto"><h2 id="question-text" class="text-xl md:text-2xl lg:text-3xl font-black text-slate-800 text-center leading-[1.5] px-2 font-black"></h2></div>
+            <div id="options-container" class="flex flex-col gap-2 md:gap-3 mt-auto font-black shrink-0 pb-2"></div>
         </div>
 
         <!-- 診断完了 -->
@@ -502,14 +639,14 @@
             </div>
         </div>
 
-        <!-- 最終レポート（完成版） -->
+        <!-- 最終レポート（完全版：エビデンスベースマネジメント追加） -->
         <div id="final-report-screen" class="screen hidden flex flex-col h-full bg-slate-800 text-white overflow-y-auto relative font-black">
             <div class="bg-slate-900/50 px-6 py-4 sticky top-0 z-10 flex justify-between items-center text-xl font-black text-indigo-300 uppercase font-black">
                 <button id="final-back-btn" class="hidden text-sm flex items-center gap-1 text-slate-300 hover:text-white transition-colors font-black">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
                     戻る
                 </button>
-                <h2 id="report-header-title" class="font-black flex-grow text-center">判定レポート</h2>
+                <h2 id="report-header-title" class="font-black flex-grow text-center">アセスメント結果詳細</h2>
                 <button id="final-nav-btn" onclick="window.closeSession()" class="text-xs bg-slate-700 font-bold px-5 py-2.5 rounded-xl hover:bg-slate-600 uppercase font-black">終了</button>
             </div>
             <div class="p-8 md:p-12 w-full max-w-5xl mx-auto space-y-12 pb-32 font-black">
@@ -730,30 +867,39 @@
         };
 
         window.generateDetailedFeedback = function(data) {
-            let message = "", advice = "";
+            let message = "", baseAdvice = "";
             const rank = data.finalRank;
             const hasRedFlag = data.phil_r1 || data.phil_r2 || data.phil_r3;
 
             switch(rank) {
-                case 'S': message = "【超優秀】 理想（Trend）を共に追求できるプロフェッショナル人材。"; advice = "早期にリーダー業務を任せ、自走を促してください。"; break;
-                case 'A': message = "【採用推奨】 戦力として高い適性があります。"; advice = "目的を伝え裁量を与えることで成長を加速させられます。"; break;
-                case 'B': message = "【合格】 現場適応は可能ですがフォローが必要です。"; advice = "入社後の1on1で論理性や理念の理解度を深めてください。"; break;
-                case 'C': message = hasRedFlag ? "【要注意】 特定のリスクペルソナ（RED FLAG）が検知されました。" : "【慎重】 理念共感や現場覚悟が不足しています。"; advice = hasRedFlag ? "リスク兆候はチームの不和に繋がります。配置に細心の注意を。" : "働く動機の再確認が必要です。"; break;
-                default: message = "【不採用】 価値観の不一致、他責傾向が強いです。"; advice = "理念と大きく乖離。ミスマッチのリスクが極めて高いです。";
+                case 'S': message = "【超優秀】 理想（Trend）を共に追求できるプロフェッショナル人材。"; baseAdvice = "早期にリーダー業務を任せ、事業所の牽引役として自走を促してください。"; break;
+                case 'A': message = "【採用推奨】 戦力として高い適性があります。"; baseAdvice = "面接で確認した「仕事へのこだわり」を尊重し、裁量を与えることで成長を加速させられます。"; break;
+                case 'B': message = "【合格】 現場適応は可能ですが初期フォローが必要です。"; baseAdvice = "入社後の1on1で論理性や理念の理解度を深め、心理的安全性を確保しながら育成してください。"; break;
+                case 'C': message = hasRedFlag ? "【要注意】 特定のリスクペルソナ（RED FLAG）が検知されました。" : "【慎重】 理念共感や現場覚悟が不足しています。"; baseAdvice = hasRedFlag ? "リスク兆候は将来的なチームの不和や燃え尽きに繋がります。配置に細心の注意を払い、業務上の明確な境界線を引くマネジメントが必須です。" : "働く動機の再確認や、現場見学を通じた実務レベルでのRJP（現実的な擦り合わせ）が必要です。"; break;
+                default: message = "【不採用】 価値観の不一致、他責傾向が強いです。"; baseAdvice = "理念と大きく乖離しています。入社後の相互のミスマッチリスクが極めて高いため、見送りが妥当です。";
             }
 
             let logicItems = [];
             if(data.logic_1) logicItems.push("結論後回し");
-            if(data.logic_2) logicItems.push("事実感情混同");
-            if(data.logic_3) logicItems.push("構造の不備");
+            if(data.logic_2) logicItems.push("事実・感情の混同");
+            if(data.logic_3) logicItems.push("話の構造不備");
             if(data.logic_4) logicItems.push("冗長・繰り返し");
 
             let riskItems = [];
-            if(data.phil_r1) riskItems.push("不動 固（変化拒絶）");
-            if(data.phil_r2) riskItems.push("依存 待子（共依存）");
-            if(data.phil_r3) riskItems.push("古井 説子（否定）");
+            if(data.phil_r1) riskItems.push("不動 固（変化を拒絶する傾向）");
+            if(data.phil_r2) riskItems.push("依存 待子（共依存・燃え尽きリスク）");
+            if(data.phil_r3) riskItems.push("古井 説子（正義感の押し付け・マウント）");
 
-            return { message, advice, logicItems, riskItems };
+            const aiType = data.aiTypeCode;
+            let aiTraits = "アセスメントが実施されていないため、性格傾向のデータはありません。";
+            let aiManagement = "アセスメント結果がないため、標準的なOJTと面接スコアに基づいた育成を行ってください。";
+            
+            if (aiType && window.TYPE_DATA[aiType]) {
+                aiTraits = window.TYPE_DATA[aiType].traits;
+                aiManagement = window.TYPE_DATA[aiType].management;
+            }
+
+            return { message, baseAdvice, logicItems, riskItems, aiType, aiTraits, aiManagement };
         };
 
         window.loadHistoryDetail = function(res) {
@@ -763,7 +909,7 @@
             document.getElementById('final-back-btn').onclick = () => window.showHistoryScreen();
             
             const navBtn = document.getElementById('final-nav-btn');
-            navBtn.classList.add('hidden'); // 履歴から来た場合は右上の終了ボタンは隠す
+            navBtn.classList.add('hidden');
             
             const feedback = window.generateDetailedFeedback(res);
             document.getElementById('final-rank').innerText = res.finalRank;
@@ -774,25 +920,55 @@
             const detail = document.getElementById('final-detail-section');
             if (detail) {
                 detail.innerHTML = `
-                    <div class="bg-white/5 border border-white/10 p-10 rounded-[3rem] space-y-6 shadow-2xl">
+                    <div class="bg-white/5 border border-white/10 p-8 rounded-[3rem] space-y-6 shadow-2xl">
                         <p class="text-indigo-400 font-black uppercase tracking-widest text-[10px]">Score Analysis / 得点の根拠</p>
                         <div class="space-y-4 text-sm font-bold text-slate-200">
                             <div class="flex justify-between pb-2 border-b border-white/5"><span>Phase 0-2: 基礎評価</span><span class="text-white">${res.p0 + res.p1 + res.p2} / 15</span></div>
                             <div class="flex justify-between pb-2 border-b border-white/5"><span>Phase 3: 面接質問</span><span class="text-white">${res.p3} / 30</span></div>
                             <div class="flex justify-between pb-2 border-b border-white/5"><span>Phase 4: 現場覚悟</span><span class="text-white">${res.p4} / 40</span></div>
-                            <div class="flex justify-between text-indigo-300 font-black pt-2"><span>理念・対話評価加点</span><span>${res.logicScore + res.philScore} / 15</span></div>
+                            <div class="flex justify-between text-indigo-300 font-black pt-2"><span>理念・対話加点</span><span>${res.logicScore + res.philScore} / 15</span></div>
                         </div>
                     </div>
-                    <div class="bg-white/5 border border-white/10 p-10 rounded-[3rem] space-y-6 shadow-2xl">
-                        <p class="text-red-400 font-black uppercase tracking-widest text-[10px]">Critical Flags / 懸念項目</p>
+                    <div class="bg-white/5 border border-white/10 p-8 rounded-[3rem] space-y-6 shadow-2xl">
+                        <p class="text-red-400 font-black uppercase tracking-widest text-[10px]">Critical Flags / 懸念・リスク</p>
                         <div class="space-y-4">
-                            <div class="bg-black/20 p-5 rounded-2xl border border-white/5 font-bold"><p class="text-[10px] text-indigo-300 mb-1 uppercase">対話スキル</p><p class="text-sm text-white">${feedback.logicItems.length > 0 ? feedback.logicItems.join("、") : "良好"}</p></div>
+                            <div class="bg-black/20 p-5 rounded-2xl border border-white/5 font-bold"><p class="text-[10px] text-indigo-300 mb-1 uppercase">対話の不備</p><p class="text-sm text-white">${feedback.logicItems.length > 0 ? feedback.logicItems.join("、") : "良好（特になし）"}</p></div>
                             <div class="bg-red-900/20 p-5 rounded-2xl border border-red-500/20 font-bold"><p class="text-[10px] text-red-400 mb-1 uppercase font-black">RED FLAG</p><p class="text-sm text-white font-black">${feedback.riskItems.length > 0 ? feedback.riskItems.join("、") : "兆候なし"}</p></div>
                         </div>
                     </div>
-                    <div class="bg-white/5 border border-white/10 p-10 rounded-[3rem] space-y-6 shadow-2xl md:col-span-2">
-                        <p class="text-emerald-400 font-black uppercase tracking-widest text-[10px]">Management Advice / 育成ポイント</p>
-                        <p class="text-base text-slate-100 leading-relaxed font-bold">${feedback.advice}</p>
+                    
+                    <div class="bg-white/5 border border-white/10 p-8 md:p-10 rounded-[3rem] space-y-8 shadow-2xl md:col-span-2">
+                        <p class="text-emerald-400 font-black uppercase tracking-widest text-[10px]">Evidence-Based Management / 根拠に基づく育成方針</p>
+                        
+                        <div class="space-y-6">
+                            <!-- AI性格インサイト -->
+                            <div class="bg-indigo-900/40 p-6 md:p-8 rounded-3xl border border-indigo-500/30">
+                                <h4 class="text-indigo-300 font-black text-sm mb-3 flex items-center gap-2">🧠 AI性格分析（${feedback.aiType || '未実施'}）に基づくインサイト</h4>
+                                <p class="text-sm text-slate-200 leading-relaxed font-bold mb-5">${feedback.aiTraits}</p>
+                                <div class="bg-indigo-950/50 p-5 rounded-2xl border border-indigo-500/20">
+                                    <p class="text-xs text-indigo-300 font-black mb-2 tracking-widest">【最適な接し方・マネジメント】</p>
+                                    <p class="text-sm text-white leading-relaxed font-bold">${feedback.aiManagement}</p>
+                                </div>
+                            </div>
+                            
+                            <!-- 面接スコア総合方針 -->
+                            <div class="bg-slate-900/50 p-6 md:p-8 rounded-3xl border border-slate-600">
+                                <h4 class="text-slate-300 font-black text-sm mb-3 flex items-center gap-2">🎯 面接評価からの総合方針</h4>
+                                <p class="text-sm text-white leading-relaxed font-bold">${feedback.baseAdvice}</p>
+                                
+                                ${feedback.riskItems.length > 0 ? `
+                                <div class="mt-5 p-5 bg-red-900/30 border-l-4 border-red-500 rounded-r-2xl">
+                                    <p class="text-xs text-red-400 font-black mb-2 tracking-widest">【アラート対応】</p>
+                                    <p class="text-sm text-red-100 font-bold leading-relaxed">現場にて強いリスク傾向（${feedback.riskItems.join(", ")}）が発現する可能性があります。管理者は常に「理念（Trend）」を基準とし、感情論での衝突を避けるよう、業務上の明確なルールと境界線を設定してください。</p>
+                                </div>` : ''}
+                                
+                                ${feedback.logicItems.length > 0 ? `
+                                <div class="mt-5 p-5 bg-yellow-900/30 border-l-4 border-yellow-500 rounded-r-2xl">
+                                    <p class="text-xs text-yellow-400 font-black mb-2 tracking-widest">【スキル補完】</p>
+                                    <p class="text-sm text-yellow-100 font-bold leading-relaxed">対話面での課題（${feedback.logicItems.join(", ")}）が見られます。OJT等を通じて、結論から話すPREP法の指導や、事実と感情を分けて客観的にレポートする訓練を定期的に取り入れてください。</p>
+                                </div>` : ''}
+                            </div>
+                        </div>
                     </div>
                 `;
             }
@@ -838,7 +1014,7 @@
             [1, 2, 3, 4, 5].forEach(score => {
                 const labels = ["全くない", "あまりない", "どちらとも", "少しある", "かなりある"];
                 const btn = document.createElement('button');
-                btn.className = "w-full bg-white border-2 border-slate-100 font-bold py-5 px-8 rounded-3xl transition-all text-left text-sm hover:border-indigo-500 active:scale-[0.98]";
+                btn.className = "w-full bg-white border-2 border-slate-100 font-bold py-3 md:py-4 px-6 rounded-2xl transition-all text-center text-sm md:text-base hover:border-indigo-500 hover:bg-indigo-50 active:scale-[0.98] shadow-sm";
                 btn.innerText = labels[score-1];
                 btn.onclick = () => {
                     window.answers[q.id] = { axis: q.axis, direction: q.direction, score };
@@ -862,7 +1038,7 @@
             window.currentAiResult = window.TYPE_DATA[window.currentAiTypeCode] || window.TYPE_DATA["ISFJ"];
             document.getElementById('result-type-code').innerText = window.currentAiTypeCode;
             document.getElementById('result-type-name').innerText = window.currentAiResult.name;
-            document.getElementById('result-description').innerText = window.currentAiResult.matchReason;
+            document.getElementById('result-description').innerText = window.currentAiResult.traits; // 修正: 詳しい性格特性を表示
             document.getElementById('match-rank').innerText = window.currentAiResult.matchRank;
             document.getElementById('result-question').innerText = window.currentAiResult.question;
             window.showScreen('result-screen');
@@ -897,11 +1073,23 @@
             
             const safeOfficeName = (window.currentOfficeIdx !== null && window.offices[window.currentOfficeIdx]) ? window.offices[window.currentOfficeIdx].name : "事業所未設定";
             
+            const rank = document.getElementById('final-rank').innerText;
+            const dataForFeedback = {
+                finalRank: rank,
+                logic_1: window.interviewData.logic_1, logic_2: window.interviewData.logic_2, logic_3: window.interviewData.logic_3, logic_4: window.interviewData.logic_4,
+                phil_r1: window.interviewData.phil_r1, phil_r2: window.interviewData.phil_r2, phil_r3: window.interviewData.phil_r3,
+                aiTypeCode: window.currentAiTypeCode
+            };
+            const feedback = window.generateDetailedFeedback(dataForFeedback);
+
+            const alertActionStr = feedback.riskItems.length > 0 ? `現場にて強いリスク傾向（${feedback.riskItems.join(", ")}）が発現する可能性があります。管理者は常に「理念（Trend）」を基準とし、感情論での衝突を避けるよう、業務上の明確なルールと境界線を設定してください。` : "特記事項なし";
+            const skillSupplementStr = feedback.logicItems.length > 0 ? `対話面での課題（${feedback.logicItems.join(", ")}）が見られます。OJT等を通じて、結論から話すPREP法の指導や、事実と感情を分けて客観的にレポートする訓練を定期的に取り入れてください。` : "特記事項なし";
+
             const payload = {
                 date: new Date().toISOString(), 
                 officeName: safeOfficeName, 
                 candidateName: document.getElementById('candidate-name').value || "未入力", 
-                finalRank: document.getElementById('final-rank').innerText, 
+                finalRank: rank, 
                 totalScore: parseInt(document.getElementById('final-total-score').innerText) || 0, 
                 aiTypeCode: window.currentAiTypeCode || "未実施", 
                 aiMatch: window.currentAiResult ? window.currentAiResult.matchReason : "未実施",
@@ -909,8 +1097,18 @@
                 p4: (window.interviewData.p4_1+window.interviewData.p4_2+window.interviewData.p4_3+window.interviewData.p4_4), 
                 logicScore: window.interviewData.calculatedLogic, philScore: window.interviewData.calculatedPhil,
                 logic_1: window.interviewData.logic_1, logic_2: window.interviewData.logic_2, logic_3: window.interviewData.logic_3, logic_4: window.interviewData.logic_4,
-                phil_r1: window.interviewData.phil_r1, phil_r2: window.interviewData.phil_r2, phil_r3: window.interviewData.phil_r3
+                phil_r1: window.interviewData.phil_r1, phil_r2: window.interviewData.phil_r2, phil_r3: window.interviewData.phil_r3,
+                
+                // --- スプレッドシート用に追加した詳細マネジメントデータ ---
+                dialogueFlaws: feedback.logicItems.length > 0 ? feedback.logicItems.join("、") : "良好（特になし）",
+                redFlags: feedback.riskItems.length > 0 ? feedback.riskItems.join("、") : "兆候なし",
+                aiInsight: feedback.aiTraits,
+                managementAdvice: feedback.aiManagement,
+                overallPolicy: feedback.baseAdvice,
+                alertAction: alertActionStr,
+                skillSupplement: skillSupplementStr
             };
+
             const history = JSON.parse(localStorage.getItem('mikiwame_history') || '[]'); history.push(payload); localStorage.setItem('mikiwame_history', JSON.stringify(history));
             try { await fetch(GAS_WEBHOOK_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) }); btn.innerText = "✅ 保存完了"; setTimeout(() => { window.showScreen('home-screen'); }, 1200); } 
             catch(e) { btn.innerText = "⚠️ 保存完了(オフライン)"; setTimeout(() => { window.showScreen('home-screen'); }, 2000); }
@@ -973,22 +1171,22 @@
         ];
 
         window.TYPE_DATA = {
-            "ISTJ": { name: "誠実な管理者", matchRank: "A", matchReason: "規律を重んじ、正確な記録を提供できる安定感が評価されます。", question: "「ルール通りに進まない時、どう切り替えましたか？」" },
-            "ISFJ": { name: "心優しき擁護者", matchRank: "S", matchReason: "圧倒的なホスピタリティと微細な変化に気づくケア能力が完全に合致するためです。", question: "「仕事を引き受けすぎて辛くなった時、誰かにSOSを出せましたか？」" },
-            "INFJ": { name: "洞察の提唱者", matchRank: "B", matchReason: "高い洞察力で質の高い支援が期待できる一方、理想と現実のギャップに悩みやすい懸念があります。", question: "「自分の理想と現場のルールがぶつかったらどうしますか？」" },
-            "INTJ": { name: "戦略的建築家", matchRank: "C", matchReason: "仕組み化には優れますが、感情的寄り添いが不足しがちな課題があります。", question: "「非効率であっても寄り添いが必要な時、どう振る舞いますか？」" },
-            "ISTP": { name: "冷静な巨匠", matchRank: "B", matchReason: "冷静でスキル習得が早い反面、単調なルーチンに飽きやすい傾向があります。", question: "「変化の少ないルーチンに対し、どうモチベーションを維持しますか？」" },
-            "ISFP": { name: "柔軟な冒険家", matchRank: "A", matchLabel: "寄り添い力高", matchReason: "利用者のペースに合わせる受容力が高く、穏やかな現場環境を作れるためです。", question: "「後輩に耳の痛い注意をしなければならない時、どう伝えますか？」" },
-            "INFP": { name: "共感の仲介者", matchRank: "A", matchLabel: "心理的サポート", matchReason: "マイノリティへの深い共感力を持ち、心のケアにおいて高い適性があります。", question: "「重い悩みを聞いて落ち込んだ際、どうセルフケアをしますか？」" },
-            "INTP": { name: "論理的探求者", matchRank: "C", matchReason: "分析力には優れますが、感情面での泥臭いサポートを軽視しがちな点があります。", question: "「理屈で解決できない感情的なトラブルに、論理以外でどう対応しますか？」" },
-            "ESTP": { name: "エネルギッシュな起業家", matchRank: "C", matchReason: "行動力は抜群ですが、細かな記録業務やスローペースな人への忍耐に課題があります。", question: "「地道な記録業務を正確に続けるための工夫は？」" },
-            "ESFP": { name: "陽気なエンターテイナー", matchRank: "A", matchReason: "明るさで利用者の笑顔を引き出し、現場をポジティブに保つ能力が高いためです。", question: "「雰囲気が悪くなるのを承知で、必要な指摘ができますか？」" },
-            "ENFP": { name: "情熱の広報運動家", matchRank: "B", matchReason: "エンパワメント力は高いですが、計画のツメの甘さや実務ミスにサポートが必要です。", question: "「新しいアイデアを最後まで形にして実行し続けた経験を教えてください。」" },
-            "ENTP": { name: "革新的な討論者", matchRank: "D", matchReason: "論理的ですが、議論を好む傾向が現場の和を乱すリスクが高いと判断されます。", question: "「自分の正論が感情的反発に遭った時、どう対処しますか？」" },
-            "ESTJ": { name: "徹底した幹部", matchRank: "B", matchReason: "強い責任感がありますが、利用者への要求が高くなりすぎるリスクがあります。", question: "「ミスを繰り返すスタッフに対し、どのようなマインドで接しますか？」" },
-            "ESFJ": { name: "世話焼きな領事官", matchRank: "S", matchReason: "チームワークを重視し、手厚い支援を安定して提供できる模範的な適性です。", question: "「自立のために、あえて失敗させる支援に抵抗はありますか？」" },
-            "ENFJ": { name: "導きの主人公", matchRank: "S", matchReason: "利用者の成長を強く信じる情熱を備えており、現場の士気と支援の質を同時に高める中核人材となるためです。", question: "「周りの温度感が低い時、どうチームをまとめますか？」" },
-            "ENTJ": { name: "野心的な指揮官", matchRank: "C", matchReason: "推進力は凄まじいですが、効率優先で福祉のプロセスを切り捨てるリスクがあります。", question: "「効率よりペースを優先してほしいと反発されたら？」" }
+            "ISTJ": { name: "誠実な管理者", matchRank: "A", matchReason: "規律を重んじ、正確な記録を提供できる安定感が評価されます。", question: "「ルール通りに進まない時、どう切り替えましたか？」", traits: "事実と論理を重んじ、計画通りに物事を進める能力に長けています。責任感が強く、一度引き受けたタスクやルールは最後までやり遂げる堅実さがあります。", management: "明確なルールや手順、目標数値を示すことで最もパフォーマンスを発揮します。急な変更や曖昧な指示はストレスとなるため、変更の際は「なぜ変更が必要なのか」という論理的な背景（エビデンス）を添えて伝えることが重要です。" },
+            "ISFJ": { name: "心優しき擁護者", matchRank: "S", matchReason: "圧倒的なホスピタリティと微細な変化に気づくケア能力が完全に合致するためです。", question: "「仕事を引き受けすぎて辛くなった時、誰かにSOSを出せましたか？」", traits: "他者への共感性が高く、周囲のニーズに細やかに気づくことができます。調和を重んじ、地道なサポート業務にも誠実に取り組む献身的な性格です。", management: "他者のために無理をして業務を抱え込みやすい傾向があります（燃え尽きリスクに注意）。定期的な1on1で業務量を確認し、彼らの貢献に対して具体的な言葉で感謝を伝えることで定着率が高まります。" },
+            "INFJ": { name: "洞察の提唱者", matchRank: "B", matchReason: "高い洞察力で質の高い支援が期待できる一方、理想と現実のギャップに悩みやすい懸念があります。", question: "「自分の理想と現場のルールがぶつかったらどうしますか？」", traits: "独自の理想と強い信念を持ち、物事の深い意味を見出そうとします。他者の感情や本質を見抜く洞察力に優れ、質の高い支援を提供できます。", management: "「何のためにこの支援をするのか」という理念や長期的ビジョン（Why）の共有が不可欠です。理想と現実のギャップで悩みやすいため、定期的に価値観をすり合わせ、感情を整理させるサポートが有効です。" },
+            "INTJ": { name: "戦略的建築家", matchRank: "C", matchReason: "仕組み化には優れますが、感情的寄り添いが不足しがちな課題があります。", question: "「非効率であっても寄り添いが必要な時、どう振る舞いますか？」", traits: "全体を俯瞰し、中長期的な戦略や仕組みを構築することに長けています。論理的かつ独立的で、効率の悪いプロセスを改善する視点を持っています。", management: "細かい指示（マイクロマネジメント）は逆効果です。目的とゴールを共有した上で、裁量を与えて任せる手法が適しています。感情的な寄り添いが不足しがちなため、他者へのコミュニケーション（EQ）に関しては適宜フォローが必要です。" },
+            "ISTP": { name: "冷静な巨匠", matchRank: "B", matchReason: "冷静でスキル習得が早い反面、単調なルーチンに飽きやすい傾向があります。", question: "「変化の少ないルーチンに対し、どうモチベーションを維持しますか？」", traits: "冷静な観察眼を持ち、突発的なトラブルにも臨機応変かつ合理的に対処できます。効率を重視し、実践的なスキル習得が早いのが特徴です。", management: "単調なルーチンワークが続くとモチベーションが低下します。実践的な課題解決を任せたり、新しい手法を試せる余白を与えると活躍します。また、報告がおろそかになりがちなので、最低限の報連相ルールは徹底させてください。" },
+            "ISFP": { name: "柔軟な冒険家", matchRank: "A", matchReason: "利用者のペースに合わせる受容力が高く、穏やかな現場環境を作れるためです。", question: "「後輩に耳の痛い注意をしなければならない時、どう伝えますか？」", traits: "利用者のペースや感情に柔軟に合わせる高い受容力を持っています。争いを好まず、穏やかで調和のとれた現場環境を作ることに貢献します。", management: "厳格すぎるルールやプレッシャーを与えると萎縮してしまいます。個人のペースを尊重し、改善点を伝える際は「否定」ではなく「提案」の形をとることが重要です。また、自ら発信するのが苦手なため、意見を引き出すサポートが必要です。" },
+            "INFP": { name: "共感の仲介者", matchRank: "A", matchReason: "マイノリティへの深い共感力を持ち、心のケアにおいて高い適性があります。", question: "「重い悩みを聞いて落ち込んだ際、どうセルフケアをしますか？」", traits: "高い理想とマイノリティへの深い共感力を持ち、利用者の心に寄り添うケアにおいて非常に高い適性を発揮します。内的価値観を大切にします。", management: "感情の起伏に影響を受けやすいため、心理的安全性のある環境が必須です。結果や数値だけでなく「プロセスや思い」を評価してください。また、客観性を失うことがあるため、プロとしての境界線（バウンダリー）の維持を意識的に指導してください。" },
+            "INTP": { name: "論理的探求者", matchRank: "C", matchReason: "分析力には優れますが、感情面での泥臭いサポートを軽視しがちな点があります。", question: "「理屈で解決できない感情的なトラブルに、論理以外でどう対応しますか？」", traits: "知的好奇心が旺盛で、複雑な問題に対して論理的な解決策を見出すことが得意です。客観的かつ分析的な視点から物事を捉えます。", management: "アイデア出しや原因分析のフェーズで重用してください。一方で、実行フェーズの細かい手続きや、感情的なトラブル対応は苦手とします。事務作業の漏れがないかのフォローアップや、対人面でのサポート体制を組むことが効果的です。" },
+            "ESTP": { name: "エネルギッシュな起業家", matchRank: "C", matchReason: "行動力は抜群ですが、細かな記録業務やスローペースな人への忍耐に課題があります。", question: "「地道な記録業務を正確に続けるための工夫は？」", traits: "エネルギッシュで行動力があり、現場での実践を通じて学びます。今この瞬間の問題解決に集中し、フットワーク軽く対応できます。", management: "動きのある環境や短期的な目標達成でモチベーションが上がります。反面、長期的な計画や細かな記録業務などの地道な作業を軽視しがちです。記録業務は仕組みでサポートするか、期限を細かく設定して管理する必要があります。" },
+            "ESFP": { name: "陽気なエンターテイナー", matchRank: "A", matchReason: "明るさで利用者の笑顔を引き出し、現場をポジティブに保つ能力が高いためです。", question: "「雰囲気が悪くなるのを承知で、必要な指摘ができますか？」", traits: "明るく社交的で、周囲を楽しませる天性の才能があります。ポジティブな雰囲気を作り出し、利用者の笑顔を引き出すことが得意です。", management: "チームの潤滑油として高く評価し、楽しく働ける雰囲気作りを任せると輝きます。厳しすぎるルールや孤立した作業は不向きです。ただし、耳の痛い指摘を避ける傾向があるため、必要に応じて毅然とした対応を取るよう指導が必要です。" },
+            "ENFP": { name: "情熱の広報運動家", matchRank: "B", matchReason: "エンパワメント力は高いですが、計画のツメの甘さや実務ミスにサポートが必要です。", question: "「新しいアイデアを最後まで形にして実行し続けた経験を教えてください。」", traits: "情熱的で想像力豊か、新しいアイデアや可能性を追求することに喜びを感じます。他者をエンパワメント（勇気づけ）する能力に長けています。", management: "新しいプロジェクトやイベント企画などを任せると大きな力を発揮します。しかし、計画のツメの甘さや、やりっ放しになる傾向があるため、スケジュール管理や細かな実務面は他者がサポート・管理する体制が求められます。" },
+            "ENTP": { name: "革新的な討論者", matchRank: "D", matchReason: "論理的ですが、議論を好む傾向が現場の和を乱すリスクが高いと判断されます。", question: "「自分の正論が感情的反発に遭った時、どう対処しますか？」", traits: "頭の回転が速く、既存のルールにとらわれない革新的なアイデアを生み出します。議論を通じて物事を多角的に検証することを好みます。", management: "頭ごなしの否定や単調なルーチン業務は避け、論理的なディスカッションの相手となることが重要です。ただし、議論のための議論になり現場の和を乱すリスク（論破）があるため、目的志向でチームの調和を保つようフィードバックが必要です。" },
+            "ESTJ": { name: "徹底した幹部", matchRank: "B", matchReason: "強い責任感がありますが、利用者への要求が高くなりすぎるリスクがあります。", question: "「ミスを繰り返すスタッフに対し、どのようなマインドで接しますか？」", traits: "強い責任感と決断力を持ち、組織のルールや秩序を重んじます。目標に向けてチームを効率的かつ計画的に動かす実務能力に優れています。", management: "早期に現場のリーダーシップや管理業務を任せると適性を発揮します。一方で、他者（特にペースの遅いスタッフや利用者）に対しても自分と同じ基準を求めがちなため、「多様な価値観とペースへの寛容さ」を意識的に教育してください。" },
+            "ESFJ": { name: "世話焼きな領事官", matchRank: "S", matchReason: "チームワークを重視し、手厚い支援を安定して提供できる模範的な適性です。", question: "「自立のために、あえて失敗させる支援に抵抗はありますか？」", traits: "協調性が非常に高く、チームメンバーや利用者の世話を焼くことに喜びを感じます。周囲の期待に応えようとする献身的な姿勢を持っています。", management: "チーム内の調和やサポート役を任せると安定して機能します。承認欲求が強いため、日々の貢献を周囲の前で具体的に称賛することが最大のモチベーションになります。時に「良かれと思って」お節介が過ぎる場合があるため、支援の境界線は明確に示してください。" },
+            "ENFJ": { name: "導きの主人公", matchRank: "S", matchReason: "利用者の成長を強く信じる情熱を備えており、現場の士気と支援の質を同時に高める中核人材となるためです。", question: "「周りの温度感が低い時、どうチームをまとめますか？」", traits: "他者の成長を強く信じ、人を導くカリスマ性と熱意を備えています。チーム全体の士気を高め、ビジョンに向けて団結させる力が強みです。", management: "メンターや現場の牽引役として抜擢してください。感情移入しやすく、他者の問題まで背負い込んで疲弊するリスクがあります。定期的に客観的な視点を取り戻させるフォローと、自分自身のケア（セルフコンパッション）を促すマネジメントが必要です。" },
+            "ENTJ": { name: "野心的な指揮官", matchRank: "C", matchReason: "推進力は凄まじいですが、効率優先で福祉のプロセスを切り捨てるリスクがあります。", question: "「効率よりペースを優先してほしいと反発されたら？」", traits: "高い目標を掲げ、そこに向かって論理的かつ戦略的に組織を牽引する力があります。決断が速く、困難な状況でも推進力を失いません。", management: "明確な権限と高い目標を与えることで最も能力を発揮します。ただし、効率と結果を優先しすぎるあまり、福祉に必要な「プロセス」や「人の感情（EQ）」を切り捨てるリスクがあります。対人面への配慮やチームへのフォローについて、意識的な指導が必須です。" }
         };
 
         // --- Initialize ---
