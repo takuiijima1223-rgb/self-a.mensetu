@@ -74,27 +74,65 @@
                     <p class="text-xs text-slate-500 font-bold mb-4 leading-relaxed">※どのフェーズからでも自由に開始できます。実施順序は自動記録され、ベストプラクティスのナレッジ化に活用されます。</p>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <button onclick="window.openPhase('p0', 'phase0-screen', 'P0:お出迎え')" id="dash-btn-p0" class="flex items-center justify-between p-4 bg-white border-2 border-slate-200 rounded-2xl hover:border-indigo-400 transition-all text-left">
-                            <div class="flex items-center gap-3"><span class="text-2xl" id="dash-icon-p0">⬜</span><div><span class="block text-[10px] text-slate-400 uppercase font-black">Phase 0</span><span class="font-black text-slate-800 text-sm md:text-base font-black">お出迎え・着席</span></div></div><span class="text-slate-300 font-black">▶</span>
-                        </button>
-                        <button onclick="window.openPhase('p1', 'phase1-screen', 'P1:アイスブレイク')" id="dash-btn-p1" class="flex items-center justify-between p-4 bg-white border-2 border-slate-200 rounded-2xl hover:border-indigo-400 transition-all text-left">
-                            <div class="flex items-center gap-3"><span class="text-2xl" id="dash-icon-p1">⬜</span><div><span class="block text-[10px] text-slate-400 uppercase font-black">Phase 1</span><span class="font-black text-slate-800 text-sm md:text-base font-black">アイスブレイク・基本確認</span></div></div><span class="text-slate-300 font-black">▶</span>
-                        </button>
-                        <button onclick="window.openPhase('p2', 'phase2-screen', 'P2:経歴スタンス')" id="dash-btn-p2" class="flex items-center justify-between p-4 bg-white border-2 border-slate-200 rounded-2xl hover:border-indigo-400 transition-all text-left">
-                            <div class="flex items-center gap-3"><span class="text-2xl" id="dash-icon-p2">⬜</span><div><span class="block text-[10px] text-slate-400 uppercase font-black">Phase 2</span><span class="font-black text-slate-800 text-sm md:text-base font-black">経歴・条件・スタンス</span></div></div><span class="text-slate-300 font-black">▶</span>
-                        </button>
-                        <button onclick="window.openPhase('ai', 'handover-screen', 'P3:AI診断')" id="dash-btn-ai" class="flex items-center justify-between p-4 bg-white border-2 border-slate-200 rounded-2xl hover:border-indigo-400 transition-all text-left">
-                            <div class="flex items-center gap-3"><span class="text-2xl" id="dash-icon-ai">⬜</span><div><span class="block text-[10px] text-slate-400 uppercase font-black">Phase 3</span><span class="font-black text-slate-800 text-sm md:text-base font-black">📱 AI性格診断</span></div></div><span class="text-slate-300 font-black">▶</span>
-                        </button>
-                        <button onclick="window.openPhase('p3', 'phase3-screen', 'P4:面接深掘り')" id="dash-btn-p3" class="flex items-center justify-between p-4 bg-white border-2 border-slate-200 rounded-2xl hover:border-indigo-400 transition-all text-left">
-                            <div class="flex items-center gap-3"><span class="text-2xl" id="dash-icon-p3">⬜</span><div><span class="block text-[10px] text-slate-400 uppercase font-black">Phase 4</span><span class="font-black text-slate-800 text-sm md:text-base font-black">面接質問・深掘り</span></div></div><span class="text-slate-300 font-black">▶</span>
-                        </button>
-                        <button onclick="window.openPhase('p4', 'phase4-screen', 'P5:覚悟の確認')" id="dash-btn-p4" class="flex items-center justify-between p-4 bg-white border-2 border-slate-200 rounded-2xl hover:border-indigo-400 transition-all text-left">
-                            <div class="flex items-center gap-3"><span class="text-2xl" id="dash-icon-p4">⬜</span><div><span class="block text-[10px] text-slate-400 uppercase font-black">Phase 5</span><span class="font-black text-slate-800 text-sm md:text-base font-black">覚悟の確認 (RJP)</span></div></div><span class="text-slate-300 font-black">▶</span>
-                        </button>
-                        <button onclick="window.openPhase('p6', 'overall-screen', 'P6:論理的対話')" id="dash-btn-p6" class="flex items-center justify-between p-4 bg-white border-2 border-slate-200 rounded-2xl hover:border-indigo-400 transition-all text-left md:col-span-2">
-                            <div class="flex items-center gap-3"><span class="text-2xl" id="dash-icon-p6">⬜</span><div><span class="block text-[10px] text-slate-400 uppercase font-black">Phase 6</span><span class="font-black text-slate-800 text-sm md:text-base font-black">論理的対話・全体評価</span></div></div><span class="text-slate-300 font-black">▶</span>
-                        </button>
+                        <div onclick="window.openPhase('p0', 'phase0-screen', 'P0:お出迎え')" id="dash-btn-p0" class="flex items-center justify-between p-4 bg-white border-2 border-slate-200 rounded-2xl hover:border-indigo-400 transition-all text-left cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <div onclick="window.toggleVisit(event, 'p0', 'P0:お出迎え')" class="px-2 -ml-2 rounded-lg hover:bg-slate-100 transition-colors" title="チェック切替"><span class="text-2xl" id="dash-icon-p0">⬜</span></div>
+                                <div><span class="block text-[10px] text-slate-400 uppercase font-black">Phase 0</span><span class="font-black text-slate-800 text-sm md:text-base font-black">お出迎え・着席</span></div>
+                            </div>
+                            <span class="text-slate-300 font-black">▶</span>
+                        </div>
+                        <div onclick="window.openPhase('p1', 'phase1-screen', 'P1:アイスブレイク')" id="dash-btn-p1" class="flex items-center justify-between p-4 bg-white border-2 border-slate-200 rounded-2xl hover:border-indigo-400 transition-all text-left cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <div onclick="window.toggleVisit(event, 'p1', 'P1:アイスブレイク')" class="px-2 -ml-2 rounded-lg hover:bg-slate-100 transition-colors" title="チェック切替"><span class="text-2xl" id="dash-icon-p1">⬜</span></div>
+                                <div><span class="block text-[10px] text-slate-400 uppercase font-black">Phase 1</span><span class="font-black text-slate-800 text-sm md:text-base font-black">アイスブレイク・基本確認</span></div>
+                            </div>
+                            <span class="text-slate-300 font-black">▶</span>
+                        </div>
+                        <div onclick="window.openPhase('p2', 'phase2-screen', 'P2:経歴スタンス')" id="dash-btn-p2" class="flex items-center justify-between p-4 bg-white border-2 border-slate-200 rounded-2xl hover:border-indigo-400 transition-all text-left cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <div onclick="window.toggleVisit(event, 'p2', 'P2:経歴スタンス')" class="px-2 -ml-2 rounded-lg hover:bg-slate-100 transition-colors" title="チェック切替"><span class="text-2xl" id="dash-icon-p2">⬜</span></div>
+                                <div><span class="block text-[10px] text-slate-400 uppercase font-black">Phase 2</span><span class="font-black text-slate-800 text-sm md:text-base font-black">経歴・条件・スタンス</span></div>
+                            </div>
+                            <span class="text-slate-300 font-black">▶</span>
+                        </div>
+                        <div onclick="window.openPhase('ai', 'handover-screen', 'P3:AI診断')" id="dash-btn-ai" class="flex items-center justify-between p-4 bg-white border-2 border-slate-200 rounded-2xl hover:border-indigo-400 transition-all text-left cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <div onclick="window.toggleVisit(event, 'ai', 'P3:AI診断')" class="px-2 -ml-2 rounded-lg hover:bg-slate-100 transition-colors" title="チェック切替"><span class="text-2xl" id="dash-icon-ai">⬜</span></div>
+                                <div><span class="block text-[10px] text-slate-400 uppercase font-black">Phase 3</span><span class="font-black text-slate-800 text-sm md:text-base font-black">📱 AI性格診断</span></div>
+                            </div>
+                            <span class="text-slate-300 font-black">▶</span>
+                        </div>
+                        <div onclick="window.openPhase('p3', 'phase3-screen', 'P4:面接深掘り')" id="dash-btn-p3" class="flex items-center justify-between p-4 bg-white border-2 border-slate-200 rounded-2xl hover:border-indigo-400 transition-all text-left cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <div onclick="window.toggleVisit(event, 'p3', 'P4:面接深掘り')" class="px-2 -ml-2 rounded-lg hover:bg-slate-100 transition-colors" title="チェック切替"><span class="text-2xl" id="dash-icon-p3">⬜</span></div>
+                                <div><span class="block text-[10px] text-slate-400 uppercase font-black">Phase 4</span><span class="font-black text-slate-800 text-sm md:text-base font-black">面接質問・深掘り</span></div>
+                            </div>
+                            <span class="text-slate-300 font-black">▶</span>
+                        </div>
+                        <div onclick="window.openPhase('p4', 'phase4-screen', 'P5:覚悟の確認')" id="dash-btn-p4" class="flex items-center justify-between p-4 bg-white border-2 border-slate-200 rounded-2xl hover:border-indigo-400 transition-all text-left cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <div onclick="window.toggleVisit(event, 'p4', 'P5:覚悟の確認')" class="px-2 -ml-2 rounded-lg hover:bg-slate-100 transition-colors" title="チェック切替"><span class="text-2xl" id="dash-icon-p4">⬜</span></div>
+                                <div><span class="block text-[10px] text-slate-400 uppercase font-black">Phase 5</span><span class="font-black text-slate-800 text-sm md:text-base font-black">覚悟の確認 (RJP)</span></div>
+                            </div>
+                            <span class="text-slate-300 font-black">▶</span>
+                        </div>
+                        
+                        <!-- 事業所内見学ボタン -->
+                        <div onclick="window.recordTour()" id="dash-btn-tour" class="flex items-center justify-between p-4 bg-white border-2 border-slate-200 rounded-2xl hover:border-yellow-400 transition-all text-left md:col-span-2 cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <span class="text-2xl" id="dash-icon-tour">⬜</span>
+                                <div><span class="block text-[10px] text-yellow-600 uppercase font-black">Option (Phase2〜4推奨)</span><span class="font-black text-slate-800 text-sm md:text-base font-black">🏢 事業所内見学</span></div>
+                            </div>
+                            <span id="dash-badge-tour" class="text-slate-400 font-black text-xs md:text-sm tracking-widest bg-slate-100 px-3 py-1 rounded-lg">記録する</span>
+                        </div>
+
+                        <div onclick="window.openPhase('p6', 'overall-screen', 'P6:論理的対話')" id="dash-btn-p6" class="flex items-center justify-between p-4 bg-white border-2 border-slate-200 rounded-2xl hover:border-indigo-400 transition-all text-left md:col-span-2 cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <div onclick="window.toggleVisit(event, 'p6', 'P6:論理的対話')" class="px-2 -ml-2 rounded-lg hover:bg-slate-100 transition-colors" title="チェック切替"><span class="text-2xl" id="dash-icon-p6">⬜</span></div>
+                                <div><span class="block text-[10px] text-slate-400 uppercase font-black">Phase 6</span><span class="font-black text-slate-800 text-sm md:text-base font-black">論理的対話・全体評価</span></div>
+                            </div>
+                            <span class="text-slate-300 font-black">▶</span>
+                        </div>
                     </div>
                 </div>
 
@@ -907,7 +945,7 @@
             p0: 3, p1: 3, p2: 3, p3_1: 5, p3_2: 5, p3_3: 5, p4_1: 5, p4_2: 5, p4_3: 5, p4_4: 5, p6_1: 3, p6_2: 3, p6_3: 3, p6_4: 3,
             phil_r1: false, phil_r2: false, phil_r3: false,
             memo_p0: "", memo_p1: "", memo_p2: "", memo_p3: "", memo_p4: "", memo_p6: "",
-            visited: { p0:false, p1:false, p2:false, ai:false, p3:false, p4:false, p6:false },
+            visited: { p0:false, p1:false, p2:false, ai:false, p3:false, p4:false, p6:false, tour:false },
             phaseOrder: [],
             subCheck: { 
                 p0_1:false, p0_2:false, 
@@ -1004,6 +1042,15 @@
             window.showScreen(screenId);
         };
 
+        // ★事業所内見学の記録機能
+        window.recordTour = function() {
+            if (!window.interviewData.visited.tour) {
+                window.interviewData.visited.tour = true;
+                window.interviewData.phaseOrder.push('🏢 事業所内見学');
+                window.updateDashboardUI();
+            }
+        };
+
         window.returnToDashboard = function() {
             window.updateDashboardUI();
             window.showScreen('dashboard-screen');
@@ -1011,24 +1058,45 @@
 
         window.updateDashboardUI = function() {
             const phases = [
-                { key: 'p0', id: 'dash-btn-p0', icon: 'dash-icon-p0' },
-                { key: 'p1', id: 'dash-btn-p1', icon: 'dash-icon-p1' },
-                { key: 'p2', id: 'dash-btn-p2', icon: 'dash-icon-p2' },
-                { key: 'ai', id: 'dash-btn-ai', icon: 'dash-icon-ai' },
-                { key: 'p3', id: 'dash-btn-p3', icon: 'dash-icon-p3' },
-                { key: 'p4', id: 'dash-btn-p4', icon: 'dash-icon-p4' },
-                { key: 'p6', id: 'dash-btn-p6', icon: 'dash-icon-p6' }
+                { key: 'p0', id: 'dash-btn-p0', icon: 'dash-icon-p0', color: 'indigo' },
+                { key: 'p1', id: 'dash-btn-p1', icon: 'dash-icon-p1', color: 'indigo' },
+                { key: 'p2', id: 'dash-btn-p2', icon: 'dash-icon-p2', color: 'indigo' },
+                { key: 'ai', id: 'dash-btn-ai', icon: 'dash-icon-ai', color: 'indigo' },
+                { key: 'p3', id: 'dash-btn-p3', icon: 'dash-icon-p3', color: 'indigo' },
+                { key: 'tour', id: 'dash-btn-tour', icon: 'dash-icon-tour', color: 'yellow' },
+                { key: 'p4', id: 'dash-btn-p4', icon: 'dash-icon-p4', color: 'indigo' },
+                { key: 'p6', id: 'dash-btn-p6', icon: 'dash-icon-p6', color: 'indigo' }
             ];
             phases.forEach(function(p) {
                 const btn = document.getElementById(p.id);
                 const icon = document.getElementById(p.icon);
                 if (!btn || !icon) return;
+                
+                const activeBorder = p.color === 'yellow' ? 'border-yellow-400' : 'border-indigo-400';
+                const activeBg = p.color === 'yellow' ? 'bg-yellow-50' : 'bg-indigo-50';
+
                 if (window.interviewData.visited[p.key]) {
-                    btn.classList.add('border-indigo-400', 'bg-indigo-50');
+                    btn.classList.add(activeBorder, activeBg);
                     icon.innerText = "✅";
+                    if(p.key === 'tour') {
+                        const label = document.getElementById('dash-badge-tour');
+                        if(label) {
+                            label.innerText = "記録済み";
+                            label.classList.replace('bg-slate-100', 'bg-yellow-100');
+                            label.classList.replace('text-slate-400', 'text-yellow-700');
+                        }
+                    }
                 } else {
-                    btn.classList.remove('border-indigo-400', 'bg-indigo-50');
+                    btn.classList.remove(activeBorder, activeBg);
                     icon.innerText = "⬜";
+                    if(p.key === 'tour') {
+                        const label = document.getElementById('dash-badge-tour');
+                        if(label) {
+                            label.innerText = "記録する";
+                            label.classList.replace('bg-yellow-100', 'bg-slate-100');
+                            label.classList.replace('text-yellow-700', 'text-slate-400');
+                        }
+                    }
                 }
             });
             const logEl = document.getElementById('phase-order-log');
@@ -1283,7 +1351,7 @@
                 p0: 3, p1: 3, p2: 3, p3_1: 5, p3_2: 5, p3_3: 5, p3_1_skipped: false, p3_2_skipped: false, p3_3_skipped: false, calculatedP3: 15, p4_1: 5, p4_2: 5, p4_3: 5, p4_4: 5, p6_1: 3, p6_2: 3, p6_3: 3, p6_4: 3, 
                 phil_r1: false, phil_r2: false, phil_r3: false, 
                 memo_p0: "", memo_p1: "", memo_p2: "", memo_p3: "", memo_p4: "", memo_p6: "", 
-                visited: { p0:false, p1:false, p2:false, ai:false, p3:false, p4:false, p6:false }, 
+                visited: { p0:false, p1:false, p2:false, ai:false, p3:false, p4:false, p6:false, tour:false }, 
                 phaseOrder: [], 
                 subCheck: { p0_1:false, p0_2:false, p0_3:false, p1_1:false, p1_2:false, p1_3:false, p2_1:false, p2_2:false, p2_3:false, p3_q1_1:false, p3_q1_2:false, p3_q2_1:false, p3_q2_2:false, p3_q2_3:false, p3_q3_1:false, p3_q3_2:false, p4_1:false, p4_2:false, p4_3:false, p4_4:false } 
             };
@@ -1322,11 +1390,29 @@
         window.confirmToHome = function() { document.getElementById('confirm-home-modal').classList.remove('hidden'); };
         window.closeSession = function() { window.showScreen('home-screen'); };
 
-        window.skipAiDiagnosis = function() { window.aiSkipped = true; window.openPhase('p3', 'phase3-screen', 'P4:面接深掘り'); };
+        window.toggleVisit = function(event, phaseKey, phaseDisplayName) {
+            event.stopPropagation(); // 画面遷移（openPhase）の発火を防ぐ
+            if (window.interviewData.visited[phaseKey]) {
+                window.interviewData.visited[phaseKey] = false;
+                window.interviewData.phaseOrder = window.interviewData.phaseOrder.filter(p => p !== phaseDisplayName);
+            } else {
+                window.interviewData.visited[phaseKey] = true;
+                window.interviewData.phaseOrder.push(phaseDisplayName);
+            }
+            window.updateDashboardUI();
+        };
 
-        // ==========================================
-        // 診断質問データ (全50問完全版)
-        // ==========================================
+        window.recordTour = function() {
+            if (!window.interviewData.visited.tour) {
+                window.interviewData.visited.tour = true;
+                window.interviewData.phaseOrder.push('🏢 事業所内見学');
+            } else {
+                window.interviewData.visited.tour = false;
+                window.interviewData.phaseOrder = window.interviewData.phaseOrder.filter(p => p !== '🏢 事業所内見学');
+            }
+            window.updateDashboardUI();
+        };
+
         window.QUESTIONS_PRO = [
             { id: 1, axis: "EI", direction: "E", text: "初対面の人ばかりの場でも、積極的に話しかけにいくことができる。" },
             { id: 2, axis: "EI", direction: "I", text: "休日は人と過ごすよりも、一人で静かに過ごす方が疲れが取れる。" },
