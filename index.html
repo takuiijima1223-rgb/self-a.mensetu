@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
@@ -1588,7 +1588,17 @@
             window.startNewSession();
         };
 
-        window.authenticateHistory = function() { window.showHistoryScreen(); };
+        window.authenticateHistory = function() {
+            const inputPw = document.getElementById('history-auth-password').value;
+            const correctPw = (window.currentOfficeIdx !== null && window.offices[window.currentOfficeIdx]) ? window.offices[window.currentOfficeIdx].password : "";
+            if (inputPw === correctPw || correctPw === "") { 
+                document.getElementById('history-auth-error').classList.add('hidden');
+                document.getElementById('history-auth-password').value = "";
+                window.showHistoryScreen(); 
+            } else { 
+                document.getElementById('history-auth-error').classList.remove('hidden'); 
+            }
+        };
 
         window.confirmToHome = function() { document.getElementById('confirm-home-modal').classList.remove('hidden'); };
         
@@ -1692,10 +1702,53 @@
             "INFP": { name: "共感の仲介者", matchRank: "C", matchReason: "高い共感力と創造性を持ちますが、ビジネスの論理性やプレッシャー耐性に課題が残りやすいです。", question: "「重いクレームや批判を受けて落ち込んだ際、どうやって論理的に原因を分析しセルフケアしますか？」", traits: "高い理想と深い共感力を持ちますが、内的価値観を優先するため、組織の客観的なルールや論理的思考に馴染むのに時間がかかります。", management: "感情の起伏に影響を受けやすいため、心理的安全性のある環境が必須です。結果や数値（KPI）だけで詰められると燃え尽きます。ビジネスパーソンとしての客観性や、感情と事実を切り離して考える（境界線を引く）論理的思考のトレーニングが不可欠です。" }
         };
 
-        // --- Init ---
-        try { window.offices = JSON.parse(localStorage.getItem('mikiwame_offices')) || []; } catch(e) { window.offices = []; }
-        window.updateHomeBadge();
-        window.showScreen('home-screen');
+        // ==========================================
+        // 初期化・イベントリスナー登録
+        // ==========================================
+        window.initApp = function() {
+            try { window.offices = JSON.parse(localStorage.getItem('mikiwame_offices')) || []; } catch(e) { window.offices = []; }
+            window.renderOfficeSelect();
+            window.updateHomeBadge();
+
+            // ログインボタンの処理
+            const loginBtn = document.getElementById('login-btn');
+            if (loginBtn) {
+                loginBtn.onclick = function() {
+                    const selectEl = document.getElementById('office-select');
+                    const passEl = document.getElementById('login-password');
+                    const errorEl = document.getElementById('login-error');
+                    
+                    if (selectEl.value === "") return;
+                    
+                    const officeIdx = parseInt(selectEl.value);
+                    const office = window.offices[officeIdx];
+                    
+                    if (office && office.password === passEl.value) {
+                        errorEl.classList.add('hidden');
+                        window.currentOfficeIdx = officeIdx;
+                        window.updateHomeBadge();
+                        passEl.value = ""; // パスワードをクリア
+                        
+                        // 遷移先を分岐
+                        if (window.pendingAction === 'startInterview') {
+                            window.pendingAction = null; 
+                            window.startNewSession();
+                        } else if (window.pendingAction === 'viewHistory') {
+                            window.pendingAction = null; 
+                            window.showHistoryScreen();
+                        } else { 
+                            window.showScreen('home-screen'); 
+                        }
+                    } else {
+                        errorEl.classList.remove('hidden');
+                    }
+                };
+            }
+            window.showScreen('home-screen');
+        };
+
+        // アプリケーション起動
+        window.initApp();
     </script>
 </body>
 </html>
