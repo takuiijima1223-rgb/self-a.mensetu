@@ -253,7 +253,7 @@
 
                 <!-- 1. 基本方針 -->
                 <div class="space-y-6">
-                    <h3 class="text-xl md:text-2xl font-black text-slate-800 border-b-4 border-indigo-500 pb-2 inline-block">1. 面接の基本方針と評価配分（105点満点）</h3>
+                    <h3 class="text-xl md:text-2xl font-black text-slate-800 border-b-4 border-indigo-500 pb-2 inline-block">1. 面接の基本方針と評価配分（110点満点）</h3>
                     <p class="text-sm md:text-base text-slate-700 font-bold leading-relaxed bg-indigo-50 p-4 md:p-5 rounded-2xl border border-indigo-100 shadow-sm">
                         本面接は「欠員補充」ではなく、「自己実現をみんなのものに」のために自らを変容させ、自走できるか」を判定するものです。
                     </p>
@@ -267,7 +267,7 @@
                                 <tr><td class="p-3 md:p-4 font-black">Phase 1</td><td class="p-3 md:p-4">アイスブレイク・基本確認</td><td class="p-3 md:p-4 font-black text-indigo-600">5点</td><td class="p-3 md:p-4">表情・対話の基礎・ニーズ把握</td></tr>
                                 <tr><td class="p-3 md:p-4 font-black">Phase 2</td><td class="p-3 md:p-4">経歴・条件・スタンス</td><td class="p-3 md:p-4 font-black text-indigo-600">5点</td><td class="p-3 md:p-4">経歴の論理性・仕事への価値観</td></tr>
                                 <tr class="bg-indigo-50"><td class="p-3 md:p-4 font-black text-indigo-700">Phase 3</td><td class="p-3 md:p-4 text-indigo-700 font-black">📱 AI性格診断</td><td class="p-3 md:p-4 font-black text-indigo-700">-</td><td class="p-3 md:p-4 text-indigo-700">性格診断を携帯やタブレットで実施。性格の傾向や入社後のマネジメントの指標を確認します</td></tr>
-                                <tr class="bg-yellow-50"><td class="p-3 md:p-4 font-black text-yellow-800">Option</td><td class="p-3 md:p-4 text-yellow-800 font-black">🏢 事業所内見学</td><td class="p-3 md:p-4 font-black text-yellow-800">-</td><td class="p-3 md:p-4 text-yellow-800">利用者のリアルな様子を見学しながら現場の雰囲気を共有します。</td></tr>
+                                <tr class="bg-yellow-50"><td class="p-3 md:p-4 font-black text-yellow-800">Option</td><td class="p-3 md:p-4 text-yellow-800 font-black">🏢 事業所内見学</td><td class="p-3 md:p-4 font-black text-yellow-800">5点</td><td class="p-3 md:p-4 text-yellow-800">利用者のリアルな様子を見学しながら現場の雰囲気を共有します。</td></tr>
                                 <tr class="bg-emerald-50"><td class="p-3 md:p-4 font-black text-emerald-800">Option</td><td class="p-3 md:p-4 text-emerald-800 font-black">❓ 質問事項</td><td class="p-3 md:p-4 font-black text-emerald-800">-</td><td class="p-3 md:p-4 text-emerald-800">候補者からの逆質問を受け付け、疑問や不安を解消します。</td></tr>
                                 <tr><td class="p-3 md:p-4 font-black">Phase 4</td><td class="p-3 md:p-4">面接質問・深掘り<br><span class="text-xs font-normal">10×3問</span></td><td class="p-3 md:p-4 font-black text-indigo-600">30点</td><td class="p-3 md:p-4">IQ/EQ/自責/ペルソナ検問（10点×3）</td></tr>
                                 <tr><td class="p-3 md:p-4 font-black">Phase 5</td><td class="p-3 md:p-4">覚悟の確認（RJP）<br><span class="text-xs font-normal">10×4問</span></td><td class="p-3 md:p-4 font-black text-indigo-600">40点</td><td class="p-3 md:p-4">現場適応力・自走の覚悟（10点×4）</td></tr>
@@ -899,6 +899,9 @@
                     </div>
                 </div>
                 <div class="md:w-1/3 bg-white p-8 rounded-3xl border border-slate-200 h-fit space-y-8 shadow-sm font-black font-black font-black">
+                    <div class="font-black font-black font-black"><div class="flex justify-between text-sm font-bold font-black font-black font-black font-black font-black"><span class="font-black font-black font-black font-black">見学評価</span><span id="score-val-tour" class="text-yellow-600 font-black text-xl font-black font-black font-black font-black font-black">3点</span></div>
+                    <input type="range" min="1" max="5" value="3" oninput="document.getElementById('score-val-tour').innerText = this.value + '点'; window.interviewData.tourScore = parseInt(this.value);" class="font-black"></div>
+
                     <div class="font-black mt-2 font-black font-black">
                         <label class="block text-[10px] font-black mb-2 text-slate-400 uppercase tracking-widest font-black font-black font-black">事業所内見学 Memo</label>
                         <textarea id="memo-tour" class="eval-memo w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:border-yellow-500 focus:outline-none shadow-inner text-sm font-bold resize-none h-32" placeholder="見学中の反応や気になった点..." oninput="window.interviewData.memo_tour = this.value"></textarea>
@@ -1007,7 +1010,7 @@
             <div class="p-8 md:p-12 w-full max-w-5xl mx-auto space-y-12 pb-32 font-black">
                 <div class="bg-slate-900 border border-slate-700 rounded-[3rem] p-12 text-center shadow-2xl relative overflow-hidden font-black">
                     <span id="final-rank" class="text-[10rem] font-black text-yellow-400 drop-shadow-2xl leading-none block font-black"></span>
-                    <p class="text-5xl font-black mt-8 text-white font-black"><span id="final-total-score"></span><span class="text-xl text-slate-600 font-medium font-black font-black"> / 105</span></p>
+                    <p class="text-5xl font-black mt-8 text-white font-black"><span id="final-total-score"></span><span class="text-xl text-slate-600 font-medium font-black font-black"> / 110</span></p>
                     <p id="final-message" class="text-slate-200 mt-10 font-bold text-xl leading-relaxed font-black font-black font-black"></p>
                 </div>
                 <div id="final-detail-section" class="grid grid-cols-1 md:grid-cols-2 gap-8 font-black font-black"></div>
@@ -1054,7 +1057,7 @@
         window.answers = {};
 
         window.interviewData = { 
-            p0: 3, p1: 3, p2: 3, p3_1: 5, p3_2: 5, p3_3: 5, p4_1: 5, p4_2: 5, p4_3: 5, p4_4: 5, p6_1: 3, p6_2: 3, p6_3: 3, p6_4: 3,
+            p0: 3, p1: 3, p2: 3, tourScore: 3, p3_1: 5, p3_2: 5, p3_3: 5, p4_1: 5, p4_2: 5, p4_3: 5, p4_4: 5, p6_1: 3, p6_2: 3, p6_3: 3, p6_4: 3,
             phil_r1: false, phil_r2: false, phil_r3: false,
             memo_p0: "", memo_p1: "", memo_p2: "", memo_p3: "", memo_p4: "", memo_tour: "", memo_questions: "", memo_p6: "",
             visited: { p0:false, p1:false, p2:false, ai:false, p3:false, p4:false, tour:false, questions:false, p6:false },
@@ -1363,10 +1366,10 @@
             if (!window.interviewData.p3_3_skipped) { p3_raw += window.interviewData.p3_3; p3_count++; }
             let s_p3 = p3_count > 0 ? Math.round((p3_raw / (p3_count * 10)) * 30) : 0;
             
-            let base = window.interviewData.p0 + window.interviewData.p1 + window.interviewData.p2 + s_p3 + (window.interviewData.p4_1+window.interviewData.p4_2+window.interviewData.p4_3+window.interviewData.p4_4);
+            let base = window.interviewData.p0 + window.interviewData.p1 + window.interviewData.p2 + window.interviewData.tourScore + s_p3 + (window.interviewData.p4_1+window.interviewData.p4_2+window.interviewData.p4_3+window.interviewData.p4_4);
             let p6 = window.interviewData.p6_1 + window.interviewData.p6_2 + window.interviewData.p6_3 + window.interviewData.p6_4;
             let philDed = (window.interviewData.phil_r1?4:0) + (window.interviewData.phil_r2?4:0) + (window.interviewData.phil_r3?4:0);
-            let total = Math.max(0, Math.min(105, base + p6 - philDed));
+            let total = Math.max(0, Math.min(110, base + p6 - philDed));
             
             let hasRedFlag = window.interviewData.phil_r1 || window.interviewData.phil_r2 || window.interviewData.phil_r3;
             let rank = 'D';
@@ -1396,7 +1399,7 @@
             document.getElementById('final-message').innerText = feedback.message;
             document.getElementById('final-detail-section').innerHTML = 
                 '<div class="bg-white/5 border border-white/10 p-8 rounded-[3rem] space-y-6 shadow-2xl md:col-span-2 font-black"><p class="text-amber-400 font-black uppercase tracking-widest text-[10px]">Interview Process / 面接進行ログ</p><div class="bg-black/20 p-4 rounded-xl border border-white/5"><p class="text-white font-bold">' + (res.phaseOrder || '記録なし') + '</p></div></div>' +
-                '<div class="bg-white/5 border border-white/10 p-8 rounded-[3rem] space-y-6 shadow-2xl font-black"><p class="text-indigo-400 font-black uppercase tracking-widest text-[10px]">Score Analysis / 得点の根拠</p><div class="space-y-4 text-sm font-bold text-slate-200"><div class="flex justify-between pb-2 border-b border-white/5"><span>Phase 0-2: 基礎評価</span><span class="text-white">' + (res.p0 + res.p1 + res.p2) + ' / 15</span></div><div class="flex justify-between pb-2 border-b border-white/5"><span>Phase 4: 面接深掘り</span><span class="text-white">' + res.p3 + ' / 30</span></div><div class="flex justify-between pb-2 border-b border-white/5"><span>Phase 5: 現場覚悟</span><span class="text-white">' + res.p4 + ' / 40</span></div><div class="flex justify-between text-indigo-300 font-black pt-2"><span>Phase 6: 論理的対話</span><span>' + res.p6 + ' / 20</span></div></div></div>' +
+                '<div class="bg-white/5 border border-white/10 p-8 rounded-[3rem] space-y-6 shadow-2xl font-black"><p class="text-indigo-400 font-black uppercase tracking-widest text-[10px]">Score Analysis / 得点の根拠</p><div class="space-y-4 text-sm font-bold text-slate-200"><div class="flex justify-between pb-2 border-b border-white/5"><span>Phase 0-2: 基礎評価</span><span class="text-white">' + (res.p0 + res.p1 + res.p2) + ' / 15</span></div><div class="flex justify-between pb-2 border-b border-white/5"><span>Option: 事業所内見学</span><span class="text-white">' + res.tourScore + ' / 5</span></div><div class="flex justify-between pb-2 border-b border-white/5"><span>Phase 4: 面接深掘り</span><span class="text-white">' + res.p3 + ' / 30</span></div><div class="flex justify-between pb-2 border-b border-white/5"><span>Phase 5: 現場覚悟</span><span class="text-white">' + res.p4 + ' / 40</span></div><div class="flex justify-between text-indigo-300 font-black pt-2"><span>Phase 6: 論理的対話</span><span>' + res.p6 + ' / 20</span></div></div></div>' +
                 '<div class="bg-white/5 border border-white/10 p-8 rounded-[3rem] space-y-6 shadow-2xl font-black"><p class="text-red-400 font-black uppercase tracking-widest text-[10px]">Critical Flags / 懸念・リスク</p><div class="space-y-4"><div class="bg-black/20 p-5 rounded-2xl border border-white/5 font-bold"><p class="text-[10px] text-indigo-300 mb-1 uppercase">対話の不備</p><p class="text-sm text-white">' + (feedback.logicItems.length > 0 ? feedback.logicItems.join("、") : "良好（特になし）") + '</p></div><div class="bg-red-900/20 p-5 rounded-2xl border border-red-500/20 font-bold"><p class="text-[10px] text-red-400 mb-1 uppercase">RED FLAG</p><p class="text-sm text-white">' + (feedback.riskItems.length > 0 ? feedback.riskItems.join("、") : "兆候なし") + '</p></div></div></div>' +
                 '<div class="bg-white/5 border border-white/10 p-8 md:p-10 rounded-[3rem] space-y-6 shadow-2xl md:col-span-2 font-black"><p class="text-emerald-400 font-black uppercase tracking-widest text-[10px]">Management Advice / マネジメント方針</p><div class="space-y-4"><p class="text-white text-sm font-bold leading-relaxed">' + feedback.baseAdvice + '</p></div></div>';
             window.showScreen('final-report-screen');
@@ -1546,7 +1549,7 @@
             window.interviewStartTime = null;
 
             window.interviewData = { 
-                p0: 3, p1: 3, p2: 3, p3_1: 5, p3_2: 5, p3_3: 5, p3_1_skipped: false, p3_2_skipped: false, p3_3_skipped: false, calculatedP3: 15, p4_1: 5, p4_2: 5, p4_3: 5, p4_4: 5, p6_1: 3, p6_2: 3, p6_3: 3, p6_4: 3, 
+                p0: 3, p1: 3, p2: 3, tourScore: 3, p3_1: 5, p3_2: 5, p3_3: 5, p3_1_skipped: false, p3_2_skipped: false, p3_3_skipped: false, calculatedP3: 15, p4_1: 5, p4_2: 5, p4_3: 5, p4_4: 5, p6_1: 3, p6_2: 3, p6_3: 3, p6_4: 3, 
                 phil_r1: false, phil_r2: false, phil_r3: false, 
                 memo_p0: "", memo_p1: "", memo_p2: "", memo_p3: "", memo_p4: "", memo_tour: "", memo_questions: "", memo_p6: "", 
                 visited: { p0:false, p1:false, p2:false, ai:false, p3:false, p4:false, tour:false, questions:false, p6:false }, 
