@@ -32,17 +32,18 @@
     <div id="app" class="bg-white w-full max-w-5xl h-full md:max-h-[95vh] lg:max-h-[900px] shadow-2xl overflow-hidden relative border border-slate-200 flex flex-col font-black md:rounded-[2rem]">
         
         <!-- グローバルタイマーバー -->
-        <div id="global-timer-bar" class="hidden bg-slate-900 text-white px-6 py-3 flex justify-between items-center text-sm font-black z-[100] shrink-0 border-b-4 border-indigo-500 shadow-lg">
-            <div class="flex items-center gap-3">
-                <span class="animate-pulse text-indigo-400 text-lg">⏱️</span> 
-                <span class="text-slate-300 uppercase tracking-widest text-xs">Total Time</span>
-                <span id="timer-overall" class="font-mono text-xl tracking-widest text-indigo-100">00:00</span>
+        <div id="global-timer-bar" class="hidden bg-slate-900 text-white px-4 md:px-6 py-2 md:py-3 flex justify-between items-center text-sm font-black z-[100] shrink-0 border-b-4 border-indigo-500 shadow-lg transition-opacity duration-300">
+            <div class="flex items-center gap-2 md:gap-3">
+                <button onclick="window.toggleTimer()" class="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center bg-slate-800 hover:bg-slate-700 rounded-full transition-colors active:scale-95 border border-slate-700 shadow-inner mr-1 md:mr-2" title="タイマーを一時停止/再開">
+                    <span id="timer-icon" class="text-base md:text-xl">⏸️</span>
+                </button>
+                <span class="text-slate-300 uppercase tracking-widest text-[10px] md:text-xs">Total</span>
+                <span id="timer-overall" class="font-mono text-lg md:text-xl tracking-widest text-indigo-100">00:00</span>
             </div>
-            <div id="phase-timer-container" class="hidden flex items-center gap-3 text-slate-300">
-                <span class="text-yellow-400 text-lg">⏳</span>
-                <span id="timer-phase-name" class="uppercase tracking-widest text-xs hidden md:block">Phase</span>
-                <span class="text-slate-400 text-xs">REMAIN:</span>
-                <span id="timer-phase" class="font-mono text-xl tracking-widest text-white">--:--</span>
+            <div id="phase-timer-container" class="hidden flex items-center gap-2 md:gap-3 text-slate-300">
+                <span class="text-yellow-400 text-base md:text-lg">⏳</span>
+                <span id="timer-phase-name" class="uppercase tracking-widest text-[10px] md:text-xs hidden md:block w-24 truncate text-right">Phase</span>
+                <span id="timer-phase" class="font-mono text-lg md:text-xl tracking-widest text-white ml-1">--:--</span>
             </div>
         </div>
 
@@ -588,10 +589,16 @@
         <div id="question-screen" class="screen hidden flex flex-col flex-1 min-h-0 p-4 md:p-8 max-w-3xl mx-auto w-full bg-white font-black overflow-hidden">
             <div class="mb-4 mt-2 md:mb-6 md:mt-4 font-black shrink-0 font-black">
                 <div class="flex justify-between items-center mb-2">
-                    <button onclick="window.returnToDashboard()" class="text-slate-400 hover:text-red-500 font-bold text-sm flex items-center gap-1 font-black">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                        中断
-                    </button>
+                    <div class="flex items-center gap-4">
+                        <button onclick="window.goBackQuestion()" id="btn-back-question" class="hidden text-slate-400 hover:text-indigo-500 font-bold text-sm flex items-center gap-1 font-black">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                            戻る
+                        </button>
+                        <button onclick="window.returnToDashboard()" class="text-slate-400 hover:text-red-500 font-bold text-sm flex items-center gap-1 font-black">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                            中断
+                        </button>
+                    </div>
                     <div class="flex gap-2 text-[10px] font-black text-indigo-500 uppercase tracking-widest font-black font-black font-black">
                         <span id="question-counter" class="font-black font-black font-black"></span><span id="progress-text" class="font-black font-black"></span>
                     </div>
@@ -1062,6 +1069,7 @@
             memo_p0: "", memo_p1: "", memo_p2: "", memo_p3: "", memo_p4: "", memo_tour: "", memo_questions: "", memo_p6: "",
             visited: { p0:false, p1:false, p2:false, ai:false, p3:false, p4:false, tour:false, questions:false, p6:false },
             phaseOrder: [],
+            phaseElapsed: { p0:0, p1:0, p2:0, ai:0, p3:0, p4:0, tour:0, questions:0, p6:0 }, // 各フェーズの累積経過時間(ms)
             subCheck: { 
                 p0_1:false, p0_2:false, 
                 p1_1:false, p1_2:false, p1_3:false, p1_4:false,
@@ -1077,8 +1085,10 @@
 
         window.globalTimerInterval = null;
         window.interviewStartTime = null;
-        window.currentPhaseStartTime = null;
-        window.currentPhaseLimit = 0;
+        window.isTimerRunning = false;
+        window.timerPauseStartTime = null;
+        window.lastTimerTick = null;
+        window.currentActivePhase = null;
 
         // ==========================================
         // グローバル関数定義
@@ -1095,38 +1105,86 @@
             return m + ":" + s;
         };
 
-        window.startInterviewTimer = function() {
-            if (!window.interviewStartTime) {
-                window.interviewStartTime = Date.now();
-                document.getElementById('global-timer-bar').classList.remove('hidden');
-                
-                window.globalTimerInterval = setInterval(function() {
-                    const now = Date.now();
-                    const overallSec = Math.floor((now - window.interviewStartTime) / 1000);
-                    document.getElementById('timer-overall').innerText = window.formatTime(overallSec);
+        window.toggleTimer = function() {
+            if (!window.interviewStartTime) return;
+            window.isTimerRunning = !window.isTimerRunning;
+            const btnIcon = document.getElementById('timer-icon');
+            const bar = document.getElementById('global-timer-bar');
 
-                    if (window.currentPhaseLimit > 0 && window.currentPhaseStartTime) {
-                        const elapsedPhaseSec = Math.floor((now - window.currentPhaseStartTime) / 1000);
-                        const remainSec = window.currentPhaseLimit - elapsedPhaseSec;
-                        const phaseTimerEl = document.getElementById('timer-phase');
-                        phaseTimerEl.innerText = window.formatTime(remainSec);
-                        
-                        if (remainSec <= 0) {
-                            phaseTimerEl.classList.add('text-red-400', 'animate-pulse');
-                            phaseTimerEl.classList.remove('text-white', 'text-yellow-400');
-                        } else if (remainSec <= 60) {
-                            phaseTimerEl.classList.add('text-yellow-400');
-                            phaseTimerEl.classList.remove('text-white', 'text-red-400', 'animate-pulse');
-                        } else {
-                            phaseTimerEl.classList.add('text-white');
-                            phaseTimerEl.classList.remove('text-red-400', 'text-yellow-400', 'animate-pulse');
-                        }
-                    }
-                }, 1000);
+            if (window.isTimerRunning) {
+                // 再開
+                if(btnIcon) btnIcon.innerText = "⏸️";
+                if(bar) bar.classList.remove('opacity-50', 'bg-slate-700');
+                if(bar) bar.classList.add('bg-slate-900');
+                if (window.timerPauseStartTime) {
+                    const pauseDuration = Date.now() - window.timerPauseStartTime;
+                    window.interviewStartTime += pauseDuration;
+                    window.timerPauseStartTime = null;
+                    window.lastTimerTick = Date.now(); // デルタ計算用リセット
+                }
+            } else {
+                // 停止
+                if(btnIcon) btnIcon.innerText = "▶️";
+                if(bar) bar.classList.add('opacity-50', 'bg-slate-700');
+                if(bar) bar.classList.remove('bg-slate-900');
+                window.timerPauseStartTime = Date.now();
             }
         };
 
-        window.setPhaseTimer = function(phaseKey, phaseName) {
+        window.startInterviewTimer = function() {
+            if (!window.interviewStartTime) {
+                window.interviewStartTime = Date.now();
+                window.isTimerRunning = true;
+                window.timerPauseStartTime = null;
+                window.lastTimerTick = Date.now();
+                const bar = document.getElementById('global-timer-bar');
+                bar.classList.remove('hidden', 'opacity-50', 'bg-slate-700');
+                bar.classList.add('bg-slate-900');
+                const icon = document.getElementById('timer-icon');
+                if(icon) icon.innerText = "⏸️";
+                
+                window.globalTimerInterval = setInterval(function() {
+                    const now = Date.now();
+                    
+                    if (!window.isTimerRunning) {
+                        return; // 停止中は処理しない
+                    }
+
+                    const delta = now - window.lastTimerTick;
+                    window.lastTimerTick = now;
+
+                    const overallSec = Math.floor((now - window.interviewStartTime) / 1000);
+                    document.getElementById('timer-overall').innerText = window.formatTime(overallSec);
+
+                    if (window.currentActivePhase) {
+                        // アクティブなフェーズの累積経過時間を加算
+                        window.interviewData.phaseElapsed[window.currentActivePhase] += delta;
+                        
+                        const limit = window.getPhaseLimit(window.currentActivePhase);
+                        if (limit > 0) {
+                            const elapsedSec = Math.floor(window.interviewData.phaseElapsed[window.currentActivePhase] / 1000);
+                            const remainSec = limit - elapsedSec;
+                            const phaseTimerEl = document.getElementById('timer-phase');
+                            
+                            phaseTimerEl.innerText = window.formatTime(remainSec);
+                            
+                            if (remainSec <= 0) {
+                                phaseTimerEl.classList.add('text-red-400', 'animate-pulse');
+                                phaseTimerEl.classList.remove('text-white', 'text-yellow-400');
+                            } else if (remainSec <= 60) {
+                                phaseTimerEl.classList.add('text-yellow-400');
+                                phaseTimerEl.classList.remove('text-white', 'text-red-400', 'animate-pulse');
+                            } else {
+                                phaseTimerEl.classList.add('text-white');
+                                phaseTimerEl.classList.remove('text-red-400', 'text-yellow-400', 'animate-pulse');
+                            }
+                        }
+                    }
+                }, 100); // 精度を上げるため100msごとに実行
+            }
+        };
+
+        window.getPhaseLimit = function(phaseKey) {
             const limits = {
                 'p0': 0,
                 'p1': 5 * 60,
@@ -1138,18 +1196,27 @@
                 'questions': 5 * 60,
                 'p6': 0 
             };
+            return limits[phaseKey] || 0;
+        };
 
-            window.currentPhaseLimit = limits[phaseKey] || 0;
+        window.setPhaseTimer = function(phaseKey, phaseName) {
+            if (!phaseKey || phaseKey === 'dashboard') {
+                window.currentActivePhase = null;
+                document.getElementById('phase-timer-container').classList.add('hidden');
+                return;
+            }
+
+            window.currentActivePhase = phaseKey;
+            const limit = window.getPhaseLimit(phaseKey);
             const container = document.getElementById('phase-timer-container');
             
-            if (window.currentPhaseLimit > 0) {
-                window.currentPhaseStartTime = Date.now();
+            if (limit > 0) {
                 document.getElementById('timer-phase-name').innerText = phaseName;
-                document.getElementById('timer-phase').innerText = window.formatTime(window.currentPhaseLimit);
+                const elapsedSec = Math.floor((window.interviewData.phaseElapsed[phaseKey] || 0) / 1000);
+                document.getElementById('timer-phase').innerText = window.formatTime(limit - elapsedSec);
                 document.getElementById('timer-phase').className = "font-mono text-xl tracking-widest text-white"; 
                 container.classList.remove('hidden');
             } else {
-                window.currentPhaseStartTime = null;
                 container.classList.add('hidden');
             }
         };
@@ -1320,10 +1387,31 @@
             document.getElementById('question-counter').innerText = "ステップ " + (window.currentQuestionIndex + 1) + " / 50";
             document.getElementById('progress-bar').style.width = progress + "%";
             document.getElementById('question-text').innerText = q.text;
+            
+            const backBtn = document.getElementById('btn-back-question');
+            if (backBtn) {
+                if (window.currentQuestionIndex > 0) {
+                    backBtn.classList.remove('hidden');
+                } else {
+                    backBtn.classList.add('hidden');
+                }
+            }
+
             const container = document.getElementById('options-container'); container.innerHTML = '';
+            
+            // 既に回答済みのデータがあるか確認
+            const existingAnswer = window.answers[q.id];
+
             [1, 2, 3, 4, 5].forEach(function(score) {
                 const btn = document.createElement('button');
-                btn.className = "w-full bg-white border-2 border-slate-100 font-black py-4 rounded-2xl hover:border-indigo-500 font-black";
+                
+                // 選択済みの回答と一致する場合は色を反転させてハイライト
+                if (existingAnswer && existingAnswer.score === score) {
+                    btn.className = "w-full bg-indigo-600 border-2 border-indigo-600 text-white shadow-md font-black py-4 rounded-2xl transition-all";
+                } else {
+                    btn.className = "w-full bg-white border-2 border-slate-100 text-slate-700 font-black py-4 rounded-2xl hover:border-indigo-500 hover:bg-slate-50 transition-all";
+                }
+                
                 btn.innerText = ["全くない", "あまりない", "どちらとも", "少しある", "かなりある"][score-1];
                 btn.onclick = function() {
                     window.answers[q.id] = { axis: q.axis, direction: q.direction, score: score };
@@ -1332,6 +1420,14 @@
                 };
                 container.appendChild(btn);
             });
+        };
+
+        window.goBackQuestion = function() {
+            if (window.currentQuestionIndex > 0) {
+                window.currentQuestionIndex--;
+                // 戻った際、過去の回答を削除せずに再描画する
+                window.renderQuestion();
+            }
         };
 
         window.showResult = function() {
@@ -1461,26 +1557,47 @@
             const btn = document.getElementById('save-report-btn'); 
             btn.disabled = true; 
             btn.innerText = "同期中...";
-            
-            const buildMemo = function(checks, memo) {
-                let checkStr = checks.length > 0 ? "【実施アクション】\n" + checks.map(function(c) { return (window.interviewData.subCheck[c.k] ? "☑ " : "☐ ") + c.l; }).join("\n") + "\n" : "";
-                let memoStr = memo ? "\n【特記事項】\n" + memo : "";
-                return (checkStr + memoStr).trim();
+
+            const formatElapsed = function(ms) {
+                if (!ms) return "00:00";
+                const sec = Math.floor(ms / 1000);
+                const m = Math.floor(sec / 60).toString().padStart(2, '0');
+                const s = (sec % 60).toString().padStart(2, '0');
+                return m + ":" + s;
             };
 
-            const memo_p0 = buildMemo([{k:'p0_1',l:'手順'}, {k:'p0_2',l:'基準'}], window.interviewData.memo_p0);
-            const memo_p1 = buildMemo([{k:'p1_1',l:'自己開示'}, {k:'p1_2',l:'スタンス提示'}, {k:'p1_3',l:'質問'}, {k:'p1_4',l:'ニーズ把握'}], window.interviewData.memo_p1);
-            const memo_p2 = buildMemo([{k:'p2_1',l:'経歴確認'}, {k:'p2_2',l:'スタンス確認'}, {k:'p2_3',l:'条件合致'}], window.interviewData.memo_p2);
+            let totalMs = 0;
+            if (window.interviewStartTime) {
+                if (window.isTimerRunning) {
+                    totalMs = Date.now() - window.interviewStartTime;
+                } else if (window.timerPauseStartTime) {
+                    totalMs = window.timerPauseStartTime - window.interviewStartTime;
+                }
+            }
+            const totalTimeStr = formatElapsed(totalMs);
+            
+            const buildMemo = function(checks, memo, phaseKey) {
+                let timeStr = "【所要時間】 " + formatElapsed(window.interviewData.phaseElapsed[phaseKey]) + "\n";
+                let checkStr = checks.length > 0 ? "【実施アクション】\n" + checks.map(function(c) { return (window.interviewData.subCheck[c.k] ? "☑ " : "☐ ") + c.l; }).join("\n") + "\n" : "";
+                let memoStr = memo ? "\n【特記事項】\n" + memo : "";
+                return (timeStr + checkStr + memoStr).trim();
+            };
+
+            const memo_p0 = buildMemo([{k:'p0_1',l:'手順'}, {k:'p0_2',l:'基準'}], window.interviewData.memo_p0, 'p0');
+            const memo_p1 = buildMemo([{k:'p1_1',l:'自己開示'}, {k:'p1_2',l:'スタンス提示'}, {k:'p1_3',l:'質問'}, {k:'p1_4',l:'ニーズ把握'}], window.interviewData.memo_p1, 'p1');
+            const memo_p2 = buildMemo([{k:'p2_1',l:'経歴確認'}, {k:'p2_2',l:'スタンス確認'}, {k:'p2_3',l:'条件合致'}], window.interviewData.memo_p2, 'p2');
             const memo_p3 = buildMemo([
                 {k:'p3_q1_1',l:'Q1:エピソード'}, {k:'p3_q1_2',l:'Q1:もしも'}, 
                 {k:'p3_q2_1',l:'Q2:達成エピソード'}, {k:'p3_q2_2',l:'Q2:リカバリー'}, {k:'p3_q2_3',l:'Q2:自責'}, 
                 {k:'p3_q3_1',l:'Q3:1次質問'}, {k:'p3_q3_2',l:'Q3:深掘質問'}
-            ], window.interviewData.memo_p3);
-            const memo_p4 = buildMemo([{k:'p4_1',l:'現場作業への従事'}, {k:'p4_2',l:'厳しい現実への耐性'}, {k:'p4_3',l:'自発性の要求'}, {k:'p4_4',l:'キャリアイメージの共有'}], window.interviewData.memo_p4);
+            ], window.interviewData.memo_p3, 'p3');
+            const memo_p4 = buildMemo([{k:'p4_1',l:'現場作業への従事'}, {k:'p4_2',l:'厳しい現実への耐性'}, {k:'p4_3',l:'自発性の要求'}, {k:'p4_4',l:'キャリアイメージの共有'}], window.interviewData.memo_p4, 'p4');
             
-            const memo_p6 = window.interviewData.memo_p6 ? "【Phase 6 特記事項】\n" + window.interviewData.memo_p6 : "";
-            const memo_tour = buildMemo([{k:'tour_1',l:'利用者の様子'}, {k:'tour_2',l:'スタッフへの態度'}], window.interviewData.memo_tour);
-            const memo_questions = buildMemo([{k:'q_1',l:'質問の質'}, {k:'q_2',l:'条件面への偏り'}], window.interviewData.memo_questions);
+            const memo_p6 = "【所要時間】 " + formatElapsed(window.interviewData.phaseElapsed.p6) + "\n" + (window.interviewData.memo_p6 ? "【Phase 6 特記事項】\n" + window.interviewData.memo_p6 : "");
+            const memo_tour = buildMemo([{k:'tour_1',l:'利用者の様子'}, {k:'tour_2',l:'スタッフへの態度'}], window.interviewData.memo_tour, 'tour');
+            const memo_questions = buildMemo([{k:'q_1',l:'質問の質'}, {k:'q_2',l:'条件面への偏り'}], window.interviewData.memo_questions, 'questions');
+
+            const aiTypeWithTime = (window.currentAiTypeCode || "未実施") + " (所要時間: " + formatElapsed(window.interviewData.phaseElapsed.ai) + ")";
 
             const feedbackData = Object.assign({}, window.interviewData, {
                 finalRank: document.getElementById('final-rank').innerText,
@@ -1497,7 +1614,8 @@
                 candidateName: document.getElementById('candidate-name').value || "未入力", 
                 finalRank: document.getElementById('final-rank').innerText, 
                 totalScore: parseInt(document.getElementById('final-total-score').innerText) || 0, 
-                aiTypeCode: window.currentAiTypeCode || "未実施", 
+                aiTypeCode: aiTypeWithTime,
+                totalTime: totalTimeStr,
                 phaseOrder: (window.interviewData.phaseOrder || []).join(" ➔ "),
                 memo_p0: memo_p0, 
                 memo_p1: memo_p1, 
@@ -1545,8 +1663,14 @@
 
         window.startNewSession = function() {
             if (window.globalTimerInterval) clearInterval(window.globalTimerInterval);
-            document.getElementById('global-timer-bar').classList.add('hidden');
+            const bar = document.getElementById('global-timer-bar');
+            bar.classList.add('hidden');
+            bar.classList.remove('opacity-50', 'bg-slate-700');
             window.interviewStartTime = null;
+            window.isTimerRunning = false;
+            window.timerPauseStartTime = null;
+            window.lastTimerTick = null;
+            window.currentActivePhase = null;
 
             window.interviewData = { 
                 p0: 3, p1: 3, p2: 3, tourScore: 3, p3_1: 5, p3_2: 5, p3_3: 5, p3_1_skipped: false, p3_2_skipped: false, p3_3_skipped: false, calculatedP3: 15, p4_1: 5, p4_2: 5, p4_3: 5, p4_4: 5, p6_1: 3, p6_2: 3, p6_3: 3, p6_4: 3, 
@@ -1554,6 +1678,7 @@
                 memo_p0: "", memo_p1: "", memo_p2: "", memo_p3: "", memo_p4: "", memo_tour: "", memo_questions: "", memo_p6: "", 
                 visited: { p0:false, p1:false, p2:false, ai:false, p3:false, p4:false, tour:false, questions:false, p6:false }, 
                 phaseOrder: [], 
+                phaseElapsed: { p0:0, p1:0, p2:0, ai:0, p3:0, p4:0, tour:0, questions:0, p6:0 },
                 subCheck: { p0_1:false, p0_2:false, p0_3:false, p1_1:false, p1_2:false, p1_3:false, p1_4:false, p2_1:false, p2_2:false, p2_3:false, p3_q1_1:false, p3_q1_2:false, p3_q2_1:false, p3_q2_2:false, p3_q2_3:false, p3_q3_1:false, p3_q3_2:false, p4_1:false, p4_2:false, p4_3:false, p4_4:false, tour_1:false, tour_2:false, q_1:false, q_2:false } 
             };
             window.answers = {}; window.currentQuestionIndex = 0; window.aiSkipped = false; window.currentAiTypeCode = null; window.currentAiResult = null;
@@ -1604,8 +1729,14 @@
         
         window.closeSession = function() { 
             if (window.globalTimerInterval) clearInterval(window.globalTimerInterval);
-            document.getElementById('global-timer-bar').classList.add('hidden');
+            const bar = document.getElementById('global-timer-bar');
+            bar.classList.add('hidden');
+            bar.classList.remove('opacity-50', 'bg-slate-700');
             window.interviewStartTime = null;
+            window.isTimerRunning = false;
+            window.timerPauseStartTime = null;
+            window.lastTimerTick = null;
+            window.currentActivePhase = null;
             window.showScreen('home-screen'); 
         };
 
