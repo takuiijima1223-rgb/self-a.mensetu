@@ -175,14 +175,18 @@
         <div class="space-y-6">
           <h3 class="text-lg md:text-xl text-slate-800 font-bold border-l-4 border-pink-600 pl-3">1. 面接の基本方針と評価配分（100点満点）</h3>
           <p class="text-sm text-slate-600 leading-relaxed bg-white p-5 rounded-xl border border-slate-200 shadow-sm">本面接は「欠員補充」ではなく、「自己実現をみんなのものに」のために自らを変容させ、自走できるかを判定するものです。</p>
+          <div class="bg-indigo-50 border border-indigo-100 p-4 rounded-xl shadow-sm my-4">
+            <p class="text-indigo-800 font-bold text-sm flex items-center gap-2"><span class="text-lg">💡</span> 【評価のポイント】1つのエピソードを深く掘り下げる</p>
+            <p class="text-xs text-slate-700 mt-2 leading-relaxed">Phase 4（面接深掘り）やPhase 5（覚悟の確認）では、必ずしも全ての質問項目を実施する必要はありません。時間が限られている場合や、候補者の特性を引き出すために1つの項目を深く掘り下げる進行でも構いません。最終評価画面で「未実施」にチェックを入れることで、実施した項目の点数から自動的に30点満点に配点調整されます。</p>
+          </div>
           <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-x-auto text-xs md:text-sm">
             <table class="w-full text-left min-w-[600px]"><thead class="bg-slate-50 text-slate-500 uppercase text-xs"><tr><th class="p-4 border-b font-bold">フェーズ</th><th class="p-4 border-b font-bold">項目</th><th class="p-4 border-b font-bold">配点</th><th class="p-4 border-b font-bold">評価の視点</th></tr></thead>
             <tbody class="divide-y divide-slate-100 text-slate-700">
               <tr><td class="p-4 font-medium">Phase 1</td><td class="p-4">お出迎え・着席</td><td class="p-4 text-pink-600 font-bold">5点</td><td class="p-4 text-xs">社会人基礎・ホスピタリティ</td></tr>
               <tr><td class="p-4 font-medium">Phase 2</td><td class="p-4">アイスブレイク・基本確認</td><td class="p-4 text-pink-600 font-bold">5点</td><td class="p-4 text-xs">表情・対話の基礎・ニーズ把握</td></tr>
               <tr><td class="p-4 font-medium">Phase 3</td><td class="p-4">経歴・条件・スタンス</td><td class="p-4 text-pink-600 font-bold">5点</td><td class="p-4 text-xs">経歴の論理性・仕事への価値観</td></tr>
-              <tr><td class="p-4 font-medium">Phase 4</td><td class="p-4">面接質問・深掘り<br><span class="text-[10px] text-slate-400">10点×3問</span></td><td class="p-4 text-pink-600 font-bold">30点</td><td class="p-4 text-xs">IQ/EQ/自責/ペルソナ検問</td></tr>
-              <tr><td class="p-4 font-medium">Phase 5</td><td class="p-4">覚悟の確認（RJP）<br><span class="text-[10px] text-slate-400">10点×3問</span></td><td class="p-4 text-pink-600 font-bold">30点</td><td class="p-4 text-xs">現場適応力・自走の覚悟</td></tr>
+              <tr><td class="p-4 font-medium">Phase 4</td><td class="p-4">面接質問・深掘り<br><span class="text-[10px] text-slate-400">10点×3問</span></td><td class="p-4 text-pink-600 font-bold">30点</td><td class="p-4 text-xs">IQ/EQ/自責/ペルソナ検問（※未実施項目は自動換算）</td></tr>
+              <tr><td class="p-4 font-medium">Phase 5</td><td class="p-4">覚悟の確認（RJP）<br><span class="text-[10px] text-slate-400">10点×3問</span></td><td class="p-4 text-pink-600 font-bold">30点</td><td class="p-4 text-xs">現場適応力・自走の覚悟（※未実施項目は自動換算）</td></tr>
               <tr class="bg-blue-50/50"><td class="p-4 text-blue-800 font-medium">Phase 6</td><td class="p-4 text-blue-800">✨ ビジョン・やりがいの共有</td><td class="p-4 text-blue-800 font-bold">-</td><td class="p-4 text-blue-800 text-xs">【得点なし】 魅力付けに専念</td></tr>
               <tr class="bg-slate-50"><td class="p-4 text-slate-800 font-medium">Final</td><td class="p-4">対人援助適性・現場カルチャーフィット</td><td class="p-4 text-pink-600 font-bold">20点</td><td class="p-4 text-xs">加点方式（面接全体を通して評価）</td></tr>
               <tr class="bg-amber-50/50"><td class="p-4 text-amber-800 font-medium">Option</td><td class="p-4 text-amber-800">🏢 事業所内見学</td><td class="p-4 text-amber-800 font-bold">5点</td><td class="p-4 text-amber-800 text-xs">利用者の様子を見学し現場の雰囲気を共有</td></tr>
@@ -441,7 +445,10 @@
       </div>
       <div class="p-8 flex flex-col md:flex-row gap-8 max-w-5xl mx-auto w-full relative">
         <div class="md:w-2/3 flex flex-col pr-4">
-          <div class="bg-pink-50/50 p-5 rounded-2xl border border-pink-100 mb-6 shrink-0"><p class="text-sm text-pink-800 font-medium leading-relaxed">候補者の本質（IQ/EQ、自責思考、ストレス耐性）を見極める最重要フェーズです。<br>具体的なリスクペルソナ（不動 固・依存 待子・古井 説子）を炙り出します。</p></div>
+          <div class="bg-pink-50/50 p-5 rounded-2xl border border-pink-100 mb-6 shrink-0">
+            <p class="text-sm text-pink-800 font-bold leading-relaxed">候補者の本質（IQ/EQ、自責思考、ストレス耐性）を見極める最重要フェーズです。</p>
+            <p class="text-xs text-pink-700 font-medium mt-1">※時間が限られている場合などは全問実施せず、1つのエピソードを深く掘り下げる進行で構いません。（未実施の項目は、スコア入力時に「未実施」とすることで自動的に満点が調整されます）</p>
+          </div>
           <div class="flex flex-col md:flex-row md:items-center justify-between bg-white border border-slate-200 p-2 rounded-2xl mb-6 shrink-0 gap-3 shadow-sm">
             <div class="flex gap-1 overflow-x-auto w-full md:w-auto">
               <button onclick="window.switchP3Tab(1)" id="tab-p3-1" class="whitespace-nowrap px-4 md:px-6 py-2.5 rounded-xl font-bold transition-all text-white bg-pink-600 shadow-md text-sm md:text-base">Q1 提案経験</button>
@@ -548,6 +555,7 @@
           <div class="bg-pink-50/50 p-6 rounded-3xl border border-pink-100 shadow-sm flex flex-col items-center md:items-start md:flex-row gap-4">
             <div class="flex-grow">
               <p class="text-pink-800 text-sm mb-1 font-bold">現場の「厳しさ」を伝え、覚悟（合意）を確認します。オープンクエスチョンで本人の思考を引き出します。</p>
+              <p class="text-xs text-pink-700 font-medium mt-1">※時間が限られている場合などは全問実施せず、1つの項目を深く掘り下げる進行でも構いません。（未実施項目はスコア入力時に自動配点調整されます）</p>
             </div>
             <button onclick="window.openDisabilityVideoInNewTab()" class="shrink-0 w-full md:w-auto bg-slate-800 hover:bg-slate-700 text-white px-5 py-3 rounded-xl shadow-md transition-all font-bold text-xs md:text-sm flex items-center justify-center gap-2">
               <span class="text-lg">🎬</span> 障害特性動画を再生
@@ -654,10 +662,34 @@
         <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
           <h3 class="text-pink-700 font-bold text-sm uppercase tracking-widest border-b border-slate-100 pb-2">Phase 1-3 / Option (各5点)</h3>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-             <div class="bg-slate-50 p-4 rounded-xl border border-slate-100"><div class="flex justify-between items-center mb-2"><label class="text-[10px] text-pink-700 block uppercase font-bold tracking-widest font-serif-en">P1:お出迎え</label><span id="score-disp-p0" class="text-pink-600 text-xl font-bold font-serif-en">0</span></div><input type="range" id="slider-p0" min="0" max="5" value="0" oninput="window.setPhase0Score(parseInt(this.value));" class="w-full"></div>
-             <div class="bg-slate-50 p-4 rounded-xl border border-slate-100"><div class="flex justify-between items-center mb-2"><label class="text-[10px] text-pink-700 block uppercase font-bold tracking-widest font-serif-en">P2:アイスブレイク</label><span id="score-val-p1" class="text-pink-600 text-xl font-bold font-serif-en">0</span></div><input type="range" min="0" max="5" value="0" oninput="document.getElementById('score-val-p1').innerText = this.value; window.interviewData.p1 = parseInt(this.value);" class="w-full"></div>
-             <div class="bg-slate-50 p-4 rounded-xl border border-slate-100"><div class="flex justify-between items-center mb-2"><label class="text-[10px] text-pink-700 block uppercase font-bold tracking-widest font-serif-en">P3:経歴・条件</label><span id="score-val-p2" class="text-pink-600 text-xl font-bold font-serif-en">0</span></div><input type="range" min="0" max="5" value="0" oninput="document.getElementById('score-val-p2').innerText = this.value; window.interviewData.p2 = parseInt(this.value);" class="w-full"></div>
-             <div class="bg-amber-50/50 p-4 rounded-xl border border-amber-100"><div class="flex justify-between items-center mb-2"><label class="text-[10px] text-amber-700 block uppercase font-bold tracking-widest font-serif-en">Option:見学</label><span id="score-val-tour" class="text-amber-500 text-xl font-bold font-serif-en">0</span></div><input type="range" min="0" max="5" value="0" oninput="document.getElementById('score-val-tour').innerText = this.value; window.interviewData.tourScore = parseInt(this.value);" class="w-full"></div>
+             <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 flex flex-col"><div class="flex justify-between items-center mb-2"><label class="text-[10px] text-pink-700 block uppercase font-bold tracking-widest font-serif-en">P1:お出迎え</label><span id="score-disp-p0" class="text-pink-600 text-xl font-bold font-serif-en">0</span></div><input type="range" id="slider-p0" min="0" max="5" value="0" oninput="window.setPhase0Score(parseInt(this.value));" class="w-full mb-3">
+               <div class="text-[10px] text-slate-600 font-medium leading-tight mt-auto pt-2 border-t border-slate-200 flex flex-col gap-1">
+                 <div class="flex gap-1"><span class="font-bold text-pink-600 shrink-0 w-6">5点:</span><span>極めて丁寧・明るく好印象</span></div>
+                 <div class="flex gap-1"><span class="font-bold text-slate-500 shrink-0 w-6">3点:</span><span>一般的・標準的な対応</span></div>
+                 <div class="flex gap-1"><span class="font-bold text-rose-500 shrink-0 w-6">0点:</span><span>無愛想・目が全く合わない</span></div>
+               </div>
+             </div>
+             <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 flex flex-col"><div class="flex justify-between items-center mb-2"><label class="text-[10px] text-pink-700 block uppercase font-bold tracking-widest font-serif-en">P2:アイスブレイク</label><span id="score-val-p1" class="text-pink-600 text-xl font-bold font-serif-en">0</span></div><input type="range" min="0" max="5" value="0" oninput="document.getElementById('score-val-p1').innerText = this.value; window.interviewData.p1 = parseInt(this.value);" class="w-full mb-3">
+               <div class="text-[10px] text-slate-600 font-medium leading-tight mt-auto pt-2 border-t border-slate-200 flex flex-col gap-1">
+                 <div class="flex gap-1"><span class="font-bold text-pink-600 shrink-0 w-6">5点:</span><span>対話が非常にスムーズで自然</span></div>
+                 <div class="flex gap-1"><span class="font-bold text-slate-500 shrink-0 w-6">3点:</span><span>一問一答だが会話は成立</span></div>
+                 <div class="flex gap-1"><span class="font-bold text-rose-500 shrink-0 w-6">0点:</span><span>表情が硬くラリーが続かない</span></div>
+               </div>
+             </div>
+             <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 flex flex-col"><div class="flex justify-between items-center mb-2"><label class="text-[10px] text-pink-700 block uppercase font-bold tracking-widest font-serif-en">P3:経歴・条件</label><span id="score-val-p2" class="text-pink-600 text-xl font-bold font-serif-en">0</span></div><input type="range" min="0" max="5" value="0" oninput="document.getElementById('score-val-p2').innerText = this.value; window.interviewData.p2 = parseInt(this.value);" class="w-full mb-3">
+               <div class="text-[10px] text-slate-600 font-medium leading-tight mt-auto pt-2 border-t border-slate-200 flex flex-col gap-1">
+                 <div class="flex gap-1"><span class="font-bold text-pink-600 shrink-0 w-6">5点:</span><span>自らの言葉で論理的・前向きに語れる</span></div>
+                 <div class="flex gap-1"><span class="font-bold text-slate-500 shrink-0 w-6">3点:</span><span>事実ベースで過不足なく答えられる</span></div>
+                 <div class="flex gap-1"><span class="font-bold text-rose-500 shrink-0 w-6">0点:</span><span>矛盾がある、条件に不満がある</span></div>
+               </div>
+             </div>
+             <div class="bg-amber-50/50 p-4 rounded-xl border border-amber-100 flex flex-col"><div class="flex justify-between items-center mb-2"><label class="text-[10px] text-amber-700 block uppercase font-bold tracking-widest font-serif-en">Option:見学</label><span id="score-val-tour" class="text-amber-500 text-xl font-bold font-serif-en">0</span></div><input type="range" min="0" max="5" value="0" oninput="document.getElementById('score-val-tour').innerText = this.value; window.interviewData.tourScore = parseInt(this.value);" class="w-full mb-3">
+               <div class="text-[10px] text-amber-700/80 font-medium leading-tight mt-auto pt-2 border-t border-amber-200/50 flex flex-col gap-1">
+                 <div class="flex gap-1"><span class="font-bold text-amber-600 shrink-0 w-6">5点:</span><span>偏見なくフラットに接する</span></div>
+                 <div class="flex gap-1"><span class="font-bold text-amber-700/60 shrink-0 w-6">3点:</span><span>特に問題なく見学できている</span></div>
+                 <div class="flex gap-1"><span class="font-bold text-rose-500 shrink-0 w-6">0点:</span><span>あからさまな嫌悪感や不適切な態度</span></div>
+               </div>
+             </div>
           </div>
         </div>
 
@@ -665,9 +697,27 @@
         <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
           <h3 class="text-pink-700 font-bold text-sm uppercase tracking-widest border-b border-slate-100 pb-2">Phase 4: 面接質問・深掘り (各10点)</h3>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="bg-slate-50 p-4 rounded-xl border border-slate-100"><div class="flex justify-between items-center mb-2"><span class="text-pink-700 font-bold text-[10px] uppercase tracking-widest font-serif-en">Q1:提案経験</span><label class="cursor-pointer text-slate-400 text-[10px] flex items-center gap-1"><input type="checkbox" id="skip-p3-1" onchange="window.toggleSkip(1, this.checked)" class="rounded border-slate-300"> 未実施</label></div><div class="flex items-center gap-3"><input type="range" id="slider-p3-1" min="0" max="10" value="0" oninput="window.interviewData.p3_1 = parseInt(this.value); document.getElementById('val-p3-1').innerText = this.value;" class="flex-grow"><span id="val-p3-1" class="text-pink-600 w-6 text-xl font-bold font-serif-en text-right">0</span></div></div>
-            <div class="bg-slate-50 p-4 rounded-xl border border-slate-100"><div class="flex justify-between items-center mb-2"><span class="text-pink-700 font-bold text-[10px] uppercase tracking-widest font-serif-en">Q2:達成感・失敗</span><label class="cursor-pointer text-slate-400 text-[10px] flex items-center gap-1"><input type="checkbox" id="skip-p3-2" onchange="window.toggleSkip(2, this.checked)" class="rounded border-slate-300"> 未実施</label></div><div class="flex items-center gap-3"><input type="range" id="slider-p3-2" min="0" max="10" value="0" oninput="window.interviewData.p3_2 = parseInt(this.value); document.getElementById('val-p3-2').innerText = this.value;" class="flex-grow"><span id="val-p3-2" class="text-pink-600 w-6 text-xl font-bold font-serif-en text-right">0</span></div></div>
-            <div class="bg-slate-50 p-4 rounded-xl border border-slate-100"><div class="flex justify-between items-center mb-2"><span class="text-pink-700 font-bold text-[10px] uppercase tracking-widest font-serif-en">Q3:喜怒哀楽</span><label class="cursor-pointer text-slate-400 text-[10px] flex items-center gap-1"><input type="checkbox" id="skip-p3-3" onchange="window.toggleSkip(3, this.checked)" class="rounded border-slate-300"> 未実施</label></div><div class="flex items-center gap-3"><input type="range" id="slider-p3-3" min="0" max="10" value="0" oninput="window.interviewData.p3_3 = parseInt(this.value); document.getElementById('val-p3-3').innerText = this.value;" class="flex-grow"><span id="val-p3-3" class="text-pink-600 w-6 text-xl font-bold font-serif-en text-right">0</span></div></div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 flex flex-col"><div class="flex justify-between items-center mb-2"><span class="text-pink-700 font-bold text-[10px] uppercase tracking-widest font-serif-en">Q1:提案経験</span><label class="cursor-pointer text-slate-400 text-[10px] flex items-center gap-1"><input type="checkbox" id="skip-p3-1" onchange="window.toggleSkip('p3', 1, this.checked)" class="rounded border-slate-300"> 未実施</label></div><div class="flex items-center gap-3 mb-3"><input type="range" id="slider-p3-1" min="0" max="10" value="0" oninput="window.interviewData.p3_1 = parseInt(this.value); document.getElementById('val-p3-1').innerText = this.value;" class="flex-grow"><span id="val-p3-1" class="text-pink-600 w-6 text-xl font-bold font-serif-en text-right">0</span></div>
+               <div class="text-[10px] text-slate-600 font-medium leading-tight mt-auto pt-2 border-t border-slate-200 flex flex-col gap-1">
+                 <div class="flex gap-1"><span class="font-bold text-pink-600 shrink-0 w-7">10点:</span><span>言語化力が高く、否定されても前向きに行動</span></div>
+                 <div class="flex gap-1"><span class="font-bold text-slate-500 shrink-0 w-7">5点:</span><span>提案経験は薄いが、意見を受け入れる素直さ</span></div>
+                 <div class="flex gap-1"><span class="font-bold text-rose-500 shrink-0 w-7">0点:</span><span>柔軟性がなく変化を拒否、マウントを取る</span></div>
+               </div>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 flex flex-col"><div class="flex justify-between items-center mb-2"><span class="text-pink-700 font-bold text-[10px] uppercase tracking-widest font-serif-en">Q2:達成感・失敗</span><label class="cursor-pointer text-slate-400 text-[10px] flex items-center gap-1"><input type="checkbox" id="skip-p3-2" onchange="window.toggleSkip('p3', 2, this.checked)" class="rounded border-slate-300"> 未実施</label></div><div class="flex items-center gap-3 mb-3"><input type="range" id="slider-p3-2" min="0" max="10" value="0" oninput="window.interviewData.p3_2 = parseInt(this.value); document.getElementById('val-p3-2').innerText = this.value;" class="flex-grow"><span id="val-p3-2" class="text-pink-600 w-6 text-xl font-bold font-serif-en text-right">0</span></div>
+               <div class="text-[10px] text-slate-600 font-medium leading-tight mt-auto pt-2 border-t border-slate-200 flex flex-col gap-1">
+                 <div class="flex gap-1"><span class="font-bold text-pink-600 shrink-0 w-7">10点:</span><span>失敗を自責として分析し、次に活かせている</span></div>
+                 <div class="flex gap-1"><span class="font-bold text-slate-500 shrink-0 w-7">5点:</span><span>自責思考はあるが、客観的分析がやや甘い</span></div>
+                 <div class="flex gap-1"><span class="font-bold text-rose-500 shrink-0 w-7">0点:</span><span>明らかな他責、または過剰に落ち込みすぎる</span></div>
+               </div>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 flex flex-col"><div class="flex justify-between items-center mb-2"><span class="text-pink-700 font-bold text-[10px] uppercase tracking-widest font-serif-en">Q3:喜怒哀楽</span><label class="cursor-pointer text-slate-400 text-[10px] flex items-center gap-1"><input type="checkbox" id="skip-p3-3" onchange="window.toggleSkip('p3', 3, this.checked)" class="rounded border-slate-300"> 未実施</label></div><div class="flex items-center gap-3 mb-3"><input type="range" id="slider-p3-3" min="0" max="10" value="0" oninput="window.interviewData.p3_3 = parseInt(this.value); document.getElementById('val-p3-3').innerText = this.value;" class="flex-grow"><span id="val-p3-3" class="text-pink-600 w-6 text-xl font-bold font-serif-en text-right">0</span></div>
+               <div class="text-[10px] text-slate-600 font-medium leading-tight mt-auto pt-2 border-t border-slate-200 flex flex-col gap-1">
+                 <div class="flex gap-1"><span class="font-bold text-pink-600 shrink-0 w-7">10点:</span><span>感情を客観視し、負の感情もプラスに変換</span></div>
+                 <div class="flex gap-1"><span class="font-bold text-slate-500 shrink-0 w-7">5点:</span><span>標準的な感情コントロールができている</span></div>
+                 <div class="flex gap-1"><span class="font-bold text-rose-500 shrink-0 w-7">0点:</span><span>独自の正義感を押し付ける、起伏が激しい</span></div>
+               </div>
+            </div>
           </div>
         </div>
 
@@ -675,9 +725,27 @@
         <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
           <h3 class="text-pink-700 font-bold text-sm uppercase tracking-widest border-b border-slate-100 pb-2">Phase 5: 覚悟の確認(RJP) (各10点)</h3>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="bg-slate-50 p-4 rounded-xl border border-slate-100"><div class="flex justify-between items-center mb-2"><label class="text-[10px] text-pink-700 block uppercase font-bold tracking-widest font-serif-en">1.現場作業</label><span id="val-p4-1" class="text-pink-600 text-xl font-bold font-serif-en">0</span></div><input type="range" id="slider-p4-1" min="0" max="10" value="0" oninput="window.interviewData.p4_1 = parseInt(this.value); document.getElementById('val-p4-1').innerText = this.value;" class="w-full"></div>
-            <div class="bg-slate-50 p-4 rounded-xl border border-slate-100"><div class="flex justify-between items-center mb-2"><label class="text-[10px] text-pink-700 block uppercase font-bold tracking-widest font-serif-en">2.厳しい現実</label><span id="val-p4-2" class="text-pink-600 text-xl font-bold font-serif-en">0</span></div><input type="range" id="slider-p4-2" min="0" max="10" value="0" oninput="window.interviewData.p4_2 = parseInt(this.value); document.getElementById('val-p4-2').innerText = this.value;" class="w-full"></div>
-            <div class="bg-slate-50 p-4 rounded-xl border border-slate-100"><div class="flex justify-between items-center mb-2"><label class="text-[10px] text-pink-700 block uppercase font-bold tracking-widest font-serif-en">3.自発性</label><span id="val-p4-3" class="text-pink-600 text-xl font-bold font-serif-en">0</span></div><input type="range" id="slider-p4-3" min="0" max="10" value="0" oninput="window.interviewData.p4_3 = parseInt(this.value); document.getElementById('val-p4-3').innerText = this.value;" class="w-full"></div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 flex flex-col"><div class="flex justify-between items-center mb-2"><label class="text-[10px] text-pink-700 block uppercase font-bold tracking-widest font-serif-en">1.現場作業</label><label class="cursor-pointer text-slate-400 text-[10px] flex items-center gap-1"><input type="checkbox" id="skip-p4-1" onchange="window.toggleSkip('p4', 1, this.checked)" class="rounded border-slate-300"> 未実施</label></div><div class="flex items-center gap-3 mb-3"><input type="range" id="slider-p4-1" min="0" max="10" value="0" oninput="window.interviewData.p4_1 = parseInt(this.value); document.getElementById('val-p4-1').innerText = this.value;" class="flex-grow"><span id="val-p4-1" class="text-pink-600 w-6 text-xl font-bold font-serif-en text-right">0</span></div>
+               <div class="text-[10px] text-slate-600 font-medium leading-tight mt-auto pt-2 border-t border-slate-200 flex flex-col gap-1">
+                 <div class="flex gap-1"><span class="font-bold text-pink-600 shrink-0 w-7">10点:</span><span>裁量の大きさを前向きに捉え自律する覚悟</span></div>
+                 <div class="flex gap-1"><span class="font-bold text-slate-500 shrink-0 w-7">5点:</span><span>不安はあるが、理解し取り組もうとする姿勢</span></div>
+                 <div class="flex gap-1"><span class="font-bold text-rose-500 shrink-0 w-7">0点:</span><span>指示がないと動けないと難色を示す</span></div>
+               </div>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 flex flex-col"><div class="flex justify-between items-center mb-2"><label class="text-[10px] text-pink-700 block uppercase font-bold tracking-widest font-serif-en">2.厳しい現実</label><label class="cursor-pointer text-slate-400 text-[10px] flex items-center gap-1"><input type="checkbox" id="skip-p4-2" onchange="window.toggleSkip('p4', 2, this.checked)" class="rounded border-slate-300"> 未実施</label></div><div class="flex items-center gap-3 mb-3"><input type="range" id="slider-p4-2" min="0" max="10" value="0" oninput="window.interviewData.p4_2 = parseInt(this.value); document.getElementById('val-p4-2').innerText = this.value;" class="flex-grow"><span id="val-p4-2" class="text-pink-600 w-6 text-xl font-bold font-serif-en text-right">0</span></div>
+               <div class="text-[10px] text-slate-600 font-medium leading-tight mt-auto pt-2 border-t border-slate-200 flex flex-col gap-1">
+                 <div class="flex gap-1"><span class="font-bold text-pink-600 shrink-0 w-7">10点:</span><span>動じず周囲と協力して冷静に対処する思考</span></div>
+                 <div class="flex gap-1"><span class="font-bold text-slate-500 shrink-0 w-7">5点:</span><span>驚きはあるが、冷静に対処しようと考えられる</span></div>
+                 <div class="flex gap-1"><span class="font-bold text-rose-500 shrink-0 w-7">0点:</span><span>強い拒絶反応、または一人で抱え込もうとする</span></div>
+               </div>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 flex flex-col"><div class="flex justify-between items-center mb-2"><label class="text-[10px] text-pink-700 block uppercase font-bold tracking-widest font-serif-en">3.自発性</label><label class="cursor-pointer text-slate-400 text-[10px] flex items-center gap-1"><input type="checkbox" id="skip-p4-3" onchange="window.toggleSkip('p4', 3, this.checked)" class="rounded border-slate-300"> 未実施</label></div><div class="flex items-center gap-3 mb-3"><input type="range" id="slider-p4-3" min="0" max="10" value="0" oninput="window.interviewData.p4_3 = parseInt(this.value); document.getElementById('val-p4-3').innerText = this.value;" class="flex-grow"><span id="val-p4-3" class="text-pink-600 w-6 text-xl font-bold font-serif-en text-right">0</span></div>
+               <div class="text-[10px] text-slate-600 font-medium leading-tight mt-auto pt-2 border-t border-slate-200 flex flex-col gap-1">
+                 <div class="flex gap-1"><span class="font-bold text-pink-600 shrink-0 w-7">10点:</span><span>課題を見つけ周囲を巻き込んで行動した経験</span></div>
+                 <div class="flex gap-1"><span class="font-bold text-slate-500 shrink-0 w-7">5点:</span><span>指示されたことには自ら工夫して取り組める</span></div>
+                 <div class="flex gap-1"><span class="font-bold text-rose-500 shrink-0 w-7">0点:</span><span>完全に受け身で自発的な行動エピソード皆無</span></div>
+               </div>
+            </div>
           </div>
         </div>
 
@@ -836,14 +904,32 @@
     window.globalTimerInterval = null; window.interviewStartTime = null; window.isTimerRunning = false; window.timerPauseStartTime = null; window.lastTimerTick = null; window.currentActivePhase = null;
 
     window.calculateTotalScore = function() {
-      let total = 0; const phases = ['p0', 'p1', 'p2', 'tourScore', 'p3_1', 'p3_2', 'p3_3', 'p4_1', 'p4_2', 'p4_3', 'p6_1', 'p6_2', 'p6_3', 'p6_4'];
-      phases.forEach(function(p) { let val = window.interviewData[p]; if (p.startsWith('p3_') && window.interviewData[p + '_skipped']) return; if (p === 'tourScore' && !window.interviewData.visited['tour']) return; total += isNaN(val) ? 0 : Math.max(0, parseInt(val)); });
+      let total = 0; 
+      const phases = ['p0', 'p1', 'p2', 'tourScore', 'p3_1', 'p3_2', 'p3_3', 'p4_1', 'p4_2', 'p4_3', 'p6_1', 'p6_2', 'p6_3', 'p6_4'];
+      phases.forEach(function(p) { 
+        let val = window.interviewData[p]; 
+        if (p.startsWith('p3_') && window.interviewData['p3_' + p.split('_')[1] + '_skipped']) return; 
+        if (p.startsWith('p4_') && window.interviewData['p4_' + p.split('_')[1] + '_skipped']) return; 
+        if (p === 'tourScore' && !window.interviewData.visited['tour']) return; 
+        total += isNaN(val) ? 0 : Math.max(0, parseInt(val)); 
+      });
+
+      // Phase 4 の自動配点調整 (実施項目のみで30点満点に換算)
       let p3_raw = 0, p3_count = 0; 
       if (!window.interviewData.p3_1_skipped) { p3_raw += window.interviewData.p3_1; p3_count++; } 
       if (!window.interviewData.p3_2_skipped) { p3_raw += window.interviewData.p3_2; p3_count++; } 
       if (!window.interviewData.p3_3_skipped) { p3_raw += window.interviewData.p3_3; p3_count++; }
       let s_p3 = p3_count > 0 ? Math.round((p3_raw / (p3_count * 10)) * 30) : 0;
       if(p3_count > 0) total = total - p3_raw + s_p3;
+
+      // Phase 5 の自動配点調整 (実施項目のみで30点満点に換算)
+      let p4_raw = 0, p4_count = 0; 
+      if (!window.interviewData.p4_1_skipped) { p4_raw += window.interviewData.p4_1; p4_count++; } 
+      if (!window.interviewData.p4_2_skipped) { p4_raw += window.interviewData.p4_2; p4_count++; } 
+      if (!window.interviewData.p4_3_skipped) { p4_raw += window.interviewData.p4_3; p4_count++; }
+      let s_p4 = p4_count > 0 ? Math.round((p4_raw / (p4_count * 10)) * 30) : 0;
+      if(p4_count > 0) total = total - p4_raw + s_p4;
+
       let philDed = (window.interviewData.phil_r1?4:0) + (window.interviewData.phil_r2?4:0) + (window.interviewData.phil_r3?4:0);
       total = Math.max(0, Math.min(100, total - philDed));
       return total;
@@ -1011,10 +1097,17 @@
       window.updateLiveTotalScore();
     };
 
-    window.toggleSkip = function(qNum, isSkipped) {
-      window.interviewData['p3_' + qNum + '_skipped'] = isSkipped; const sl = document.getElementById('slider-p3-' + qNum); const val = document.getElementById('val-p3-' + qNum);
-      if (isSkipped) { if (sl) { sl.disabled = true; sl.classList.add('opacity-30'); } if (val) { val.innerText = '-'; val.classList.add('opacity-30'); } } 
-      else { if (sl) { sl.disabled = false; sl.classList.remove('opacity-30'); } if (val) { val.innerText = sl.value; val.classList.remove('opacity-30'); } }
+    window.toggleSkip = function(phaseGroup, qNum, isSkipped) {
+      window.interviewData[phaseGroup + '_' + qNum + '_skipped'] = isSkipped; 
+      const sl = document.getElementById('slider-' + phaseGroup + '-' + qNum); 
+      const val = document.getElementById('val-' + phaseGroup + '-' + qNum);
+      if (isSkipped) { 
+        if (sl) { sl.disabled = true; sl.classList.add('opacity-30'); } 
+        if (val) { val.innerText = '-'; val.classList.add('opacity-30'); } 
+      } else { 
+        if (sl) { sl.disabled = false; sl.classList.remove('opacity-30'); } 
+        if (val) { val.innerText = sl.value; val.classList.remove('opacity-30'); } 
+      }
       window.updateLiveTotalScore();
     };
 
@@ -1028,21 +1121,36 @@
     });
 
     window.generateFinalReport = function() {
+      // Phase 4 の自動配点調整
       let p3_raw = 0, p3_count = 0; 
       if (!window.interviewData.p3_1_skipped) { p3_raw += window.interviewData.p3_1; p3_count++; } 
       if (!window.interviewData.p3_2_skipped) { p3_raw += window.interviewData.p3_2; p3_count++; } 
       if (!window.interviewData.p3_3_skipped) { p3_raw += window.interviewData.p3_3; p3_count++; }
       let s_p3 = p3_count > 0 ? Math.round((p3_raw / (p3_count * 10)) * 30) : 0;
+      window.interviewData.calculatedP3 = s_p3;
+
+      // Phase 5 の自動配点調整
+      let p4_raw = 0, p4_count = 0; 
+      if (!window.interviewData.p4_1_skipped) { p4_raw += window.interviewData.p4_1; p4_count++; } 
+      if (!window.interviewData.p4_2_skipped) { p4_raw += window.interviewData.p4_2; p4_count++; } 
+      if (!window.interviewData.p4_3_skipped) { p4_raw += window.interviewData.p4_3; p4_count++; }
+      let s_p4 = p4_count > 0 ? Math.round((p4_raw / (p4_count * 10)) * 30) : 0;
+      window.interviewData.calculatedP4 = s_p4;
+
       let total = window.calculateTotalScore();
       let hasRedFlag = window.interviewData.phil_r1 || window.interviewData.phil_r2 || window.interviewData.phil_r3;
       let rank = 'D'; if (total >= 80) { rank = 'S'; } else if (total >= 70) { rank = 'A'; } else if (total >= 60) { rank = 'B'; } else if (total >= 50) { rank = 'C'; } else { rank = 'D'; }
       if (hasRedFlag && (rank === 'S' || rank === 'A' || rank === 'B')) { rank = 'C'; }
-      window.interviewData.calculatedP3 = s_p3; let p6 = window.interviewData.p6_1 + window.interviewData.p6_2 + window.interviewData.p6_3 + window.interviewData.p6_4; window.interviewData.calculatedP6 = p6;
+      let p6 = window.interviewData.p6_1 + window.interviewData.p6_2 + window.interviewData.p6_3 + window.interviewData.p6_4; window.interviewData.calculatedP6 = p6;
+      
       const formatElapsed = function(ms) { if (!ms) return "00:00"; const sec = Math.floor(ms / 1000); const m = Math.floor(sec / 60).toString().padStart(2, '0'); const s = (sec % 60).toString().padStart(2, '0'); return m + ":" + s; };
       let totalMs = 0; if (window.interviewStartTime) { if (window.isTimerRunning) totalMs = Date.now() - window.interviewStartTime; else if (window.timerPauseStartTime) totalMs = window.timerPauseStartTime - window.interviewStartTime; }
       window.interviewData.totalTimeStr = formatElapsed(totalMs);
+      
       const candName = document.getElementById('candidate-name').value || "未入力"; const candGender = document.getElementById('candidate-gender').value || "未選択"; const candAge = document.getElementById('candidate-age').value ? document.getElementById('candidate-age').value + "歳" : "未入力"; const candExpHas = document.getElementById('candidate-exp-has').value; let candExpStr = candExpHas === "有" ? "有り (" + (document.getElementById('candidate-exp-years').value || "0") + "年)" : "無し";
-      const res = Object.assign({}, window.interviewData, { totalScore: total, finalRank: rank, p3: s_p3, p4: (window.interviewData.p4_1+window.interviewData.p4_2+window.interviewData.p4_3), p6: p6, candidateName: candName, candidateGender: candGender, candidateAge: candAge, candidateExp: candExpStr, totalTime: window.interviewData.totalTimeStr });
+      
+      // calculatedP4 を res に渡す
+      const res = Object.assign({}, window.interviewData, { totalScore: total, finalRank: rank, p3: s_p3, p4: s_p4, p6: p6, candidateName: candName, candidateGender: candGender, candidateAge: candAge, candidateExp: candExpStr, totalTime: window.interviewData.totalTimeStr });
       window.loadHistoryDetail(res);
     };
 
@@ -1089,7 +1197,7 @@
       const alertActionStr = feedback.riskItems.length > 0 ? "現場にて強いリスク傾向（" + feedback.riskItems.join("、") + "）が発現する可能性があります。管理者は常に「理念（Trend）」を基準とし、感情論での衝突を避けるよう、業務上の明確なルールと境界線を設定してください。" : "特記事項なし"; const skillSupplementStr = feedback.logicItems.length > 0 ? "対話面での課題（" + feedback.logicItems.join("、") + "）が見られます。入社後はOJT等を通じて定期的に指導やヒアリングを取り入れてください。" : "特記事項なし";
       const candName = document.getElementById('candidate-name').value || "未入力"; const candGender = document.getElementById('candidate-gender').value || "未選択"; const candAge = document.getElementById('candidate-age').value ? document.getElementById('candidate-age').value + "歳" : "未入力"; const candExpHas = document.getElementById('candidate-exp-has').value; let candExpStr = candExpHas === "有" ? "有り (" + (document.getElementById('candidate-exp-years').value || "0") + "年)" : "無し";
       
-      const payload = { date: new Date().toISOString(), area: currentArea, officeName: currentOfficeName, candidateName: candName, candidateGender: candGender, candidateAge: candAge, candidateExp: candExpStr, adoptionStatus: adoptionStatus, finalRank: document.getElementById('final-rank').innerText, totalScore: parseInt(document.getElementById('final-total-score').innerText) || 0, aiTypeCode: "未実施（機能削除）", totalTime: window.interviewData.totalTimeStr || "00:00", phaseOrder: (window.interviewData.phaseOrder || []).join(" ➔ "), memo_p0: memo_p0, memo_p1: memo_p1, memo_p2: memo_p2, memo_p3: memo_p3, memo_p4: memo_p4, memo_p6: (memo_p5 + "\n\n" + memo_p6).trim(), memo_tour: memo_tour, memo_questions: memo_questions, dialogueFlaws: feedback.logicItems.length > 0 ? feedback.logicItems.join("、") : "良好（特になし）", redFlags: feedback.riskItems.length > 0 ? feedback.riskItems.join("、") : "兆候なし", aiInsight: "-", managementAdvice: "-", overallPolicy: feedback.baseAdvice, alertAction: alertActionStr, skillSupplement: skillSupplementStr, p0: window.interviewData.p0, p1: window.interviewData.p1, p2: window.interviewData.p2, p3: window.interviewData.calculatedP3, p4: (window.interviewData.p4_1+window.interviewData.p4_2+window.interviewData.p4_3), p6: window.interviewData.calculatedP6 };
+      const payload = { date: new Date().toISOString(), area: currentArea, officeName: currentOfficeName, candidateName: candName, candidateGender: candGender, candidateAge: candAge, candidateExp: candExpStr, adoptionStatus: adoptionStatus, finalRank: document.getElementById('final-rank').innerText, totalScore: parseInt(document.getElementById('final-total-score').innerText) || 0, aiTypeCode: "未実施（機能削除）", totalTime: window.interviewData.totalTimeStr || "00:00", phaseOrder: (window.interviewData.phaseOrder || []).join(" ➔ "), memo_p0: memo_p0, memo_p1: memo_p1, memo_p2: memo_p2, memo_p3: memo_p3, memo_p4: memo_p4, memo_p6: (memo_p5 + "\n\n" + memo_p6).trim(), memo_tour: memo_tour, memo_questions: memo_questions, dialogueFlaws: feedback.logicItems.length > 0 ? feedback.logicItems.join("、") : "良好（特になし）", redFlags: feedback.riskItems.length > 0 ? feedback.riskItems.join("、") : "兆候なし", aiInsight: "-", managementAdvice: "-", overallPolicy: feedback.baseAdvice, alertAction: alertActionStr, skillSupplement: skillSupplementStr, p0: window.interviewData.p0, p1: window.interviewData.p1, p2: window.interviewData.p2, p3: window.interviewData.calculatedP3, p4: window.interviewData.calculatedP4, p6: window.interviewData.calculatedP6 };
       
       let history = []; try { history = JSON.parse(localStorage.getItem('mikiwame_history') || '[]'); } catch(e) {} history.push(payload); 
       try { localStorage.setItem('mikiwame_history', JSON.stringify(history)); } catch(e) {}
@@ -1101,6 +1209,7 @@
       window.interviewData = { p0: 0, p1: 0, p2: 0, tourScore: 0, p3_1: 0, p3_2: 0, p3_3: 0, p4_1: 0, p4_2: 0, p4_3: 0, p6_1: 0, p6_2: 0, p6_3: 0, p6_4: 0, phil_r1: false, phil_r2: false, phil_r3: false, memo_p0: "", memo_p1: "", memo_p2: "", memo_p3: "", memo_p4: "", memo_p5: "", memo_tour: "", memo_questions: "", memo_p6: "", visited: { p0:false, p1:false, p2:false, p3:false, p4:false, p5:false, tour:false, questions:false, p6:false }, phaseOrder: [], phaseElapsed: { p0:0, p1:0, p2:0, p3:0, p4:0, p5:0, tour:0, questions:0, p6:0 }, subCheck: { p0_1:false, p0_2:false, p1_1:false, p1_2:false, p1_3:false, p1_4:false, p1_5:false, p2_1:false, p2_2:false, p2_3:false, p3_q1_1:false, p3_q1_2:false, p3_q2_1:false, p3_q2_2:false, p3_q2_3:false, p3_q3_1:false, p3_q3_2:false, p4_1:false, p4_2:false, p4_3:false, p5_1:false, p5_2:false, p5_3:false, tour_1:false, tour_2:false, q_1:false, q_2:false } };
       document.getElementById('candidate-name').value = ""; document.getElementById('candidate-gender').value = ""; document.getElementById('candidate-age').value = ""; document.getElementById('candidate-exp-has').value = "無"; document.getElementById('candidate-exp-years').value = ""; window.toggleExpYears(); document.querySelectorAll('input[type=checkbox]').forEach(function(c) { c.checked = false; }); document.querySelectorAll('textarea.eval-memo').forEach(function(t) { t.value = ""; }); document.querySelectorAll('input[type=range]').forEach(function(s) { s.value = 0; });
       const scoreDisplays = ['score-disp-p0', 'score-val-p1', 'score-val-p2', 'score-val-tour', 'val-p3-1', 'val-p3-2', 'val-p3-3', 'val-p4-1', 'val-p4-2', 'val-p4-3', 'score-disp-p6-1', 'score-disp-p6-2', 'score-disp-p6-3', 'score-disp-p6-4']; scoreDisplays.forEach(function(id) { const el = document.getElementById(id); if (el) { if (id.startsWith('val-')) el.innerText = '0'; else el.innerText = '0'; } });
+      ['p3', 'p4'].forEach(function(g) { [1, 2, 3].forEach(function(n) { const sl = document.getElementById('slider-' + g + '-' + n); if (sl) { sl.disabled = false; sl.classList.remove('opacity-30'); } const val = document.getElementById('val-' + g + '-' + n); if (val) val.classList.remove('opacity-30'); }); });
       document.querySelectorAll('input[name="adoption_status"]').forEach(r => r.checked = false); ['q1-block', 'q2-block', 'q3-block'].forEach(function(id) { const el = document.getElementById(id); if(el) el.classList.remove('risk-detected'); }); window.switchP3Tab(1); window.startInterviewTimer(); window.returnToDashboard(); window.updateLiveTotalScore();
     };
 
