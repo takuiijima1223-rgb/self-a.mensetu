@@ -218,7 +218,7 @@
               <p><span class="text-pink-600 font-medium">メモと動画の断り：</span><br>「面接中、お話しいただいた内容を忘れないよう、こちらのPC（またはスマートフォン）でメモを取りながら進めさせていただきますね。また、途中A型事業所の概要説明の動画で説明する時間もありますので、リラックスして聞いてくださいね」</p>
               <p><span class="text-pink-600 font-medium">自己開示（面接官から）：</span><br>「〇〇でチーフをやっている〇〇です。前職は〜で未経験から入りました」と安心感を与える。</p>
               <p><span class="text-pink-600 font-medium">スタンス提示：</span><br>「ざっくばらんにいきますね」「気になることは都度聞いてください」と伝える。双方向での対話を促し、安心感を醸成します。</p>
-              <p><span class="text-pink-600 font-medium">質問：</span><br>未経験の場合「障害福祉サービスってご存知ですか？」「知ったきっかけは？」知らない場合は「どんなイメージありますか？」<br>経験者の場合「障害福祉に携わるきっかけは何ですか？」</p>
+              <p><span class="text-pink-600 font-medium">質問と動画視聴：</span><br>未経験の場合「障害福祉サービスってご存知ですか？」「知ったきっかけは？」知らない場合は「どんなイメージありますか？」<br><span class="text-xs text-indigo-600 font-bold bg-indigo-50 p-1 rounded inline-block mt-1 mb-1">※未経験者の場合は、このタイミングで「A型事業所 概要説明動画」を視聴してもらってください。</span><br>経験者の場合「障害福祉に携わるきっかけは何ですか？」</p>
               <p class="bg-rose-50/50 border border-rose-200 p-3 rounded-lg"><span class="text-rose-600 font-bold">ニーズ把握（※必ず確認してください）：</span><br>「今日、一番気になっていることは何ですか？」と聞き、目的を絞ります。<br><span class="font-bold text-pink-700 block mt-1.5">ここで聞いた「気になっていること」を起点にして、面接を進めていきましょう。</span></p>
             </div>
           </div>
@@ -361,13 +361,18 @@
       </div>
       <div class="flex-grow p-6 overflow-y-auto flex flex-col md:flex-row gap-6">
         <div class="md:w-2/3 bg-white p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6 h-fit">
-          <h3 class="text-pink-700 uppercase text-sm border-b border-slate-100 pb-2 tracking-widest font-bold">心理的安全性とニーズ把握</h3>
+          <div class="flex flex-col md:flex-row justify-between md:items-center gap-4 border-b border-slate-100 pb-2">
+            <h3 class="text-pink-700 uppercase text-sm tracking-widest font-bold">心理的安全性とニーズ把握</h3>
+            <button onclick="window.openOverviewVideoInNewTab()" class="shrink-0 w-full md:w-auto bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg shadow-md transition-all font-bold text-xs flex items-center justify-center gap-2">
+              <span class="text-base">🎬</span> A型事業所 概要説明動画
+            </button>
+          </div>
           <p class="text-xs text-pink-700 bg-pink-50/50 p-4 rounded-xl border border-pink-100 flex items-start gap-2"><span class="text-lg leading-none">💡</span><span>自己開示例：「〇〇でチーフをしている〇〇です。前職は〇〇でした」</span></p>
           <div class="space-y-3">
             <label class="action-item flex items-start gap-4 p-3 rounded-2xl cursor-pointer border border-transparent bg-slate-50/50"><input type="checkbox" class="action-check mt-1 shrink-0 w-6 h-6 rounded border-slate-300 text-pink-600 focus:ring-pink-500" onchange="window.interviewData.subCheck.p1_1 = this.checked"><span class="text-sm leading-relaxed text-slate-700"><span class="text-pink-600 font-bold">● メモと動画の断り：</span> 「面接中、お話しいただいた内容を忘れないよう、こちらのPC（またはスマートフォン）でメモを取りながら進めさせていただきますね。また、途中A型事業所の概要説明の動画で説明する時間もありますので、リラックスして聞いてくださいね」と最初に伝える。</span></label>
             <label class="action-item flex items-start gap-4 p-3 rounded-2xl cursor-pointer border border-transparent bg-slate-50/50"><input type="checkbox" class="action-check mt-1 shrink-0 w-6 h-6 rounded border-slate-300 text-pink-600 focus:ring-pink-500" onchange="window.interviewData.subCheck.p1_2 = this.checked"><span class="text-sm leading-relaxed text-slate-700"><span class="text-pink-600 font-bold">● 自己開示：</span> 「〇〇でチーフをやっている〇〇です。前職は〜で未経験から入りました」と安心感を与える。</span></label>
             <label class="action-item flex items-start gap-4 p-3 rounded-2xl cursor-pointer border border-transparent bg-slate-50/50"><input type="checkbox" class="action-check mt-1 shrink-0 w-6 h-6 rounded border-slate-300 text-pink-600 focus:ring-pink-500" onchange="window.interviewData.subCheck.p1_3 = this.checked"><span class="text-sm leading-relaxed text-slate-700"><span class="text-pink-600 font-bold">● スタンス提示：</span> 「ざっくばらんにいきますね」「気になることは都度聞いてください」と伝える。双方向での対話を促し、安心感を醸成します。</span></label>
-            <label class="action-item flex items-start gap-4 p-3 rounded-2xl cursor-pointer border border-transparent bg-slate-50/50"><input type="checkbox" class="action-check mt-1 shrink-0 w-6 h-6 rounded border-slate-300 text-pink-600 focus:ring-pink-500" onchange="window.interviewData.subCheck.p1_4 = this.checked"><span class="text-sm leading-relaxed text-slate-700"><span class="text-pink-600 font-bold">● 質問：</span> 未経験の場合「障害福祉サービスってご存知ですか？」「知ったきっかけは？」知らない場合は「どんなイメージありますか？」<br>経験者の場合「障害福祉に携わるきっかけは何ですか？」</span></label>
+            <label class="action-item flex items-start gap-4 p-3 rounded-2xl cursor-pointer border border-transparent bg-slate-50/50"><input type="checkbox" class="action-check mt-1 shrink-0 w-6 h-6 rounded border-slate-300 text-pink-600 focus:ring-pink-500" onchange="window.interviewData.subCheck.p1_4 = this.checked"><span class="text-sm leading-relaxed text-slate-700"><span class="text-pink-600 font-bold">● 質問と動画視聴：</span> 未経験の場合「障害福祉サービスってご存知ですか？」「知ったきっかけは？」知らない場合は「どんなイメージありますか？」<br><span class="block mt-2 mb-1 p-2 bg-indigo-50 border border-indigo-100 rounded-lg text-indigo-700 font-bold text-xs">※未経験者の場合は、上部の「🎬 A型事業所 概要説明動画」ボタンから動画を視聴してもらってください。</span>経験者の場合「障害福祉に携わるきっかけは何ですか？」</span></label>
             <label class="action-item flex items-start gap-4 p-3 rounded-2xl cursor-pointer border border-rose-200 bg-rose-50/50 shadow-sm"><input type="checkbox" class="action-check mt-1 shrink-0 w-6 h-6 rounded border-rose-300 text-rose-600 focus:ring-rose-500" onchange="window.interviewData.subCheck.p1_5 = this.checked"><span class="text-sm leading-relaxed text-slate-800"><span class="text-rose-600 font-bold">● ニーズ把握（※必ず確認してください）：</span><br>「今日、一番気になっていることは何ですか？」と聞き、目的を絞ります。<span class="block mt-1.5 font-bold text-pink-700">ここで聞いた「気になっていること」を起点にして、面接を進めていきましょう。</span></span></label>
             
             <div class="mt-4 p-4 bg-pink-50 border border-pink-100 rounded-xl shadow-sm">
@@ -864,6 +869,12 @@
       "石川AM": ["HELLOS北仙台(B型)", "HELLOS名取(B型)", "オンステージ鶴岡", "ハニービー環水公園前"],
       "小野統括": ["ハニービー小杉東", "かほく", "151A福光", "151A魚津", "ハニービー渋川", "きぼう", "きずな", "ひかり"],
       "中村AM": ["HELLOS北仙台(A型)", "アイステージ中浦和", "アイステージ川口"]
+    };
+
+    window.openOverviewVideoInNewTab = function() {
+      // 基礎研修（未経験者向け）A型説明動画のURL
+      const videoUrl = "https://drive.google.com/file/d/1OGmLNPC2nK5sO9RN7lKzix9DhYvX5rnT/view?usp=drive_link";
+      window.open(videoUrl, "_blank");
     };
 
     window.openDisabilityVideoInNewTab = function() {
